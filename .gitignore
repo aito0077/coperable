@@ -1,0 +1,5 @@
+/coperable-site/node_modules
+/coperable-engine/data
+/coperable-engine/target
+*.leo
+*.swp

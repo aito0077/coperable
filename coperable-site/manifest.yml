@@ -1,0 +1,9 @@
+--- 
+applications: 
+- url: coperable.${target-base}
+  name: coperable
+  path: .
+  instances: 1
+  runtime: node08
+  memory: 64M
+  framework: node

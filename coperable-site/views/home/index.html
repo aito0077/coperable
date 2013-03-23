@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {{> header}}
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"> </script>
+        <script type="text/javascript">
+            function initialize() {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var my_latitude = position.coords.latitude,
+                    my_longitude = position.coords.longitude;
+                    var mapOptions = {
+                        center: new google.maps.LatLng(my_latitude, my_longitude),
+                        zoom: 50,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+                });
+            }
+        </script>
+    </head>
+    <body onload="initialize()">
+        <div class="container">
+            {{> menu_site}}
+
+            <div class="span12">
+              <div class="demo-text-box prl">
+                <p class="lead text-center">Ayudamos a personas que trabajan con iniciativas positivas</p>
+                <p class="lead text-center">uniéndolos con quienes desean colaborar con su comunidad.</p>
+              </div>
+            </div>
+
+            <div class="row span12">
+                <div class="span3 palette palette-firm text-center">
+                    <div class="palette palette-firm">
+                        <h3 class="tile-title">Organiz&aacute;</h3>
+                        <p>Promueve tu Iniciativa Social y consigue apoyo.</p>
+                        <a class="btn btn-primary btn-large btn-block btn-inverse" href="#">Organiz&aacute;</a>
+                    </div>
+                </div>
+                <div class="span5 demo-video center">
+                    <video class="video-js" controls preload="auto" width="100%" height="250" poster="images/video/poster.jpg" data-setup="{}">
+                    </video>
+                </div> 
+                <div class="span3 palette palette-alizarin text-center" >
+                    <div class="palette palette-alizarin">
+                        <h3 class="tile-title">Particip&aacute;</h3>
+                        <p>En iniciativas positivas que mejoran tu Comunidad.</p>
+                        <a class="btn btn-danger btn-large btn-block btn-inverse" href="#">Particip&aacute;</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row span12">
+                {{> iniciativas_browser_command}} 
+            </div>
+
+            <div class="row span10 offset2" style="height:300px;">
+                {{> map}}
+            </div>
+
+            {{> footer}}
+        </div>
+    </body>
+</html>

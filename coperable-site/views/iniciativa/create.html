@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {{> header}}
+    </head>
+    <body onload="initialize()">
+        <div class="container">
+            {{> menu_site}}
+
+          <h3 class="demo-panel-title">Input</h3>
+          <form>
+              <div class="row">
+                <div class="span3">
+                  <input type="text" value="" placeholder="Inactive" class="span3" />
+                </div>
+              </div> 
+          </form>
+            <div id="map_canvas" style="width:100%; height:100%"></div>
+            {{> footer}}
+        </div>
+    </body>
+</html>

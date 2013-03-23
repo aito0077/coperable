@@ -1,0 +1,14 @@
+{
+  "name": "coperable-api",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "request": "*",
+    "restify": "*",
+    "underscore": "1.4.4",
+    "mongoose": "3.5.7"
+  }
+}

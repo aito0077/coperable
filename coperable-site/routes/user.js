@@ -1,7 +1,16 @@
 
-/*
- * GET users listing.
- */
+exports.login = function(req, res) {
+    res.locals = {
+        title: 'Login'
+    };
+    return res.render('user/login',{
+        partials: {
+            header: 'wrapper/header',
+            menu_site: 'wrapper/menu_site',
+            footer: 'wrapper/footer'
+        }
+    });
+};
 
 exports.list = function(req, res){
 

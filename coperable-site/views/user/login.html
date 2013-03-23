@@ -1,2 +1,39 @@
-{{> part}}
-Login
+<!DOCTYPE html>
+<html>
+    <head>
+        {{> header}}
+    </head>
+    <body onload="initialize()">
+        <div class="container">
+            {{> menu_site}}
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span6">
+                        <h3>Si tienes usuario y password puedes entrar con ellos.</h3>
+                        <div class="row">
+                            <input type="text" value="" placeholder="Usuario" class="span6" />
+                        </div>
+                        <div class="row">
+                            <input type="password" value="" placeholder="Password" class="span6" />
+                        </div>
+                         <h3> Si no tienes cuenta puedes registarte <a href="/user/signup">aqu&iacute;</a></h3>
+                    </div>
+                    <div class="span6">
+                        <h3>Si tienes una cuenta en estos sitios, puedes entrar con ella</h3>
+                            <div class="span3">
+                                <a href="/auth/facebook" class="btn btn-large btn-block">
+                                    <img src="/static/images/social_buttons/facebook.png" class="big-illustration"/>
+                                </a>
+                            </div>
+                            <div class="span3">
+                                <a href="/auth/twitter" class="btn btn-large btn-block">
+                                    <img src="/static/images/social_buttons/twitter.png" class="big-illustration"/>
+                                </a>
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

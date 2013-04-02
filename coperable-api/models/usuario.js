@@ -1,6 +1,8 @@
 var mongoose = require('mongoose/'),
     us = require('underscore'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    bcrypt = require('bcrypt'),
+    SALT_WORK_FACTOR = 10;
 
 var UsuarioSchema = new Schema({
     username:  String,
@@ -31,6 +33,38 @@ var UsuarioSchema = new Schema({
 
 var limit = 20;
 
+UsuarioSchema.pre('save', function(next) {
+    var user = this;
+
+    if (!user.isModified('password')) {
+        return next();
+    }
+    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+        if (err) {
+            return next(err);
+        }
+
+        bcrypt.hash(user.password, salt, function(err, hash) {
+            if (err) {
+                return next(err);
+            }
+            user.password = hash;
+            next();
+        });
+    });
+
+
+});
+
+UsuarioSchema.methods.comparePassword = function(candidatePassword, callback) {
+    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, isMatch);
+    });
+};
+
 var Usuario = mongoose.model('Usuario', UsuarioSchema);
 
 exports.list = function(success) {
@@ -41,6 +75,11 @@ exports.list = function(success) {
 
 exports.get = function(id, success) {
   Usuario.findOne({username: id}).exec(success);
+};
+
+
+exports.findOne = function(query, callback) {
+    Usuario.findOne(query, callback);
 };
 
 exports.insert = function(usuario, success, error) {
@@ -73,4 +112,5 @@ exports.remove = function(id, success, error) {
         }
     });
 };
+
 

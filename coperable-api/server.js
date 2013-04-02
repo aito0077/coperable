@@ -1,7 +1,8 @@
 var mongoose = require('mongoose/'),
     restify = require('restify'),
     config = require('./config'),
-    iniciativas = require('./logic/iniciativas.js');
+    iniciativas = require('./logic/iniciativas.js'),
+    usuarios = require('./logic/users.js');
 
 
 mongoose.connect(config.server.mongoose_auth);
@@ -32,11 +33,18 @@ var server = restify.createServer({
 });
 server.use(restify.bodyParser({ mapParams: false }));
 
+
+
 server.get('/api/iniciativa', iniciativas.list);
 server.get('/api/iniciativa/:id', fetch);
 server.put('/api/iniciativa', iniciativas.create);
 server.put('/api/iniciativa/:id', update);
 server.del('/api/iniciativa/:id', remove);
+
+server.post('/api/user/authenticate', usuarios.authenticate);
+server.put('/api/usuario', usuarios.create);
+
+
 
 server.listen(config.server.port, function() {
       console.log('%s listening at %s', server.name, server.url);

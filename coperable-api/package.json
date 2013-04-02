@@ -9,6 +9,7 @@
     "request": "*",
     "restify": "*",
     "underscore": "1.4.4",
-    "mongoose": "3.5.7"
+    "mongoose": "3.5.7",
+    "bcrypt": "0.7.5"
   }
 }

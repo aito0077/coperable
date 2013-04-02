@@ -1,3 +1,5 @@
+var cop_api = require('../api_client/api'),
+    us = require('underscore');
 
 exports.login = function(req, res) {
     res.locals = {
@@ -11,6 +13,45 @@ exports.login = function(req, res) {
         }
     });
 };
+
+exports.signup = function(req, res) {
+    res.locals = {
+        title: 'Registrate'
+    };
+    return res.render('user/signup',{
+        partials: {
+            header: 'wrapper/header',
+            menu_site: 'wrapper/menu_site',
+            footer: 'wrapper/footer'
+        }
+    });
+};
+
+exports.do_signup = function(req, res, done) {
+	var user_data = us.extend({}, req.body);
+	console.log(user_data);
+		
+	cop_api.client.put('/api/usuario', user_data, function(err, req, res, obj) {
+	    //assert.ifError(err);
+            console.log('%d -> %j', res.statusCode, res.headers);
+	    console.log('%j', obj);
+		done();
+	});
+};
+
+exports.authenticate = function(username, password, done) {
+    var user_data = {
+        username: username,
+        password: password
+    };
+	console.log(user_data);
+		
+	cop_api.client.post('/api/user/authenticate', user_data, function(err, req, res, user) {
+	    console.log('%j', user);
+		done(err, user);
+	});
+};
+
 
 exports.list = function(req, res){
 

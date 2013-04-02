@@ -3,7 +3,6 @@ var config = require('./config'),
     routes = require('./routes'),
     user = require('./routes/user'),
     home = require('./routes/home'),
-    api_client = require('./api_client/api'),
     iniciativa = require('./routes/iniciativa'),
     http = require('http'),
     path = require('path'),
@@ -11,8 +10,6 @@ var config = require('./config'),
     LocalStrategy = require('passport-local').Strategy,
     FacebookStrategy = require('passport-facebook').Strategy,
     TwitterStrategy = require('passport-twitter').Strategy;
-
-
 
 var app = express();
 
@@ -39,9 +36,9 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-
 passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    console.log('Serializando usuario id: '+user._id);
+    done(null, user._id);
 });
 
 passport.deserializeUser(function(id, done) {
@@ -52,20 +49,19 @@ passport.deserializeUser(function(id, done) {
     */
 });
 
-passport.use(new LocalStrategy(
+passport.use(new LocalStrategy({
+        usernameField: 'username',
+        passwordField: 'password'
+    },
     function(username, password, done) {
-        /*
-        User.findOne({ username: username }, function(err, user) {
+        console.log('Username: '+username+' - Password: '+password);
+        user.authenticate(username, password, function(err, user) {
             if (err) { return done(err); }
             if (!user) {
-                return done(null, false, { message: 'Incorrect username.' });
-            }
-            if (!user.validPassword(password)) {
-                return done(null, false, { message: 'Incorrect password.' });
+                return done(null, false, { message: 'Usuario/Password incorrecto.' });
             }
             return done(null, user);
         });
-        */
     }
 ));
 
@@ -103,20 +99,21 @@ passport.use(new TwitterStrategy({
     }
 ));
 
-
-
 app.get('/', home.index);
 app.get('/iniciativa', iniciativa.view);
 app.get('/iniciativa/owner', iniciativa.owner);
 app.get('/iniciativa/create', iniciativa.create);
 app.get('/users', user.list);
-app.get('/user/login', user.login);
 
+app.get('/user/signup', user.signup);
+app.post('/user/signup', user.do_signup);
+
+app.get('/user/login', user.login);
 app.post('/user/login', 
     passport.authenticate('local', {
         successRedirect: '/',
         failureRedirect: '/user/login',
-        failureFlash: true 
+        failureFlash: false
     })
 );
 
@@ -129,7 +126,6 @@ app.get('/auth/facebook/callback',
 );
 
 app.get('/auth/twitter', passport.authenticate('twitter'));
-
 app.get('/auth/twitter/callback', 
     passport.authenticate('twitter', { 
         successRedirect: '/',

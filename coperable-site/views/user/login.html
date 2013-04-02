@@ -10,13 +10,19 @@
                 <div class="row-fluid">
                     <div class="span6">
                         <h3>Si tienes usuario y password puedes entrar con ellos.</h3>
-                        <div class="row">
-                            <input type="text" value="" placeholder="Usuario" class="span6" />
-                        </div>
-                        <div class="row">
-                            <input type="password" value="" placeholder="Password" class="span6" />
-                        </div>
-                         <h3> Si no tienes cuenta puedes registarte <a href="/user/signup">aqu&iacute;</a></h3>
+                        <form method="post" action="/user/login">
+                            <div class="row">
+                                <input type="text" name="username" placeholder="Usuario" class="span6" />
+                            </div>
+                            <div class="row">
+                                <input type="password" name="password" placeholder="Password" class="span6" />
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Aceptar</button>
+                                <button type="button" class="btn">Cancel</button>
+                            </div
+                        </form>
+                        <h3>Si no tienes cuenta puedes registarte <a href="/user/signup">aqu&iacute;</a></h3>
                     </div>
                     <div class="span6">
                         <h3>Si tienes una cuenta en estos sitios, puedes entrar con ella</h3>

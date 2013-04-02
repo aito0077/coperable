@@ -13,6 +13,7 @@
     "passport-facebook": "0.1.5",
     "passport-twitter": "0.1.4",
     "underscore": "1.4.4",
-    "restify": "2.3.4"
+    "restify": "2.3.4",
+    "bcrypt": "0.7.5"
   }
 }

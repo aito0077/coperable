@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {{> header}}
+
+        <link rel="stylesheet" type="text/css" href="/static/javascripts/redactor/redactor.css"></link>
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/javascripts/redactor/plugins/clips.css"></link>
+        <link rel="stylesheet" type="text/css" media="screen" href="/static/stylesheets/datepicker.css"></link>
+        <link rel="stylesheet" href="/static/javascripts/jquery.upload/css/jquery.fileupload-ui.css">
+
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+
+        <script src="/static/javascripts/bootstrap-typeahead.min.js"></script>
+        <script src="/static/javascripts/bootstrap-datepicker.js"></script>
+        <script src="/static/javascripts/jquery.addresspicker.min.js"></script>
+        <script src="/static/javascripts/redactor/redactor.min.js"></script>
+        <script src="/static/javascripts/redactor/plugins/fullscreen.js"></script>
+        <script src="/static/javascripts/redactor/plugins/clips.js"></script>
+        <script src="/static/javascripts/redactor/es.js"></script>
+
+        <script type='text/javascript' src='/static/javascripts/underscore-min.js'></script>
+        <script type='text/javascript' src='/static/javascripts/backbone-min.js'></script>
+        <script type='text/javascript' src='/static/javascripts/s3-upload/webtoolkit.base64.js'></script>
+        <script type='text/javascript' src='/static/javascripts/s3-upload/sha1.js'></script>
+        <script type='text/javascript' src='/static/javascripts/s3-upload/jquery.form.js'></script>
+        <script type='text/javascript' src='/static/javascripts/s3-upload/base64-binary.js'></script>
+
+        <script type='text/javascript' src='/static/javascripts/s3-upload/image_saver.js'></script>
+
+    </head>
+    <body>
+        <div class="container">
+            {{> menu_site}}
+            <h3>Registrate</h3>
+            <div class="row">
+                <div class="span5">
+                    <form class="form-horizontal" method="POST" action="/user/signup">
+                        <input type="hidden" name="latitude" id="latitude"/>
+                        <input type="hidden" name="longitude" id="longitude"/>
+                        <div class="control-group">
+                            <label class="control-label" for="username">Usuario</label>
+                            <div class="controls">
+                                <input type="text" name="username" id="username" value="" name class="span3" required/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="password">Password</label>
+                            <div class="controls">
+                                 <input type="password" name="password" id="password" value="" class="span3" required/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="confirm-password">Confirmar Password</label>
+                            <div class="controls">
+                                 <input type="password" id="confirm-password" class="span3" required/>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="email">Email</label>
+                            <div class="controls">
+                                <input type="email" name="email" class="span3" required/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="first_name">Nombre</label>
+                            <div class="controls">
+                                 <input type="text" name="first_name" id="first_name" class="span3" required/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="last_name">Apellido</label>
+                            <div class="controls">
+                                 <input type="text" name="last_name" id="last_name" class="span3" required/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="birthdate">Fecha Nacimiento</label>
+                            <div class="controls">
+                                <input type="text" id="birthdate" name="birthdate" class="input-small span2 datepicker" autocomplete="off" required/>
+                            </div>
+                        </div>
+                        {{> widget_address}}
+
+                        <div class="control-group">
+                            <label class="control-label" for="about">Sobre m&iacute;</label>
+                            <div class="controls">
+                                <textarea id="about" name="about" class="input-xxlarge" autocomplete="off"></textarea>
+                            </div>
+                        </div>
+         
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="span5">
+                    <div id='container'></div>
+                </div>
+            </div>
+        </div>
+
+        
+    <script type="text/template" id="image-preview-template">
+      <p><%= filename %></p>
+      <img id="imagePreview" src='<%= data %>' />
+    </script>
+
+
+        <script type="text/template" id="image-meta-template">
+            <input type="hidden" name="key" value='<%= key %>' />
+            <input type="hidden" name="acl" value='<%= acl %>' />
+            <input type="hidden" name="Content-Type" value='<%= contentType %>' />
+            <input type="hidden" name="AWSAccessKeyId" value='<%= AWSAccessKeyId %>' />
+            <input type="hidden" name="success_action_redirect" value='<%= successActionRedirect %>' />
+            <input type="hidden" name="x-amz-meta-filename" value='<%=filename %>' />
+            <input type="hidden" name="Policy" value='<%= POLICY %>' />
+            <input type="hidden" name="Signature" value='<%= SIGNATURE %>' />
+        </script> 
+
+        <script type="text/template" id="image-file-template">
+          <form id="formBlob" action='http://<%= bucket %>.s3.amazonaws.com' method="post" enctype="multipart/form-data" >
+            <input id="myImage" type="file" name="file" /><br />
+            <input id="btnSave" type="submit" value="Save Image"></input>
+          </form>
+        </script>
+
+
+
+        <script>
+            $('.datepicker').datepicker();
+            $('#about').redactor({
+                lang: 'es',
+                plugins: ['fullscreen', 'clips'],
+                imageUpload: '/resources/upload_image/'
+            });
+
+            $(function() {
+                var addresspicker = $( "#addresspicker" ).addresspicker();
+                var addresspickerMap = $( "#addresspicker_map" ).addresspicker(
+                {
+                    regionBias: "ar",
+                    map:      "#map_canvas",
+                    typeaheaddelay: 1000,
+                    mapOptions: {
+                        languaje: "es",
+                        zoom:16,
+                        center: new google.maps.LatLng(52.5122, 13.4194)
+                    }
+
+                });
+
+                addresspickerMap.on("addressChanged", function(evt, address) {
+                    console.log('Address Changed');
+                    console.dir(address);
+                });
+                addresspickerMap.on("positionChanged", function(evt, markerPosition) {
+                    console.log('Position Changed');
+                    console.dir(markerPosition);
+                    markerPosition.getAddress( function(address) {
+                        if (address) {
+                            $( "#addresspicker_map").val(address.formatted_address);
+                        }
+                    })
+                });
+            });
+
+    $(document).ready(function() {
+
+        console.log("1");
+        window.defaultMyImage =
+            new MyImage({filename: 'preview.png',
+                 data: '/static/javascripts/s3-upload/preview.png',
+                 bucket: 'coperable-storage',
+                 acl: 'public-read',
+                 successActionRedirect: 'http://coperable.net/user/signup',
+                 contentType: 'image/',
+                 folder: '/',
+                 AWSAccessKeyId: 'AKIAID6Q6EJLJGCBUGTQ',
+                 AWSSecretKeyId: 'qRQGVyx9D6qIx1n79ngqOGALwdOCBxkJa/GDFjxc'
+                });
+
+        console.log("2");
+        window.imagePreviewView = new ImagePreviewView({model: window.defaultMyImage});
+        console.log("3");
+        window.imageFileView = new ImageFileView({model: window.defaultMyImage});
+        console.log("4");
+
+        window.App = new window.ImageRouter();
+        console.log("5");
+        Backbone.history.start();
+        console.log("6");
+    });
+
+        </script>
+
+    </body>
+</html>
+

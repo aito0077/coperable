@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {{> header}}
+
+    </head>
+    <body> 
+        <div class="container">
+            {{> menu_site}}
+            <ul class="thumbnails">
+                {{#iniciativas}}
+                <li class="span2">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/320x200" alt="ALT NAME">
+                        <div class="caption">
+                            <span><strong>{{name}}</strong></span>
+                            <p align="center"><a href="/iniciativas/view/{{_id}}" class="btn btn-primary btn-block">Ver</a></p>
+                        </div>
+                    </div>
+                </li>
+                {{/iniciativas}}
+            </ul>
+
+        </div>
+    </body>
+</html>
+

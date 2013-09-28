@@ -1,15 +1,21 @@
-var config = require('./config'),
+var config = require('./config-dev'),
     express = require('express'),
     routes = require('./routes'),
     user = require('./routes/user'),
     home = require('./routes/home'),
     iniciativa = require('./routes/iniciativa'),
+    iniciativas = require('./logic/iniciativas'),
+    users = require('./logic/users'),
     http = require('http'),
     path = require('path'),
     passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy,
-    FacebookStrategy = require('passport-facebook').Strategy,
-    TwitterStrategy = require('passport-twitter').Strategy;
+    pass_autentication = require('./logic/authentication'),
+    redis = require('redis'),
+    external_files = require('./logic/filehandler'),
+    RedisStore = require('connect-redis')(express);
+
+var rClient = redis.createClient();
+var sessionStore = new RedisStore({client:rClient});
 
 var app = express();
 
@@ -17,6 +23,7 @@ app.engine('html', require('hogan-express'));
 app.enable('view cache');
 
 app.configure(function(){
+    app.use('/static', express.static(path.join(__dirname, 'public')));
     app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'html');
@@ -24,99 +31,99 @@ app.configure(function(){
     app.use(express.logger('dev'));
     app.use(express.cookieParser());
     app.use(express.bodyParser());
-    app.use(express.session({ secret: 'bl33dingumñoño' }));
+    app.use(express.urlencoded());
+    app.use(express.multipart());
+    app.use(express.session({
+        store: sessionStore, 
+        key: 'jsessionid', 
+        secret: 'bl33dingumñoño'}
+    ));
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(express.methodOverride());
     app.use(app.router);
-    app.use('/static', express.static(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-passport.serializeUser(function(user, done) {
-    console.log('Serializando usuario id: '+user._id);
-    done(null, user._id);
-});
-
-passport.deserializeUser(function(id, done) {
-    /*
-    User.findById(id, function(err, user) {
-        done(err, user);
-    });
-    */
-});
-
-passport.use(new LocalStrategy({
-        usernameField: 'username',
-        passwordField: 'password'
-    },
-    function(username, password, done) {
-        console.log('Username: '+username+' - Password: '+password);
-        user.authenticate(username, password, function(err, user) {
-            if (err) { return done(err); }
-            if (!user) {
-                return done(null, false, { message: 'Usuario/Password incorrecto.' });
-            }
-            return done(null, user);
-        });
+function ensureAuthenticated(req, res, next) {
+    if(!req.isAuthenticated()) {
+        res.redirect('/user/login');       
     }
-));
+    next('route');
+}
 
+function loadUserInformation(req, res, next) {
+    var geo = (req.session ? req.session.geo : false) || (req.cookies ? req.cookies.geo : undefined);
+    res.locals = {
+        user: req.user,
+        geo: geo
+    };
 
-passport.use(new FacebookStrategy({
-        clientID: config.system.FACEBOOK_APP_ID,
-        clientSecret: config.system.FACEBOOK_APP_SECRET,
-        callbackURL: "http://coperable.cloudfoundry.com/auth/facebook/callback"
-    },
-    function(accessToken, refreshToken, profile, done) {
-        console.dir(profile);
-        /*
-        User.findOrCreate(..., function(err, user) {
-        if (err) { return done(err); }
-            done(null, user);
-        });
-        */
-    }
-));
+    console.dir(res.locals);
+    next('route');
+}
 
-passport.use(new TwitterStrategy({
-        consumerKey: config.system.TWITTER_CONSUMER_KEY,
-        consumerSecret: config.system.TWITTER_CONSUMER_SECRET,
-        callbackURL: "http://coperable.cloudfoundry.com/auth/twitter/callback"
-    },
-    function(token, tokenSecret, profile, done) {
-        /*
-        User.findOrCreate(..., function(err, user) {
-            if (err) { 
-                return done(err); 
-            }
-            done(null, user);
-        });
-        */
-    }
-));
+app.get('*', loadUserInformation);
+app.get('/*/create', ensureAuthenticated);
 
 app.get('/', home.index);
-app.get('/iniciativa', iniciativa.view);
-app.get('/iniciativa/owner', iniciativa.owner);
-app.get('/iniciativa/create', iniciativa.create);
-app.get('/users', user.list);
 
-app.get('/user/signup', user.signup);
-app.post('/user/signup', user.do_signup);
+
+app.all( '*', function( req, res, next ) {
+    res.header( 'Access-Control-Allow-Origin', '*' );
+    res.header( 'Access-Control-Allow-Method', 'POST, GET, PUT, DELETE, OPTIONS' );
+    res.header( 'Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-File-Name, Content-Type, Cache-Control' );
+    if( 'OPTIONS' == req.method ) {
+        res.send( 203, 'OK' );
+    }
+    next();
+});
+
+app.get('/iniciativas/edit', iniciativa.edit);
+app.get('/iniciativas/create', iniciativa.create);
+app.get('/iniciativas/view/:id', iniciativa.view);
+app.get('/iniciativas/list', iniciativa.list);
+
+app.post('/iniciativas', iniciativas.create);
+app.put('/iniciativas/:id', iniciativas.save);
+app.get('/iniciativas/:id', iniciativas.get);
+app.get('/iniciativa/:slug', iniciativa.view_slug);
+
+app.get('/iniciativas', function(req, res, next) {
+    console.dir(req.query);
+    if(req.query.category) {
+        iniciativas.browseByCategory(req, res, function(err, iniciativas) {
+            res.send(iniciativas);
+        });
+    } else {
+        iniciativas.list(req, res, function(err, iniciativas) {
+            res.send(iniciativas);
+        });
+    }
+});
+
+
+
+app.get('/user/success_login', function(req, res, next) {
+    res.send({'result':'Bienvenido.'});
+});
+
+app.get('/user/failure_login', function(req, res, next) {
+    res.send(403, 'El usuario no se encuentra.');
+});
+
 
 app.get('/user/login', user.login);
 app.post('/user/login', 
     passport.authenticate('local', {
-        successRedirect: '/',
-        failureRedirect: '/user/login',
+        successRedirect: '/user/success_login',
+        failureRedirect: '/user/failure_login',
         failureFlash: false
     })
 );
-
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback', 
     passport.authenticate('facebook', { 
@@ -124,7 +131,6 @@ app.get('/auth/facebook/callback',
         failureRedirect: '/user/login' 
     })
 );
-
 app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback', 
     passport.authenticate('twitter', { 
@@ -132,6 +138,27 @@ app.get('/auth/twitter/callback',
         failureRedirect: '/user/login'
     })
 );
+app.get('/user/signup', user.signup);
+app.post('/user/signup', users.do_signup);
+app.get('/user/geolocalization/:latitud/:longitud', user.set_localization);
+app.get('/user/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+});
+app.get('/users', users.list);
+
+app.get('/user/:id', user.profile);
+
+
+app.post('/gets3credentials', external_files.createS3Policy);
+app.get('/uploadsuccess', function(req, resp) {
+    console.dir(req);
+    console.log('Exito en subir la imagen');
+    res.send('OK');
+});
+
+
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

@@ -5,9 +5,23 @@ var mongoose = require('mongoose/'),
 
 
 var IniciativaSchema = new Schema({
-    title:  String,
+    name:  String,
+    slug:  String,
     code:  String,
+    goal:  String,
+    duration:  String,
     description:   String,
+    address:   String,
+    profile_picture:   String,
+    pariticipants_amount:   String,
+    phone:   String,
+    email:   String,
+    categories: {
+        medio_ambiente: {type: Boolean, default: false},
+        educacion: {type: Boolean, default: false},
+        desarrollo: {type: Boolean, default: false},
+        arte_cultura: {type: Boolean, default: false},
+    },
     owner: {
         user: String,
         name: String
@@ -34,11 +48,31 @@ var IniciativaSchema = new Schema({
         latitude: {type: Number, default: 0},
         longitude: {type: Number, default: 0}
     },
+    networks: {
+        facebook: {
+            text: String
+        },
+        twitter: {
+            text: String
+        },
+        vimeo: {
+            text: String
+        },
+        youtube: {
+            text: String
+        },
+        flickr: {
+            text: String
+        }
+    },
     creation_date: { type: Date, default: Date.now },
     modification_date: { type: Date, default: Date.now }
 });
 
 var Iniciativa = mongoose.model('Iniciativa', IniciativaSchema);
+
+exports.Model = Iniciativa;
+
 var limit = 20;
 
 exports.list = function(success) {
@@ -57,8 +91,8 @@ exports.insert = function(iniciativa, success, error) {
         modification_date: new Date(),
         current_stage: 'PREPARACION',
         location: {
-            latitud: 0,
-            longitud: 0
+            latitude: iniciativa.latitude,
+            longitude: iniciativa.longitude
         },
         stages: [{
             stage: 'PREPARACION',
@@ -68,6 +102,7 @@ exports.insert = function(iniciativa, success, error) {
     },
     persist = {};
     us.extend(persist, default_values, iniciativa);
+    console.dir(persist);
     var iniciativa_model = new Iniciativa(persist);
     iniciativa_model.save(function(err, data) {
         if(err) {

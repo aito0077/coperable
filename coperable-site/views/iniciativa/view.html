@@ -1,1 +1,108 @@
-Iniciativa View  
+<!DOCTYPE html>
+<html>
+    <head>
+        {{> header}}
+
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script src="/static/javascripts/underscore-min.js"></script>
+
+        <style>
+            #wrapper { position: relative; }
+            #over_map { position: relative; top: -30px; left: 10px; z-index: 99; }
+            .dropSheet {
+
+                opacity: 0.5;
+                filter: alpha(opacity=50);
+                /* IE10 Consumer Preview */ 
+                background-image: -ms-linear-gradient(top, #FFFFFF 0%, #000000 100%);
+                /* Mozilla Firefox */ 
+                background-image: -moz-linear-gradient(top, #FFFFFF 0%, #000000 100%);
+                /* Opera */ 
+                background-image: -o-linear-gradient(top, #FFFFFF 0%, #000000 100%);
+                /* Webkit (Safari/Chrome 10) */ 
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #000000));
+                /* Webkit (Chrome 11+) */ 
+                background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #000000 100%);
+                /* W3C Markup, IE10 Release Preview */ 
+                background-image: linear-gradient(to bottom, #FFFFFF 0%, #000000 100%);
+            }
+        </style>
+
+    </head>
+    <body> 
+        <div class="container">
+            {{> menu_site}}
+            <h3>{{iniciativa.name}}</h3>
+            <h4>{{iniciativa.goal}}</h4>
+
+
+            <div id="tareas">
+                {{#iniciativa.tasks}}
+                <ul>
+                    <li>
+                        {{description}}
+                    </li>                
+                </ul>
+                {{/iniciativa.tasks}}
+            </div>
+
+            <div id="description"> </div>
+
+            <div id="wrapper" class="offset1 span10" style="height:400px">
+                <div id="map_canvas" style="width:100%; height:100%"></div>
+
+                <div id="over_map" class="dropSheet" >
+                    <h3><span style="font-color: #FFFFFF"> {{iniciativa.start_date}}</span></h3><br />
+                    <h4><span style="font-color: #FFFFFF"> {{iniciativa.address}}<span></h4>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+
+            function initialize() {
+
+            var descripcion = $('<div />').html('{{iniciativa.description}}').text();
+                 $('#description').html(descripcion);
+                var location = new google.maps.LatLng({{iniciativa.location.latitude}},{{iniciativa.location.longitude}});
+                var myOptions = {
+                    zoom: 14,
+                    center:  location,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+
+                var markerTemplate = _.template([
+                    '<div class="media">',
+                        '<a class="pull-left" href="#">',
+                        '</a>',
+                        '<div class="media-body">',
+                            '<h3><a class="iniciativa" data-id="{{iniciativa._id}}" href="#">{{iniciativa.name}}</a></h3>',
+                            '<div class="media">',
+                                '<p class="descSmall">'+descripcion+'</p>',
+                            '</div>',
+                        '</div>',
+                    '</div>'].join(''));
+
+                    console.log(markerTemplate);
+
+                    var marker = new google.maps.Marker({
+                        title: '{{iniciativa.name}}',
+                        position: location,
+                        map: map
+                    });
+                    marker.info = new google.maps.InfoWindow({
+                        content:markerTemplate('{{iniciativa.description}}')
+                    })
+                    google.maps.event.addListener(marker, 'click', function(){
+                        marker.info.open(map, marker);
+                    });
+
+           };
+           initialize();
+        </script>
+    </body>
+</html>

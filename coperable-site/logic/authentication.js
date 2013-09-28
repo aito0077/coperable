@@ -86,8 +86,8 @@ passport.use(new FacebookStrategy({
 passport.use(new TwitterStrategy({
         consumerKey: config.system.TWITTER.key,
         consumerSecret: config.system.TWITTER.secret,
-        //callbackURL: "http://coperable.cloudfoundry.com/auth/twitter/callback"
-        callbackURL: "http://coperable.net/auth/twitter/callback"
+        callbackURL: "http://coperable.cloudfoundry.com/auth/twitter/callback"
+        //callbackURL: "http://coperable.net/auth/twitter/callback"
     },
     oauthenticate_create
 ));

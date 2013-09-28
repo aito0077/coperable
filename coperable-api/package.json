@@ -3,13 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app"
+    "start": "node server.js"
   },
   "dependencies": {
     "request": "*",
     "restify": "*",
     "underscore": "1.4.4",
     "mongoose": "3.5.7",
-    "bcrypt": "0.7.5"
+    "bcrypt": "0.7.5",
+    "validator": "1.1.1"
   }
 }

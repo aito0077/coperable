@@ -14,6 +14,13 @@
     "passport-twitter": "0.1.4",
     "underscore": "1.4.4",
     "restify": "2.3.4",
-    "bcrypt": "0.7.5"
+    "bcrypt": "0.7.5",
+    "redis": "0.8.2",
+    "connect-redis": "1.4.5",
+    "aws-sdk": "0.9.7-pre.8",
+    "mime-magic": "5.14.0",
+    "validator": "1.1.1",
+    "express-validator": "0.3.2",
+    "fbgraph": "0.2.6"
   }
 }

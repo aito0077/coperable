@@ -14,11 +14,15 @@ var UsuarioSchema = new Schema({
     facebook_id:   String,
     twitter_id:   String,
     authenticate_with: String,
+    birthdate: Date,
+    about: String,
+    cantidad_iniciativas:  {type: Number, default: 0},
     iniciativas:    [{
         title: String,
         description: String,
         owner: { type: Boolean, default: false}
     }],
+    cantidad_actividades:  {type: Number, default: 0},
     activities: [{
         date: { type: Date, default: Date.now },
         description: { type: Date, default: Date.now },
@@ -27,7 +31,29 @@ var UsuarioSchema = new Schema({
     verified: { type: Boolean, default: false},
     last_time_access: { type: Date, default: Date.now },
     creation_date: { type: Date, default: Date.now },
-    modification_date: { type: Date, default: Date.now }
+    modification_date: { type: Date, default: Date.now },
+    networks: {
+        facebook: {
+            has: {type: Boolean, default: false},
+            user_id: String
+        },
+        twitter: {
+            has: {type: Boolean, default: false},
+            user_id: String
+        },
+        vimeo: {
+            has: {type: Boolean, default: false},
+            user_id: String
+        },
+        youtube: {
+            has: {type: Boolean, default: false},
+            user_id: String
+        },
+        flickr: {
+            has: {type: Boolean, default: false},
+            user_id: String
+        }
+    }
 
 });
 
@@ -66,6 +92,8 @@ UsuarioSchema.methods.comparePassword = function(candidatePassword, callback) {
 };
 
 var Usuario = mongoose.model('Usuario', UsuarioSchema);
+
+exports.Model = Usuario;
 
 exports.list = function(success) {
   Usuario.find().limit(limit).sort('creation_date', -1).execFind(function (arr,data) {

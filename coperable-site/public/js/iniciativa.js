@@ -5,7 +5,21 @@ $(function(){
         window.iniciativa = self.iniciativa = {};
     }
 
+    iniciativa.Model = Backbone.Model.extend({
+        urlRoot : '/iniciativas',
+        idAttribute: "_id"
+    });
+
+    iniciativa.Collection = Backbone.Collection.extend({
+        model: iniciativa.Model,
+        url: '/iniciativas',
+        idAttribute: "_id"
+    });
+
+
     iniciativa.Edit = Backbone.View.extend({
+
+
         events: {
             'change #name': 'set_name',
             'change #goal': 'set_goal',
@@ -29,11 +43,7 @@ $(function(){
             console.log('inicializando...');
 
             this.current_tab = 'basicos_tab';
-            var Iniciativa = Backbone.Model.extend({
-                urlRoot : '/iniciativas',
-                idAttribute: "_id"
-            });
-            this.model = new Iniciativa;
+            this.model = new iniciativa.Model;
 
             this.setup_bindings();
             this.setup_components();
@@ -326,6 +336,179 @@ $(function(){
                     center: self.user_position
                 }
             });
+
+        }
+    });
+
+
+
+    iniciativa.MapBrowser = Backbone.View.extend({
+
+        el: $('#map_browser'),
+        zoom_default: 12,
+
+        ARTE_CULTURA: 'arte_cultura',
+        DESARROLLO: 'desarrollo',
+        EDUCACION: 'educacion',
+        MEDIO_AMBIENTE: 'medio_ambiente',
+
+        markers: new Array(),
+
+        events: {
+            'click #browser_all': 'browse_iniciativas',
+            'click #browser_me': 'browse_iniciativas',
+            'click #browser_ac': 'browse_iniciativas',
+            'click #browser_ed': 'browse_iniciativas',
+            'click #browser_ds': 'browse_iniciativas'
+        },
+
+        initialize: function() {
+            _.bindAll(this, 'reset', 'setup_binding', 'setup_component', 'render_map', 'detect_geolocation', 'traer_iniciativas', 'marcar_iniciativas', 'browse_iniciativas', 'clear_markers');
+
+            this.model = new iniciativa.Model;
+            this.iniciativas = new iniciativa.Collection;
+            this.buenos_aires = new google.maps.LatLng(-34.615692,-58.432846);
+            this.user_default = this.buenos_aires;
+            this.browserSupportGeolocation =  navigator.geolocation ? true : false;
+
+            this.setup_component();
+            this.setup_binding();
+        },
+
+        reset: function(options) {
+            if(options.user_location) {
+                this.user_default = new google.maps.LatLng(options.user_location.latitud, options.user_location.longitud);
+                this.has_location = true;
+                this.user_location = options.user_user_location;
+            }
+            this.initialLocation = this.user_default;
+
+            this.render_map();
+        },
+
+        setup_binding: function() {
+            var self = this;
+        },
+
+        setup_component: function() {
+            this.markerTemplate = _.template([
+                '<div class="media">',
+                    '<a class="pull-left" href="#">',
+                    '</a>',
+                    '<div class="media-body">',
+                        '<h3><a class="iniciativa" data-id="<%= _id %>" href="/iniciativas/view/<%= _id %>"><%= name %></a></h3>',
+                        '<div class="media">',
+                            '<p class="descSmall"><%= goal %></p>',
+                        '</div>',
+                    '</div>',
+                '</div>'].join(''));
+
+
+
+            var myOptions = {
+                zoom: 12,
+                center:  this.user_default,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            this.map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        },
+
+        traer_iniciativas: function(category) {
+            var self = this;
+            this.iniciativas.fetch({
+                data: $.param({ 
+                    category: category
+                }),
+                success: function(iniciativas, response, options) {
+                    self.marcar_iniciativas();
+                }    
+            });
+        },
+
+        clear_markers: function() {
+            _.each(this.markers, function(marker) {
+                marker.setMap(null);
+            });
+            this.markers = new Array();
+        },
+
+        marcar_iniciativas: function() {
+            var self = this;
+            this.clear_markers();
+
+            _.each(this.iniciativas.models, function(model) {
+                console.dir(model.attributes);
+                var location = model.get('location');
+                var marker = new google.maps.Marker({
+                    title: model.get('name'),
+                    position: new google.maps.LatLng(location.latitude,location.longitude),
+                    map: self.map
+                });
+
+                console.log(self.markerTemplate(model.toJSON()));
+                marker.info = new google.maps.InfoWindow({
+                    content:self.markerTemplate(model.toJSON())
+                })
+                google.maps.event.addListener(marker, 'click', function(){
+                    marker.info.open(self.map, marker);
+                });
+                self.markers.push(marker);
+            });
+        },
+
+        render_map: function() {
+            this.map.setCenter(this.initialLocation);
+            this.traer_iniciativas();
+        },
+
+        detect_geolocation: function() {
+            if(this.browserSupportGeolocation) {
+                try {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+                        console.log('Latitud: '+initialLocation.lat()+' - Longitud: '+initialLocation.lng());
+                        $.get(  
+                            '/user/geolocalization/'+initialLocation.lat()+'/'+initialLocation.lng(),
+                        {},  
+                        function(responseText) {  
+                            console.log(responseText);  
+                        });  
+                    }, 
+                    function() {
+                        handleNoGeolocation(browserSupportFlag);
+                    });
+                } catch(positionError) {
+                    console.dir(positionError);
+                }
+            }
+        },
+
+        browse_iniciativas: function(e) {
+            var category = null;
+            console.log('Target id: '+e.target.id);
+            switch(e.target.id) {
+                case 'browser_all':
+                    category = null;
+                    break;
+                case 'browser_me':
+                    category = this.MEDIO_AMBIENTE;
+                    break;
+                case 'browser_ac':
+                    category = this.ARTE_CULTURA;
+                    break;
+                case 'browser_ed':
+                    category = this.EDUCACION;
+                    break;
+                case 'browser_ds':
+                    category = this.DESARROLLO;
+                    break;
+                default:
+                    break;
+            }
+            console.log('Filtrar usando: '+category);
+
+            this.traer_iniciativas(category);    
 
         }
     });

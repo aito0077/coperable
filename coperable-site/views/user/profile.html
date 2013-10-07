@@ -1,2 +1,59 @@
-{{> part}}
-Profile
+<!DOCTYPE html>
+<html>
+    <head>
+        {{> header}}
+        <script type='text/javascript' src='/static/javascripts/underscore-min.js'></script>
+        <script type='text/javascript' src='/static/javascripts/backbone-min.js'></script>
+
+    </head>
+    <body>
+        <div class="container">
+            {{> menu_site}}
+            <div class="row">
+                <div class="span6">
+                    <h3>{{profile.first_name}} {{profile.last_name</h3>
+                    <h4>{{profile.address}}</h4>
+                    <h4>{{profile.birthdate}}</h4>
+                    <h3 class="demo-panel-title">Sobre m&iacute;</h3>
+                    <p>{{profile.about}}</p>
+                </div>
+                <div class="offset2 span3">
+                    <h3 class="demo-panel-title">Redes Sociales</h3>
+                    <div class="share mrl">
+                        <ul>
+                            <li>
+                                <label class="share-label" for="share-toggle2">Facebook</label>
+                                <div class="toggle">
+                                    <label class="toggle-radio" for="share-toggle2">ON</label>
+                                    <input type="radio" name="share-toggles" id="share-toggle2" value="toggle1">
+                                    <label class="toggle-radio" for="share-toggle1">OFF</label>
+                                    <input type="radio" name="share-toggles" id="share-toggle1" value="toggle2" checked="checked">
+                                </div>
+                            </li>
+                            <li>
+                                <label class="share-label" for="share-toggle4">Twitter</label>
+                                <div class="toggle">
+                                    <label class="toggle-radio" for="share-toggle4">ON</label>
+                                    <input type="radio" name="share-toggles2" id="share-toggle4" value="toggle1" checked="checked">
+                                    <label class="toggle-radio" for="share-toggle3">OFF</label>
+                                    <input type="radio" name="share-toggles2" id="share-toggle3" value="toggle2">
+                                </div>
+                            </li>
+                            <li>
+                            <label class="share-label" for="share-toggle6">Google+</label>
+                            <div class="toggle">
+                                <label class="toggle-radio" for="share-toggle6">ON</label>
+                                <input type="radio" name="share-toggles3" id="share-toggle6" value="toggle1">
+                                <label class="toggle-radio" for="share-toggle5">OFF</label>
+                                <input type="radio" name="share-toggles3" id="share-toggle5" value="toggle2" checked="checked">
+                                </div>
+                            </li>
+                        </ul>
+                    </div> 
+                 </div>
+            </div>
+        </div>
+
+    </body>
+</html>
+

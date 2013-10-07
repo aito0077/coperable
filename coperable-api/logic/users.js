@@ -13,9 +13,7 @@ exports.list = function(req, res, next) {
 };
 
 exports.create = function(req, res, next) {
-    console.dir(req.body);
     var body = req.body;
-    console.dir(body);
     usuario.insert(
         body,
         function(data) {
@@ -30,24 +28,55 @@ exports.create = function(req, res, next) {
 exports.authenticate = function(req, res, next) {
     var body = req.body;
     var login_data = {
-        username: body.username,
+        email: body.email,
         password: body.password
     };
     console.dir(login_data);
-    usuario.findOne({ username: login_data.username }, function(err, user) {
+    usuario.findOne({ email: login_data.email}, function(err, user) {
         if (err) {
             console.log('Error: '+err);
             throw err;
         }
-        user.comparePassword(login_data.password, function(err, isMatch) {
-            if (err) { 
-                throw err;
-            }
-            console.log('Authenticated: '+ login_data.username);
-            console.dir(user);
-            res.send(user);
-        });
+        if(user) {
+            user.comparePassword(login_data.password, function(err, isMatch) {
+                if (err) { 
+                    throw err;
+                }
+                res.send(isMatch ? user : {});
+            });
+        } else {
+            res.send({});
+        }
     });
+};
 
+
+exports.findById = function(req, res, next) {
+    var user_id = req.params.id;
+    console.log("Find by Id: "+user_id);
+    usuario.Model.findById(user_id, '-password').exec(function (err, user) {
+        console.dir(user);
+        if(user) {
+            res.send(user);
+        } else {
+            res.send(404, {});
+        }
+    });
+};
+
+exports.findByProvider = function(req, res, next) {
+    var provider = req.params.provider;
+        user_id = req.params.id,
+        user_filter = {};
+    user_filter[provider+'_id'] = user_id;
+    console.dir(user_filter);
+    usuario.Model.findOne(user_filter,  '-password').exec(function (err, user) {
+        console.dir(user);
+        if(user) {
+            res.send(user);
+        } else {
+            res.send({});
+        }
+    });
 };
 

@@ -1,6 +1,6 @@
 // Don't commit this file to your public repos
 exports.server = {
-  //mongodb://username:server@localhost:27017/messages
-  mongoose_auth: 'mongodb://localhost/test',
-  port: '3001'
+    host: (process.env.VCAP_APP_HOST || 'localhost'),
+    port: (process.env.VMC_APP_PORT || 3001)
+    //mongoose_auth: 'mongodb://localhost/test',
 }

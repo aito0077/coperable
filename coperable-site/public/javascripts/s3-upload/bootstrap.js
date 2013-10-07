@@ -11,8 +11,8 @@
                  successActionRedirect: 'http://coperable.net/user/signup',
                  contentType: 'image/',
                  folder: '/',
-                 AWSAccessKeyId: 'KEY',
-                 AWSSecretKeyId: 'SECRET'
+                 AWSAccessKeyId: 'AKIAID6Q6EJLJGCBUGTQ',
+                 AWSSecretKeyId: 'qRQGVyx9D6qIx1n79ngqOGALwdOCBxkJa/GDFjxc'
                 });
 
         console.log("2");

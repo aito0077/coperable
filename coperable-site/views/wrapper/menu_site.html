@@ -17,7 +17,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="/iniciativas/list">
                         Inciativas
                       </a>
                     </li>
@@ -31,11 +31,16 @@
                 <div class="offset8 nav-collapse collapse">
                   <ul class="nav">
                     <li>
-                        <a href="/user/login">Login/Usuario<span class="navbar-unread">1</span> </a>
+                        {{#user}}
+                        <a href="/user/{{user.id}}">{{user.username}}<span class="navbar-unread">1</span> </a>
                         <ul>
-                            <li><a href="#">Perfil</a></li>
-                            <li><a href="#">Salir</a></li>
+                            <li><a href="/user/{{user.id}}">Perfil</a></li>
+                            <li><a href="/user/logout">Salir</a></li>
                         </ul> 
+                        {{/user}}
+                        {{^user}}
+                         <a href="#login_modal" role="button" data-toggle="modal" data-target="#login_modal">Ingres&aacute;</a>
+                        {{/user}}
                     </li>
                   </ul> 
 
@@ -47,4 +52,5 @@
         </div>
      </div> <!-- /row -->
 
+     {{> login_modal}}
 

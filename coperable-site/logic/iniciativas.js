@@ -74,9 +74,17 @@ exports.findByName = function(name, done) {
 
 
 
-exports.list = function(done) {
-	cop_api.client.get('/api/iniciativa', function(err, req, res, iniciativas) {
-		done(err, iniciativas);
+exports.list = function(req, res, done) {
+	cop_api.client.get('/api/iniciativa', function(err, request, response, iniciativas) {
+       done(err, iniciativas);
 	});
 };
 
+exports.browseByCategory = function(req, res, done) {
+
+    var category= req.query['category'];
+    console.log('Buscando por categoria: '+category);
+	cop_api.client.get('/api/iniciativa/category/'+category, function(err, request, response, iniciativas) {
+       done(err, iniciativas);
+	});
+};

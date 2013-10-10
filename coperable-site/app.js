@@ -1,4 +1,4 @@
-var config = require('./config-dev'),
+var config = require('./config'),
     express = require('express'),
     routes = require('./routes'),
     user = require('./routes/user'),

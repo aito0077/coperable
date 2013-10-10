@@ -1,7 +1,7 @@
-var config = require('../config-dev'),
+var config = require('../config'),
     crypto = require( 'crypto' ),
     mime = require( 'mime-magic' ),
-    DropboxClient = require('dropbox-node').DropboxClient,
+    //DropboxClient = require('dropbox-node').DropboxClient,
     us = require('underscore'),
     AWS = require('aws-sdk');
 

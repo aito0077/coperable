@@ -1,4 +1,4 @@
-var config = require('../config-dev'),
+var config = require('../config'),
     cop_api = require('../api_client/api'),
     users = require('../logic/users'),
     passport = require('passport'),
@@ -75,8 +75,8 @@ var oauthenticate_create = function(accessToken, refreshToken, given_profile, do
 
 
 passport.use(new FacebookStrategy({
-        clientID: config.system.FACEBOOK.id,
-        clientSecret: config.system.FACEBOOK.secret,
+        clientID: config.system.FACEBOOK_APP_ID,
+        clientSecret: config.system.FACEBOOK_APP_SECRET,
         callbackURL: "http://coperable.cloudfoundry.com/auth/facebook/callback"
         //callbackURL: "http://coperable.net/auth/facebook/callback"
     },
@@ -84,8 +84,8 @@ passport.use(new FacebookStrategy({
 ));
 
 passport.use(new TwitterStrategy({
-        consumerKey: config.system.TWITTER.key,
-        consumerSecret: config.system.TWITTER.secret,
+        consumerKey: config.system.TWITTER_CONSUMER_KEY,
+        consumerSecret: config.system.TWITTER_CONSUMER_SECRET,
         callbackURL: "http://coperable.cloudfoundry.com/auth/twitter/callback"
         //callbackURL: "http://coperable.net/auth/twitter/callback"
     },

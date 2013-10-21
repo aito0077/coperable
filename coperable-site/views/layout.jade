@@ -1,0 +1,23 @@
+doctype html
+html(lang='es')
+  head
+    title #{layoutTitle} | Coperable
+    link(rel='stylesheet', href='http://yui.yahooapis.com/pure/0.3.0/base-min.css')
+    link(rel='stylesheet', href='http://yui.yahooapis.com/pure/0.3.0/grids-min.css')
+    link(rel='stylesheet/less', href='/static/css/styles.less')
+
+    script(src='//cdn.jsdelivr.net/jquery/2.0.3/jquery-2.0.3.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/less.js/1.4.1/less.min.js')
+  body
+    header
+      .pure-g.content-wrapper
+        .pure-u-1-2
+          .logo
+            a(href='/'): img(src="/static/img/logo-1.png")
+        .pure-u-1-2
+          nav: ul
+            li: a(href='/iniciativa') Iniciativas
+            li: a(href='#') Organizá
+
+    .pure-g.content-wrapper
+      block content

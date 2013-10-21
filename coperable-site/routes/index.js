@@ -5,12 +5,12 @@
 
 
 exports.index = function(req, res) {
-    res.locals = {
-        title: 'Title',
-    };
-    return res.render('index',{
-        partials: {
-            part: 'part',
-        }
-    });
+  res.locals = {
+    title: 'Title',
+  };
+  return res.render('index',{
+    partials: {
+      part: 'part',
+    }
+  });
 };

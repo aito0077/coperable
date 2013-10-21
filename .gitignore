@@ -1,7 +1,8 @@
-/coperable-site/node_modules
 /coperable-engine/data
 /coperable-engine/target
 /coperable-site/config.js
 /coperable-api/config.js
-*.leo
+node_modules
+.nvmrc
 *.swp
+*.leo

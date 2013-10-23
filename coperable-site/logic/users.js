@@ -3,6 +3,12 @@ var config = require('../config'),
   us = require('underscore'),
   external_files = require('../logic/filehandler');
 
+/*
+cop_api = require('./api_client/api')
+user_data = { username: 'tout', password: '789456' }
+cop_api.client.put('/api/usuario', user_data, function(err, req, res, obj) { console.log(arguments) });
+*/
+
 exports.do_signup = function(req, res, done) {
   var user_data = us.extend({}, req.body);
   console.log(user_data);

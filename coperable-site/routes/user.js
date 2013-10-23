@@ -29,15 +29,14 @@ exports.profile = function(req, res) {
 
 exports.login = function(req, res) {
 
+  /*
   res.locals = us.extend(res.locals, {
     title: 'Login'
   });
-  /*
   res.locals = {
     user: req.user,
     title: 'Login'
   };
-  */
   return res.render('user/login',{
     partials: {
       header: 'wrapper/header',
@@ -45,6 +44,11 @@ exports.login = function(req, res) {
       footer: 'wrapper/footer'
     }
   });
+  */
+  return res.render('user/login.html', {
+    layoutTitle: 'Login',
+    layoutId: 'user-login'
+  })
 };
 
 exports.signup = function(req, res) {
@@ -56,6 +60,7 @@ exports.signup = function(req, res) {
   };
   */
 
+  /*
   res.locals = us.extend(res.locals, {
     title: 'Registrate'
   });
@@ -67,6 +72,12 @@ exports.signup = function(req, res) {
       widget_address: 'widgets/address'
     }
   });
+  */
+
+  return res.render('user/signup.html', {
+    layoutTitle: 'Login',
+    layoutId: 'user-login'
+  })
 };
 
 exports.set_localization = function(req, res, done) {

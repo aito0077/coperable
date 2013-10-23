@@ -1,5 +1,9 @@
 var _ = require('underscore')
 
+var config = require('../config'),
+  cop_api = require('../api_client/api'),
+  us = require('underscore')
+
 exports.index = function(req, res) {
 
   /*
@@ -25,10 +29,14 @@ exports.index = function(req, res) {
     }
   });
   */
+  cop_api
+  var geo = (req.session ? req.session.geo : false) ||
+            (req.cookies ? req.cookies.geo : undefined)
 
-  res.locals = _.extend(res.locals, {
-    layoutTitle: 'Home'
+  return res.render('home/index.html', {
+    layoutTitle: 'Home',
+    layoutId: 'home-index',
+    user: req.user,
+    geo: geo
   })
-
-  return res.render('home/index')
 };

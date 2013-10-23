@@ -13,6 +13,14 @@ var config = require('./config'),
   redis = require('redis'),
   external_files = require('./logic/filehandler'),
   RedisStore = require('connect-redis')(express);
+/*
+function _cb() {
+  console.log(arguments)
+}
+var repl = require("repl");
+var context = repl.start("$ ").context;
+context.cb = _cb;
+*/
 
 var stylus = require('stylus')
 var nib = require('nib')
@@ -22,8 +30,9 @@ var sessionStore = new RedisStore({client:rClient});
 
 var app = express();
 
-//app.engine('html', require('hogan-express'));
-app.engine('jade', require('jade').__express);
+app.set('layout', 'layout')
+app.engine('html', require('hogan-express'));
+//app.engine('jade', require('jade').__express);
 //app.enable('view cache');
 
 

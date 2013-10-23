@@ -1,44 +1,21 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        {{> header}}
-    </head>
-    <body>
-        <div class="container">
-            {{> menu_site}}
-            <div class="container-fluid">
-                <div class="row-fluid">
-                    <div class="span6">
-                        <h3>Si tienes usuario y password puedes entrar con ellos.</h3>
-                        <form method="post" action="/user/login">
-                            <div class="row">
-                                <input type="text" name="username" placeholder="Usuario" class="span6" />
-                            </div>
-                            <div class="row">
-                                <input type="password" name="password" placeholder="Password" class="span6" />
-                            </div>
-                            <div class="form-actions">
-                                <button type="submit" class="btn btn-primary">Aceptar</button>
-                            </div
-                        </form>
-                        <h3>Si no tienes cuenta puedes registarte <a href="/user/signup">aqu&iacute;</a></h3>
-                    </div>
-                    <div class="span6">
-                        <h3>Si tienes una cuenta en estos sitios, puedes entrar con ella</h3>
-                            <div class="span3">
-                                <a href="/auth/facebook" class="btn btn-large btn-block">
-                                    <img src="/static/images/social_buttons/facebook.png" class="big-illustration"/>
-                                </a>
-                            </div>
-                            <div class="span3">
-                                <a href="/auth/twitter" class="btn btn-large btn-block">
-                                    <img src="/static/images/social_buttons/twitter.png" class="big-illustration"/>
-                                </a>
-                            </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+<div class="container pure-g-r">
+  <h1 class="pure-u-1">Ingresá</h1>
+  <div class="module pure-u-2-5 centered">
+    <p>Podes usar tus redes sociales para hacer login</p>
+    <a href="/auth/facebook">
+      <img src="/static/img/social-btn-facebook.png"/>
+    </a>
+    <a href="/auth/twitter" class="btn btn-large btn-block">
+      <img src="/static/img/social-btn-twitter.png"/>
+    </a>
+    <p>o tu cuenta coperable</p>
+    <form method="post" action="/user/login" class="pure-form">
+      <fieldset class="pure-group">
+        <input type="text" name="username" placeholder="Usuario" class="pure-input-1" required>
+        <input type="password" name="password" placeholder="Contraseña" class="pure-input-1" required>
+      </fieldset>
+      <button type="submit" class="pure-button pure-input-1 pure-button-primary">Aceptar</button>
+    </form>
+    <p>Si no tienes cuenta puedes registate <strong><a href="/user/signup">acá</a></strong></p>
+  </div>
+</div>

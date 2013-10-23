@@ -47,7 +47,7 @@ $(function(){
 
             this.setup_bindings();
             this.setup_components();
-        }, 
+        },
 
         reset: function(options) {
             this.model.set(options);
@@ -58,17 +58,17 @@ $(function(){
                 map_canvas: '#map_canvas',
                 user_position: this.user_default
             });
- 
+
         },
 
         setup_bindings: function() {
 
             this.model.on('change:latitud', function(model, attribute) {
-                $('#latitude').val(model.get('latitud')); 
+                $('#latitude').val(model.get('latitud'));
             });
 
             this.model.on('change:longitud', function(model, attribute) {
-                $('#longitude').val(model.get('longitud')); 
+                $('#longitude').val(model.get('longitud'));
             });
         },
 
@@ -107,13 +107,13 @@ $(function(){
 
 
             $('#iniciativa_wizard a:first').tab('show');
-        
+
             this.address = new AddressPicker();
 
             this.address.on('direccion_change', function(direccion) {
                 self.model.set({
                     address: direccion
-                }); 
+                });
             });
             this.address.on('location_change', function(location) {
                 self.model.set({
@@ -123,19 +123,19 @@ $(function(){
                         latitude: location.latitud,
                         longitude: location.longitud
                     }
-                }); 
+                });
             });
 
         },
 
         create_iniciativa: function(e) {
             this.save_iniciativa();
-        }, 
+        },
 
         save_iniciativa: function() {
             var self = this;
             $('#description').val(JSON.stringify($('#description_red').getCode()));
-            
+
             if(this.validate()) {
                 console.log('Es un modelo nuevo? '+this.model.isNew());
                 this.model.save(null, {
@@ -153,13 +153,13 @@ $(function(){
         after_save: function() {
             var tab_to_show = 'basicos_tab';
             switch(this.current_tab) {
-                case 'basicos_tab': 
+                case 'basicos_tab':
                     tab_to_show = 'tareas_tab';
                     break;
-                case 'tareas_tab': 
+                case 'tareas_tab':
                     tab_to_show = 'redes_tab';
                     break;
-                deafult: 
+                deafult:
                     tab_to_show = 'basicos_tab';
                     break;
             }
@@ -308,7 +308,7 @@ $(function(){
                 }
                 self.trigger('location_change', {
                     latitud: address.geometry.location.jb,
-                    longitud: address.geometry.location.kb  
+                    longitud: address.geometry.location.kb
                 });
             });
             this.addresspickerMap.on("positionChanged", function(evt, markerPosition) {
@@ -363,7 +363,7 @@ $(function(){
         },
 
         initialize: function() {
-            _.bindAll(this, 'reset', 'setup_binding', 'setup_component', 'render_map', 'detect_geolocation', 'traer_iniciativas', 'marcar_iniciativas', 'browse_iniciativas', 'clear_markers');
+            _.bindAll(this);
 
             this.model = new iniciativa.Model;
             this.iniciativas = new iniciativa.Collection;
@@ -417,12 +417,12 @@ $(function(){
         traer_iniciativas: function(category) {
             var self = this;
             this.iniciativas.fetch({
-                data: $.param({ 
+                data: $.param({
                     category: category
                 }),
                 success: function(iniciativas, response, options) {
                     self.marcar_iniciativas();
-                }    
+                }
             });
         },
 
@@ -468,13 +468,13 @@ $(function(){
                     navigator.geolocation.getCurrentPosition(function(position) {
                         var initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
                         console.log('Latitud: '+initialLocation.lat()+' - Longitud: '+initialLocation.lng());
-                        $.get(  
+                        $.get(
                             '/user/geolocalization/'+initialLocation.lat()+'/'+initialLocation.lng(),
-                        {},  
-                        function(responseText) {  
-                            console.log(responseText);  
-                        });  
-                    }, 
+                        {},
+                        function(responseText) {
+                            console.log(responseText);
+                        });
+                    },
                     function() {
                         handleNoGeolocation(browserSupportFlag);
                     });
@@ -508,7 +508,7 @@ $(function(){
             }
             console.log('Filtrar usando: '+category);
 
-            this.traer_iniciativas(category);    
+            this.traer_iniciativas(category);
 
         }
     });

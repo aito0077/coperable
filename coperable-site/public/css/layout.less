@@ -5,37 +5,98 @@ body {
   margin: 0;
   background: url(/static/img/bg.png);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   color: #767676;
 }
 
-
 ul {
-  list-style:none;
-  margin:0;
-  padding:0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
+
 a {
   text-decoration:none;
-  color:#767676;
+  color: #767676;
 }
 
 h1,h2,h3 {
-  color:#322B25;
+  color: #322B25;
 }
 h1 {
-  font-size:26px;
+  font-size: 25px;
+  line-height: 30px;
 }
 h2 {
-  font-size:24px;
+  font-size: 23px;
+  font-weight: 400;
 }
 h3 {
-  font-size:21px;
+  font-size: 21px;
 }
 h4 {
-  font-size:17px;
-  color:#5B5B5B;
-  margin:10px 0 15px;
+  font-size: 17px;
+  color: #5B5B5B;
+  margin: 10px 0 15px;
+}
+
+.pure-g , .pure-g-r {
+  [class *= "pure-u"] {
+    &.centered {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+.weak { font-weight:normal; }
+.clearfix {
+  &:after {
+    content:'';
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    clear:both;
+    height:0;
+  }
+}
+
+[data-icon] {
+  position:relative;
+  padding-left:26px;
+  &:before {
+    font-family: 'icomoon';
+    content: attr(data-icon);
+    speak: none;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    font-size:22px;
+    position:absolute;
+    left:0;
+  }
+}
+
+.icon {
+  font-family: 'icomoon';
+  speak: none;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src:url('../fonts/icomoon.eot');
+  src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.woff') format('woff'),
+    url('../fonts/icomoon.ttf') format('truetype'),
+    url('../fonts/icomoon.svg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .content-wrapper {
@@ -80,6 +141,7 @@ header {
           line-height:36px;
           display:block;
           font-weight:bold;
+          font-size: 13px;
           padding:0 10px;
           margin:0 10px;
         }

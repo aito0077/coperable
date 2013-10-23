@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {{> header}}
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="/static/javascripts/underscore-min.js"></script>
+    <script src="/static/javascripts/backbone-min.js"></script>
+    <script src="/static/js/iniciativa.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      {{> menu_site}}
+
+      <div class="span12">
+        <div class="demo-text-box prl">
+        <p class="lead text-center">Ayudamos a personas que trabajan con iniciativas positivas</p>
+        <p class="lead text-center">uniéndolos con quienes desean colaborar con su comunidad.</p>
+        </div>
+      </div>
+
+      <div class="row span12">
+        <div class="span3 palette palette-firm text-center">
+          <div class="palette palette-firm">
+            <h3 class="tile-title">Organiz&aacute;</h3>
+            <p>Promueve tu Iniciativa Social y consigue apoyo.</p>
+            <a class="btn btn-primary btn-large btn-block btn-inverse" href="/iniciativas/create">Organiz&aacute;</a>
+          </div>
+        </div>
+        <div class="span5 demo-video center">
+          <video class="video-js" controls preload="auto" width="100%" height="250" data-setup="{}">
+          </video>
+        </div>
+        <div class="span3 palette palette-alizarin text-center" >
+          <div class="palette palette-alizarin">
+            <h3 class="tile-title">Particip&aacute;</h3>
+            <p>En iniciativas positivas que mejoran tu Comunidad.</p>
+            <a class="btn btn-danger btn-large btn-block btn-inverse" href="/iniciativas/list">Particip&aacute;</a>
+          </div>
+        </div>
+      </div>
+      <!--
+      <div class="row span12">
+        {{> iniciativas_browser_command}}
+      </div>
+      -->
+
+      <div class="offset1 span10" style="height:400px">
+        {{> map}}
+      </div>
+
+      {{> footer}}
+    </div>
+
+    <script type="text/javascript">
+      $(function(){
+        map_browser = new iniciativa.MapBrowser();
+        map_browser.reset({
+          {{#geo}}
+          user_location: {
+            latitud: {{geo.latitud}},
+            longitud: {{geo.longitud}}
+          }
+          {{/geo}}
+        });
+       });
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,153 @@
+#home-index {
+  .main-title {
+    max-width: 840px;
+    text-align: center;
+    margin: 62px auto 39px;
+  }
+  .box-organiza,
+  .box-participa,
+  .main-video {
+    border-radius: 3px;
+    height: 308px;
+  }
+  .box-organiza,
+  .box-participa {
+    color: #FFF;
+    text-align: center;
+    padding: 63px 15px 0;
+    width: 20%;
+    h2 {
+      position: relative;
+      color: #FFF;
+      &:after {
+        content: '';
+        height: 1px;
+        width: 38px;
+        background: rgba(0,0,0,.2);
+        position: absolute;
+        left: 50%;
+        margin-left: -16px;
+        bottom: -18px;
+      }
+    }
+    p {
+      padding-top: 11px;
+      line-height: 20px;
+      font-weight: 100;
+    }
+    a {
+      width: 87px;
+      height: 36px;
+      display: inline-block;
+      background: #FFF;
+      border-radius: 3px;
+      line-height: 36px;
+      font-weight: bold;
+      margin-top: 12px;
+    }
+  }
+  .box-participa {
+    float: left;
+    background: #00BE94;
+    a { color: #00BE94; }
+  }
+  .box-organiza {
+    float: right;
+    background: #FF7B2C;
+    a { color: #FF7B2C; }
+  }
+  .main-video {
+    margin: 0 auto;
+    padding: 0 1.5%;
+    width: 60%;
+    overflow: hidden;
+  }
+
+  .ultimas-iniciativas {
+    margin-top: 50px;
+  }
+  .ultimas-iniciativas-filtro {
+    border-bottom: 2px solid #D8D8D8;
+    margin-bottom: 22px;
+    li {
+      margin-bottom: -2px;
+      line-height: 42px;
+      text-align: center;
+      float: left;
+      border-bottom: 2px solid;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 2px 25px 0 44px;
+      &:nth-child(1){
+        color: #9D2EA7;
+        border-color: #9D2EA7;
+        &.selected{ background: #9D2EA7 }
+      }
+      &:nth-child(2){
+        color: #388D47;
+        border-color: #388D47;
+        &.selected{ background: #388D47 }
+      }
+      &:nth-child(3){
+        color: #EB3130;
+        border-color: #EB3130;
+        &.selected{ background: #EB3130 }
+      }
+      &:nth-child(4){
+        color: #37A2DF;
+        border-color: #37A2DF;
+        &.selected{ background: #37A2DF }
+      }
+      &:nth-child(5){
+        color: #E4A807;
+        border-color: #E4A807;
+        &.selected{ background: #E4A807 }
+      }
+      &.selected {
+        color: #FFF;
+      }
+      &:before {
+        position: absolute;
+        left: 0;
+        margin-left: 14px;
+        line-height: 41px;
+      }
+    }
+  }
+  .ultimas-iniciativas-mapa {
+    height: 400px;
+  }
+  .ultimas-iniciativas-mapa-wrapper {
+    position:relative;
+    background:#EBEBEB;
+    padding:10px;
+    box-shadow:1px 2px 3px rgba(0,0,0,.3);
+    height:620px;
+    border-radius:4px;
+    &:before {
+      opacity:.03;
+      content:'';
+      background:url(/static/img/paper-fold.jpg);
+      background-size:100%;
+      width:100%;
+      height:620px;
+      top:0;
+      left:0;
+      position:absolute;
+      z-index:1;
+      pointer-events:none;
+    }
+    &:after {
+      opacity:.1;
+      content:'';
+      background:url(/static/img/paper-texture.jpg);
+      width:100%;
+      height:620px;
+      top:0;
+      left:0;
+      position:absolute;
+      z-index:2;
+      pointer-events:none;
+    }
+  }
+}

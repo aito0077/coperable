@@ -15,15 +15,21 @@ exports.list = function(req, res, next) {
 exports.create = function(req, res, next) {
     var body = req.body;
     console.dir(body);
-    usuario.insert(
-        body,
-        function(data) {
-            res.send(data);
-        },
-        function(err) {
-            res.send(err);
-        }
-    );
+    usuario.alreadyExists(body.username, function(results) {
+        usuario.insert(
+            body,
+            function(data) {
+                res.send(data);
+            },
+            function(err) {
+                res.send(err);
+            }
+        );
+     },
+     function(message) {
+        res.send(message);
+    } );
+
 };
 
 exports.authenticate = function(req, res, next) {

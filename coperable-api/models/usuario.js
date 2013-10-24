@@ -105,6 +105,18 @@ exports.get = function(id, success) {
   Usuario.findOne({username: id}).exec(success);
 };
 
+exports.alreadyExists = function(id, success, wrong) {
+  Usuario.find({username: id}).limit(limit).execFind(function (arr,data) {
+    console.dir(data);
+    if(typeof data[0] !== 'undefined') {
+        console.log('Username already exists');
+        wrong({error: 'username_already_exists'});
+    } else {
+        success(data);
+    }
+  });
+};
+
 
 exports.findOne = function(query, callback) {
     Usuario.findOne(query, callback);

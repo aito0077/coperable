@@ -20,12 +20,12 @@ passport.deserializeUser(function(user, done) {
 });
 
 passport.use(new LocalStrategy({
-    usernameField: 'email',
+    usernameField: 'username',
     passwordField: 'password'
   },
-  function(email, password, done) {
-    console.log('Email: '+email+' - password: '+password);
-    users.authenticate(email, password, function(err, user) {
+  function(username, password, done) {
+    console.log('Username: '+username+' - password: '+password);
+    users.authenticate(username, password, function(err, user) {
       if (err) { return done(err); }
       if (us.isEmpty(user)) {
         return done(null, false, { message: 'Usuario/Password incorrecto.' });

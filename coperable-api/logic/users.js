@@ -14,6 +14,7 @@ exports.list = function(req, res, next) {
 
 exports.create = function(req, res, next) {
     var body = req.body;
+    console.dir(body);
     usuario.insert(
         body,
         function(data) {
@@ -28,11 +29,11 @@ exports.create = function(req, res, next) {
 exports.authenticate = function(req, res, next) {
     var body = req.body;
     var login_data = {
-        email: body.email,
-        password: body.password
+        password: body.password,
+        username: body.username
     };
     console.dir(login_data);
-    usuario.findOne({ email: login_data.email}, function(err, user) {
+    usuario.findOne({ username: login_data.username}, function(err, user) {
         if (err) {
             console.log('Error: '+err);
             throw err;

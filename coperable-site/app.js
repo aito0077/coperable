@@ -172,7 +172,10 @@ app.get('/auth/twitter/callback',
   })
 );
 app.get('/user/signup', user.signup);
-app.post('/user/signup', users.do_signup);
+app.post('/user/signup', users.do_signup, function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 app.get('/user/geolocalization/:latitud/:longitud', user.set_localization);
 app.get('/user/logout', function(req, res){
   req.logout();

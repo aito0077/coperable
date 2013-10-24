@@ -20,9 +20,9 @@ exports.do_signup = function(req, res, done) {
   });
 };
 
-exports.authenticate = function(email, password, done) {
+exports.authenticate = function(username, password, done) {
   var user_data = {
-    email: email,
+    username: username,
     password: password
   };
   console.log(user_data);

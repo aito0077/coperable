@@ -1,9 +1,5 @@
 var _ = require('underscore')
 
-var config = require('../config'),
-  cop_api = require('../api_client/api'),
-  us = require('underscore')
-
 exports.index = function(req, res) {
 
   /*
@@ -29,7 +25,6 @@ exports.index = function(req, res) {
     }
   });
   */
-  cop_api
   var geo = (req.session ? req.session.geo : false) ||
             (req.cookies ? req.cookies.geo : undefined)
 

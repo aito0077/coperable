@@ -76,7 +76,7 @@ exports.findByName = function(name, done) {
 
 exports.list = function(req, res, done) {
   cop_api.client.get('/api/iniciativa', function(err, request, response, iniciativas) {
-     done(err, iniciativas);
+    done(err, iniciativas);
   });
 };
 

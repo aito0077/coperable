@@ -1,7 +1,7 @@
 var mongoose = require('mongoose/'),
     util = require('util'),
     us = require('underscore'),
-    Schema = mongoose.Schema;  
+    Schema = mongoose.Schema;
 
 
 var IniciativaSchema = new Schema({
@@ -26,7 +26,7 @@ var IniciativaSchema = new Schema({
         user: String,
         name: String
     },
-    members: [{ 
+    members: [{
         user: String,
         role: String,
         since_date: { type: Date, default: Date.now }
@@ -116,10 +116,10 @@ exports.insert = function(iniciativa, success, error) {
 exports.update = function(iniciativa, success, error) {
     Iniciativa.update({code: iniciativa.code}, iniciativa, function(err) {
         if(err) {
-           error(err); 
+           error(err);
         } else {
-           success(); 
-        }  
+           success();
+        }
     });
 };
 

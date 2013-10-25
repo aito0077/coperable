@@ -1,0 +1,32 @@
+<div class="iniciativas-list pure-g-r">
+  {{#iniciativas}}
+    <div class="iniciativas-list-item-wrapper pure-u-1-3">
+      <div class="iniciativas-list-item category-{{category.slug}} stage-{{current_stage}}">
+        <div class="thumb">
+          <div class="label">{{category.name}}</div>
+          <a href="/iniciativas/{{slug}}">
+            <img src="{{thumb}}">
+          </a>
+        </div>
+        <div class="wrapper">
+          <h4 class="title">
+            <a href="/iniciativas/{{slug}}">{{name}}</a>
+          </h4>
+          <p class="address ellipsis" data-icon="">{{address}}</p>
+          <div class="start-date ellipsis" data-icon="">
+            {{start_date}}
+          </div>
+        </div>
+        <ul class="stages wrapper">
+          <li class="convocatoria actual">Convocatoria<div class="icon"></div></li>
+          <li class="activando">Activando<div class="icon"></div></li>
+          <li class="finalizada">Finalizada<div class="icon"></div></li>
+        </ul>
+        <div class="actions wrapper">
+          <a href="/iniciativas/{{slug}}" rel="/iniciativas/{{slug}}" class="pure-button boton-participar">Participá</a>
+          <div class="text">{{pariticipants_amount}} participando</div>
+        </div>
+      </div>
+    </div>
+  {{/iniciativas}}
+</div>

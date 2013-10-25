@@ -13,6 +13,7 @@ var config = require('./config'),
   redis = require('redis'),
   external_files = require('./logic/filehandler'),
   RedisStore = require('connect-redis')(express);
+
 /*
 function _cb() {
   console.log(arguments)
@@ -115,15 +116,16 @@ app.all( '*', function( req, res, next ) {
   next();
 });
 
-app.get('/iniciativas/edit', iniciativa.edit);
-app.get('/iniciativas/create', iniciativa.create);
-app.get('/iniciativas/view/:id', iniciativa.view);
-app.get('/iniciativas/list', iniciativa.list);
+app.get('/iniciativas', iniciativa.list);
+app.get('/iniciativas/:id', iniciativa.view);
+app.get('/iniciativas/:slug', iniciativa.view_slug);
 
-app.post('/iniciativas', iniciativas.create);
-app.put('/iniciativas/:id', iniciativas.save);
-app.get('/iniciativas/:id', iniciativas.get);
-app.get('/iniciativa/:slug', iniciativa.view_slug);
+// app.get('/iniciativas/view/:id', iniciativa.view);
+// app.get('/iniciativas/edit', iniciativa.edit);
+// app.get('/iniciativas/create', iniciativa.create);
+// app.post('/iniciativas/create', iniciativas.create);
+// app.put('/iniciativas/:id', iniciativas.save);
+// app.get('/iniciativas/:id', iniciativas.get);
 
 app.get('/iniciativas', function(req, res, next) {
   console.dir(req.query);
@@ -149,6 +151,12 @@ app.get('/user/failure_login', function(req, res, next) {
 });
 
 
+app.get(['/user/login', '/user/signup'], function(req, res, next){
+  if(req.isAuthenticated()) {
+    res.send({'result':'Ya estás logueado!'});
+  }
+  next('route')
+});
 app.get('/user/login', user.login);
 app.post('/user/login',
   passport.authenticate('local', {

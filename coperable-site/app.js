@@ -127,6 +127,7 @@ app.get('/iniciativas/:id', iniciativa.view);
  app.get('/api/iniciativas/view/:id', iniciativa.view);
  app.get('/api/iniciativas/edit', iniciativa.edit);
  app.get('/api/iniciativas/:id', iniciativas.get);
+ app.post('/api/iniciativas', iniciativas.create);
 
  app.get('/api/iniciativas', function(req, res, next) {
    console.dir(req.query);

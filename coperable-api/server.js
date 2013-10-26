@@ -4,9 +4,9 @@ var mongoose = require('mongoose/'),
     iniciativas = require('./logic/iniciativas.js'),
     usuarios = require('./logic/users.js');
 
-if(process.env.VCAP_SERVICES){
+if( process.env.VCAP_SERVICES ){
     var env = JSON.parse(process.env.VCAP_SERVICES);
-    var mongo = env['mongodb-2.0'][0]['credentials'];
+    var mongo = env['mongodb-1.8'][0]['credentials'];
 } else {
     var mongo = {
         "hostname":"localhost",

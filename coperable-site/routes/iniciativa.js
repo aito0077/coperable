@@ -122,14 +122,18 @@ exports.list = function(req, res) {
     //     pariticipants_amount: 28,
     //   }
     // ]
-    return res.render('iniciativa/index.html', {
-      layoutTitle: 'Iniciativas',
-      layoutId: 'iniciativas-index',
-      iniciativas: iniciativas,
-      partials: {
-        list: 'iniciativa/_list'
-      }
-    })
+    if( req.xhr ) {
+      return res.send(iniciativas)
+    } else {
+      return res.render('iniciativa/index.html', {
+        layoutTitle: 'Iniciativas',
+        layoutId: 'iniciativas-index',
+        iniciativas: iniciativas,
+        partials: {
+          list: 'iniciativa/_list'
+        }
+      })
+    }
   });
 };
 

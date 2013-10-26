@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+  <title>{{layoutTitle}} | Coperable</title>
+  <link rel='stylesheet' href='http://yui.yahooapis.com/pure/0.3.0/base-min.css'>
+  <link rel='stylesheet' href='http://yui.yahooapis.com/pure/0.3.0/grids-min.css'>
+  <link rel='stylesheet' href='http://yui.yahooapis.com/pure/0.3.0/buttons-min.css'>
+  <link rel='stylesheet' href='http://yui.yahooapis.com/pure/0.3.0/forms-min.css'>
+  <link rel='stylesheet/less' href='/static/css/styles.less'>
+
+  <script src='//cdn.jsdelivr.net/less/1.4.2/less.min.js'></script>
+
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
+  <script src='//cdn.jsdelivr.net/lodash/2.1.0/lodash.underscore.min.js'></script>
+  <script src='//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js'></script>
+  <script src='//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'></script>
+  <script src="/static/js/iniciativa.js"></script>
+
+  {{{ yield-head }}}
+</head>
+<body id='{{layoutId}}'>
+  <header>
+    <div class="pure-g content-wrapper">
+      <div class="pure-u-1-2">
+        <div class="logo"><a href="/"><img src="/static/img/logo-1.png"/></a></div>
+      </div>
+      <div class="pure-u-1-2">
+        <nav>
+          <ul>
+            <li><a href="/developement/doc">Documentaci&oacute;n</a></li>
+            {{#user}}
+                <li><a href="/developement/control">Administraci&oacute;n</a></li>
+            {{/user}}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="content-wrapper">
+
+    <h1 class="main-title">Coperable API</h1>
+    {{{ yield }}}
+  </div>
+</body>
+</html>

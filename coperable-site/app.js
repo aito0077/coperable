@@ -205,6 +205,8 @@ app.get('/uploadsuccess', function(req, resp) {
 
 
 app.get('/development/', development.index);
+app.get('/development/doc', development.doc);
+app.get('/development/control', development.control);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

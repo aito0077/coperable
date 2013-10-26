@@ -55,14 +55,12 @@ exports.view = function(req, res) {
 
     res.locals = us.extend(res.locals, {
       iniciativa: iniciativa,
-      title: iniciativa.name
+      layoutTitle: iniciativa.name,
+      layoutId: 'iniciativas-view',
     });
     return res.render('iniciativa/view.html',{
       partials: {
-        header: 'wrapper/header',
-        menu_site: 'wrapper/menu_site',
         map: 'widgets/map',
-        footer: 'wrapper/footer'
       }
     });
   });

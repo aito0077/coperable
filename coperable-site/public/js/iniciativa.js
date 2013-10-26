@@ -426,7 +426,7 @@ $(function(){
           '<a class="pull-left" href="#">',
           '</a>',
           '<div class="media-body">',
-            '<h3><a class="iniciativa" data-id="<%= _id %>" href="/iniciativas/view/<%= _id %>"><%= name %></a></h3>',
+            '<h3><a class="iniciativa" data-id="<%= _id %>" href="/iniciativas/<%= _id %>"><%= name %></a></h3>',
             '<div class="media">',
               '<p class="descSmall"><%= goal %></p>',
             '</div>',

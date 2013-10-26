@@ -145,7 +145,7 @@ app.get('/iniciativas/:id', iniciativa.view);
 
 
 app.get('/user/success_login', function(req, res, next) {
-  res.send({'result':'Bienvenido.'});
+  res.redirect('/');
 });
 
 app.get('/user/failure_login', function(req, res, next) {

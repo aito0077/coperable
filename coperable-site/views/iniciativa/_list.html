@@ -1,12 +1,10 @@
 <div class="iniciativas-list pure-g-r">
   {{#iniciativas}}
     <div class="iniciativas-list-item-wrapper pure-u-1-3">
-      <div class="iniciativas-list-item category-{{category.slug}} stage-{{current_stage}}">
+      <div class="iniciativas-list-item category-environment stage-{{current_stage}}" id="iniciativas-list-item-{{_id}}">
         <div class="thumb">
-          <div class="label">{{category.name}}</div>
-          <a href="/iniciativas/{{slug}}">
-            <img src="{{thumb}}">
-          </a>
+          <div class="label">Medio Ambiente</div>
+          <div class="iniciativas-list-item-map" style="width: 100%;height: 130px;"></div>
         </div>
         <div class="wrapper">
           <h4 class="title">
@@ -14,7 +12,7 @@
           </h4>
           <p class="address ellipsis" data-icon="">{{address}}</p>
           <div class="start-date ellipsis" data-icon="">
-            {{start_date}}
+            {{creation_date}}
           </div>
         </div>
         <ul class="stages wrapper">
@@ -27,6 +25,24 @@
           <div class="text">{{pariticipants_amount}} participando</div>
         </div>
       </div>
+      <script type="text/javascript">
+        $(function(){
+          var $item = $("#iniciativas-list-item-{{_id}}")
+          $item.find('.iniciativas-list-item-map').goMap({
+            markers: [{
+                latitude: {{location.latitude}},
+                longitude: {{location.longitude}}
+            }],
+            navigationControl: false,
+            mapTypeControl: false,
+            scrollwheel: false,
+            disableDoubleClickZoom: true,
+            maptype: 'ROADMAP'
+          });
+          var $date = $item.find('.start-date')
+          $date.html(moment($date.html()).lang('es').fromNow())
+        })
+      </script>
     </div>
   {{/iniciativas}}
 </div>

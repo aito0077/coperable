@@ -44,21 +44,21 @@ app.configure(function(){
   app.set('views', __dirname + '/views');
   //app.set('view engine', 'html');
 
-  function compile(str, path) {
-    return stylus(str)
-      .set('filename', path)
-      .set('compress', false)
-      .set('warn', true)
-      .use(nib())
-      .import('nib');
-  }
+  // function compile(str, path) {
+  //   return stylus(str)
+  //     .set('filename', path)
+  //     .set('compress', false)
+  //     .set('warn', true)
+  //     .use(nib())
+  //     .import('nib');
+  // }
 
-  app.use(stylus.middleware({
-    debug: true,
-    src: __dirname + '/assets/css',
-    dest: __dirname + '/public/css/',
-    compile: compile
-  }));
+  // app.use(stylus.middleware({
+  //   debug: true,
+  //   src: __dirname + '/assets/css',
+  //   dest: __dirname + '/public/css/',
+  //   compile: compile
+  // }));
 
   app.use(express.favicon());
   app.use(express.logger('dev'));
@@ -117,28 +117,28 @@ app.all( '*', function( req, res, next ) {
 });
 
 app.get('/iniciativas', iniciativa.list);
-app.get('/iniciativas/:id', iniciativa.view);
+app.get('/iniciativas/create', iniciativa.create);
+app.post('/iniciativas', iniciativas.create);
+app.put('/iniciativas/:id', iniciativas.save);
 app.get('/iniciativas/:slug', iniciativa.view_slug);
+app.get('/iniciativas/:id', iniciativa.view);
 
 // app.get('/iniciativas/view/:id', iniciativa.view);
 // app.get('/iniciativas/edit', iniciativa.edit);
-// app.get('/iniciativas/create', iniciativa.create);
-// app.post('/iniciativas/create', iniciativas.create);
-// app.put('/iniciativas/:id', iniciativas.save);
 // app.get('/iniciativas/:id', iniciativas.get);
 
-app.get('/iniciativas', function(req, res, next) {
-  console.dir(req.query);
-  if(req.query.category) {
-    iniciativas.browseByCategory(req, res, function(err, iniciativas) {
-      res.send(iniciativas);
-    });
-  } else {
-    iniciativas.list(req, res, function(err, iniciativas) {
-      res.send(iniciativas);
-    });
-  }
-});
+// app.get('/iniciativas', function(req, res, next) {
+//   console.dir(req.query);
+//   if(req.query.category) {
+//     iniciativas.browseByCategory(req, res, function(err, iniciativas) {
+//       res.send(iniciativas);
+//     });
+//   } else {
+//     iniciativas.list(req, res, function(err, iniciativas) {
+//       res.send(iniciativas);
+//     });
+//   }
+// });
 
 
 

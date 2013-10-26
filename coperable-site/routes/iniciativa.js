@@ -2,6 +2,7 @@ var iniciativas = require('../logic/iniciativas'),
   us = require('underscore');
 
 exports.create = function(req, res) {
+  /*
   us.extend(res.locals, {
     title: 'Organiza'
   });
@@ -13,6 +14,14 @@ exports.create = function(req, res) {
       widget_address: 'widgets/address'
     }
   });
+  */
+  return res.render('iniciativa/create.html', {
+    layoutTitle: 'Empezar Iniciativa',
+    layoutId: 'iniciativa-create',
+    partials: {
+      widget_address: 'widgets/address'
+    }
+  })
 };
 
 exports.edit = function(req, res) {
@@ -36,6 +45,7 @@ exports.edit = function(req, res) {
 };
 
 exports.view = function(req, res) {
+  console.log('route view')
   var iniciativa_id = req.params['id'];
   iniciativas.findById(iniciativa_id, function(err, iniciativa) {
     console.dir(iniciativa);
@@ -60,6 +70,7 @@ exports.view = function(req, res) {
 };
 
 exports.view_slug = function(req, res) {
+  console.log('route view_slug')
   var slug = req.params['slug'];
   iniciativas.findByName(slug, function(err, iniciativa) {
     console.dir(iniciativa);
@@ -96,73 +107,21 @@ exports.list = function(req, res) {
       }
     });
     */
-    iniciativas = [
-      {
-        name: 'Sembrando sonrisas en Boedo',
-        slug: 'sembrando-semillas-en-boedo',
-        category: {
-          slug: 'environment',
-          name: 'Medio Ambiente',
-        },
-        thumb: '/static/img/iniciativas/initiativepic-1-mq.jpg',
-        address: 'Palermo, Buenos Aires',
-        start_date: 'Martes 28/06/13 16:40hs',
-        current_stage: 'convocatoria',
-        pariticipants_amount: 28,
-      },
-      {
-        name: 'Sembrando sonrisas en Boedo',
-        slug: 'sembrando-semillas-en-boedo',
-        category: {
-          slug: 'environment',
-          name: 'Medio Ambiente',
-        },
-        thumb: '/static/img/iniciativas/initiativepic-1-mq.jpg',
-        address: 'Palermo, Buenos Aires',
-        start_date: 'Martes 28/06/13 16:40hs',
-        current_stage: 'convocatoria',
-        pariticipants_amount: 28,
-      },
-      {
-        name: 'Sembrando sonrisas en Boedo',
-        slug: 'sembrando-semillas-en-boedo',
-        category: {
-          slug: 'environment',
-          name: 'Medio Ambiente',
-        },
-        thumb: '/static/img/iniciativas/initiativepic-1-mq.jpg',
-        address: 'Palermo, Buenos Aires',
-        start_date: 'Martes 28/06/13 16:40hs',
-        current_stage: 'convocatoria',
-        pariticipants_amount: 28,
-      },
-      {
-        name: 'Sembrando sonrisas en Boedo',
-        slug: 'sembrando-semillas-en-boedo',
-        category: {
-          slug: 'environment',
-          name: 'Medio Ambiente',
-        },
-        thumb: '/static/img/iniciativas/initiativepic-1-mq.jpg',
-        address: 'Palermo, Buenos Aires',
-        start_date: 'Martes 28/06/13 16:40hs',
-        current_stage: 'convocatoria',
-        pariticipants_amount: 28,
-      },
-      {
-        name: 'Sembrando sonrisas en Boedo',
-        slug: 'sembrando-semillas-en-boedo',
-        category: {
-          slug: 'environment',
-          name: 'Medio Ambiente',
-        },
-        thumb: '/static/img/iniciativas/initiativepic-1-mq.jpg',
-        address: 'Palermo, Buenos Aires',
-        start_date: 'Martes 28/06/13 16:40hs',
-        current_stage: 'convocatoria',
-        pariticipants_amount: 28,
-      },
-    ]
+    // iniciativas = [
+    //   {
+    //     name: 'Sembrando sonrisas en Boedo',
+    //     slug: 'sembrando-semillas-en-boedo',
+    //     category: {
+    //       slug: 'environment',
+    //       name: 'Medio Ambiente',
+    //     },
+    //     thumb: '/static/img/iniciativas/initiativepic-1-mq.jpg',
+    //     address: 'Palermo, Buenos Aires',
+    //     start_date: 'Martes 28/06/13 16:40hs',
+    //     current_stage: 'convocatoria',
+    //     pariticipants_amount: 28,
+    //   }
+    // ]
     return res.render('iniciativa/index.html', {
       layoutTitle: 'Iniciativas',
       layoutId: 'iniciativas-index',

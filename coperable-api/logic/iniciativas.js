@@ -73,6 +73,54 @@ exports.save = function(req, res, next) {
     });
 }
 
+exports.participate = function(req, res, next) {
+    var body = req.body;
+    Iniciativa.save(
+        body,
+        function(data) {
+            usuario.Model.findById(body.owner.user).exec(function (err, user) {
+                user.update({ 
+                        $inc: {
+                            'cantidad_iniciativas':1
+                        },
+                        $push: {
+                            'iniciativas': {
+                                id: data._id,
+                                title: body.title,
+                                description: body.description,
+                                owner: true
+                            }
+                        }   
+                    },
+                    function() {
+                        res.send(data);
+                    } 
+                );
+            });
+
+        },
+        function(err) {
+            res.send({error: err});
+        }
+    );
+};
+
+exports.participate = function(req, res, next) {
+    console.log('Guardando iniciativa');
+    var iniciativa_id = req.params.id;
+    var user_id = req.params.userId;
+    var body = req.body;
+    var user = 
+    Iniciativa.Model.findById(iniciativa_id, function (err, iniciativa) {
+        if (err) return handleError(err);
+        us.extend(iniciativa, body);
+        iniciativa.save(function (err) {
+        if (err) return handleError(err);
+            res.send(iniciativa);
+        });
+    });
+}
+
 exports.findById = function(req, res, next) {
     var iniciativa_id = req.params.id;
     console.log('Iniciativa id: '+iniciativa_id);

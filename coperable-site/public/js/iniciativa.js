@@ -6,13 +6,13 @@ $(function(){
   }
 
   iniciativa.Model = Backbone.Model.extend({
-    urlRoot : '/iniciativas',
+    urlRoot : '/api/iniciativas',
     idAttribute: "_id"
   });
 
   iniciativa.Collection = Backbone.Collection.extend({
     model: iniciativa.Model,
-    url: '/iniciativas',
+    url: '/api/iniciativas',
     idAttribute: "_id"
   });
 

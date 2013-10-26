@@ -70,6 +70,10 @@ server.get('/api/iniciativa/:id', iniciativas.findById);
 server.post('/api/iniciativa', iniciativas.create);
 server.put('/api/iniciativa/:id', iniciativas.save);
 server.del('/api/iniciativa/:id', remove);
+server.post('/api/iniciativa/:id/:userId', iniciativas.participate);
+
+server.get('/api/organizadores', usuarios.listOwners);
+server.get('/api/participantes', usuarios.list);
 
 server.post('/api/user/authenticate', usuarios.authenticate);
 server.get('/api/user/:id', usuarios.findById);

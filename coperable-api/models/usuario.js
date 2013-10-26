@@ -96,7 +96,13 @@ var Usuario = mongoose.model('Usuario', UsuarioSchema);
 exports.Model = Usuario;
 
 exports.list = function(success) {
-  Usuario.find().limit(limit).sort('creation_date', -1).execFind(function (arr,data) {
+  Usuario.find().limit(limit).select('username first_name last_name email location iniciativas').execFind(function (arr,data) {
+    success(data);
+  });
+};
+
+exports.listOwners = function(success) {
+  Usuario.find().limit(limit).select('username first_name last_name email location iniciativas').execFind(function (arr,data) {
     success(data);
   });
 };
@@ -154,3 +160,4 @@ exports.remove = function(id, success, error) {
 };
 
 
+ 

@@ -16,7 +16,7 @@ exports.profile = function(req, res) {
       title: 'Perfil'
     };
     */
-    return res.render('user/profile',{
+    return res.render('user/profile.html',{
       partials: {
         header: 'wrapper/header',
         menu_site: 'wrapper/menu_site',

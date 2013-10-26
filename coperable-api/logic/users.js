@@ -2,7 +2,7 @@ var usuario = require('../models/usuario.js'),
     us = require('underscore');
 
 exports.list = function(req, res, next) {
-    iniciativa.list(
+    usuario.list(
         function(data) {
             res.send(data);
         },
@@ -11,6 +11,19 @@ exports.list = function(req, res, next) {
         }
     );
 };
+
+exports.listOwners = function(req, res, next) {
+    usuario.listOwners(
+        function(data) {
+            res.send(data);
+        },
+        function(err) {
+            res.send(err);
+        }
+    );
+};
+
+
 
 exports.create = function(req, res, next) {
     var body = req.body;

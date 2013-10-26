@@ -4,6 +4,7 @@ var config = require('./config'),
   user = require('./routes/user'),
   home = require('./routes/home'),
   iniciativa = require('./routes/iniciativa'),
+  development = require('./routes/development'),
   iniciativas = require('./logic/iniciativas'),
   users = require('./logic/users'),
   http = require('http'),
@@ -120,25 +121,25 @@ app.get('/iniciativas', iniciativa.list);
 app.get('/iniciativas/create', iniciativa.create);
 app.post('/iniciativas', iniciativas.create);
 app.put('/iniciativas/:id', iniciativas.save);
-app.get('/iniciativas/:slug', iniciativa.view_slug);
+app.get('/iniciativas/name/:slug', iniciativa.view_slug);
 app.get('/iniciativas/:id', iniciativa.view);
 
-// app.get('/iniciativas/view/:id', iniciativa.view);
-// app.get('/iniciativas/edit', iniciativa.edit);
-// app.get('/iniciativas/:id', iniciativas.get);
+ app.get('/api/iniciativas/view/:id', iniciativa.view);
+ app.get('/api/iniciativas/edit', iniciativa.edit);
+ app.get('/api/iniciativas/:id', iniciativas.get);
 
-// app.get('/iniciativas', function(req, res, next) {
-//   console.dir(req.query);
-//   if(req.query.category) {
-//     iniciativas.browseByCategory(req, res, function(err, iniciativas) {
-//       res.send(iniciativas);
-//     });
-//   } else {
-//     iniciativas.list(req, res, function(err, iniciativas) {
-//       res.send(iniciativas);
-//     });
-//   }
-// });
+ app.get('/api/iniciativas', function(req, res, next) {
+   console.dir(req.query);
+   if(req.query.category) {
+     iniciativas.browseByCategory(req, res, function(err, iniciativas) {
+       res.send(iniciativas);
+     });
+   } else {
+     iniciativas.list(req, res, function(err, iniciativas) {
+       res.send(iniciativas);
+     });
+   }
+ });
 
 
 
@@ -203,6 +204,7 @@ app.get('/uploadsuccess', function(req, resp) {
 
 
 
+app.get('/development/', development.index);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

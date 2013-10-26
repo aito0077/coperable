@@ -1,5 +1,28 @@
 
 <div class="content">
+    <ul id="setting" class="nav nav-tabs">
+        <li class="active" ><a href="#detalle" data-toggle="tab">Detalle</a></li>
+        <li><a href="#settings" class="active" data-toggle="tab">Preferencias</a></li>
+        <li><a href="#claves" class="active" data-toggle="tab">Claves</a></li>
+    </ul>
 
+    <div class="tab-content">
+        <div class="tab-pane active" id="detalle">
+            Detalle 
+        </div>
+        <div class="tab-pane" id="settings">
+            Preferencias
+        </div>
+        <div class="tab-pane" id="claves">
+            Claves
+        </div>
+    </div>
 
 </div>
+<script>
+    $('#setting  a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+</script>

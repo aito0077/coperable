@@ -5,7 +5,7 @@ exports.system = {
     TWITTER_CONSUMER_KEY: 'v79FIC2Z6oCTcJgUFOyXhA',
     TWITTER_CONSUMER_SECRET: 'xAa5CxnPBtrXeitcr4rBHXTqus4zAHmfRSbYp0UfJTs',
     AMAZON: 'fakeID',
-    API_URL: process.env.API_URL || 'http://127.0.0.1:3001',
+    API_URL: process.env.API_URL || 'coperable-api.aws.af.cm', //'http://127.0.0.1:3001',
     DOMAIN_BASE: process.env.DOMAIN_BASE || 'http://coperable.dev'
     //DOMAIN_BASE: 'http://127.0.0.1:3000'
 }

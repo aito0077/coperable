@@ -1,2 +1,2 @@
 #!/bin/sh
-sudo /usr/bin/mongod -v --dbpath=$PWD/data
+sudo mongod -v --dbpath=$PWD/data

@@ -4,7 +4,6 @@ var users = require('../logic/users'),
 exports.profile = function(req, res) {
   var user_id = req.params['id'];
   users.profile(user_id, function(err, user) {
-
     res.locals = us.extend(res.locals, {
       profile: user,
       title: 'Perfil'

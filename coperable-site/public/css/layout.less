@@ -1,14 +1,11 @@
 @verde: #00BE94;
+@negro: #322B25;
+@gris: #5B5B5B;
 
 * { .box-sizing(border-box); }
 
 body {
-  padding: 0;
-  margin: 0;
   background: url(/static/img/bg.png);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  color: #767676;
 }
 
 ul {
@@ -17,13 +14,14 @@ ul {
   padding: 0;
 }
 
+/*
 a {
   text-decoration: none;
   color: inherit;
 }
 
 h1,h2,h3 {
-  color: #322B25;
+  color: @negro;
 }
 h1 {
   font-size: 25px;
@@ -37,69 +35,11 @@ h3 {
   font-size: 21px;
 }
 h4 {
-  font-size: 17px;
-  color: #5B5B5B;
+  //font-size: 17px;
+  color: @gris;
   margin: 10px 0 15px;
 }
-
-.pure-g , .pure-g-r {
-  [class *= "pure-u"] {
-    &.centered {
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
-}
-
-.weak { font-weight:normal; }
-.clearfix {
-  &:after {
-    content:'';
-    visibility:hidden;
-    display:block;
-    font-size:0;
-    clear:both;
-    height:0;
-  }
-}
-
-[data-icon] {
-  position:relative;
-  padding-left:26px;
-  &:before {
-    font-family: 'icomoon';
-    content: attr(data-icon);
-    speak: none;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    font-size:22px;
-    position:absolute;
-    left:0;
-  }
-}
-
-.icon {
-  font-family: 'icomoon';
-  speak: none;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  -webkit-font-smoothing: antialiased;
-}
-
-@font-face {
-  font-family: 'icomoon';
-  src:url('../fonts/icomoon.eot');
-  src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.woff') format('woff'),
-    url('../fonts/icomoon.ttf') format('truetype'),
-    url('../fonts/icomoon.svg#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
+*/
 
 .content-wrapper {
   max-width: 960px;
@@ -109,7 +49,7 @@ h4 {
 
 header {
   position: relative;
-  height: 83px;
+  min-height: 83px;
   width: 100%;
   background: #FFF;
   box-shadow: 0 1px 3px rgba(0,0,0,.3);
@@ -139,19 +79,19 @@ header {
       li {
         float: left;
         a {
-          height:36px;
-          line-height:36px;
-          display:block;
-          font-weight:bold;
+          height: 36px;
+          line-height: 36px;
+          display: block;
+          font-weight: bold;
           font-size: 13px;
-          padding:0 10px;
-          margin:0 10px;
+          padding: 0 10px;
+          margin: 0 10px;
         }
         &:nth-child(1) a {
-          color:#127824;
+          color: #127824;
         }
         &:nth-child(2) a {
-          color:#FF5B60;
+          color: #FF5B60;
         }
       }
     }

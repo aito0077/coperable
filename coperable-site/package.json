@@ -22,9 +22,6 @@
     "mime-magic": "5.14.0",
     "validator": "1.1.1",
     "express-validator": "0.3.2",
-    "fbgraph": "0.2.6",
-    "jade": "~0.35.0",
-    "stylus": "~0.38.0",
-    "nib": "~1.0.1"
+    "fbgraph": "0.2.6"
   }
 }

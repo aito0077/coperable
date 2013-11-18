@@ -1,220 +1,51 @@
-<h1 class="main-title">Ayudamos a personas que trabajan con iniciativas positivas uniéndolos con quienes desean colaborar con su comunidad</h1>
+<div class="content-wrapper">
+  <h3 class="main-title">Ayudamos a personas que trabajan con iniciativas positivas uniéndolos con quienes desean colaborar con su comunidad</h3>
 
-<div class="box-wrapper">
-  <div class="box-participa">
-    <h2>Participá</h2>
-    <p>En iniciativas abiertas y gratuítas cerca de tu casa.</p><a href="/iniciativas">Sumate</a>
+  <div class="box-wrapper">
+    <div class="box-participa">
+      <h3>Participá</h3>
+      <p>En iniciativas abiertas y gratuítas cerca de tu casa.</p><a href="/iniciativas">Sumate</a>
+    </div>
+    <div class="box-organiza">
+      <h3>Organizá</h3>
+      <p>Difundí y sumá participantes a tu iniciativa.</p><a href="/iniciativas/create">Organizar</a>
+    </div>
   </div>
-  <div class="box-organiza">
-    <h2>Organizá</h2>
-    <p>Difundí y sumá participantes a tu iniciativa.</p><a href="/iniciativas/create">Organizar</a>
+
+  <div class="main-video">
+    <iframe src="http://player.vimeo.com/video/65076873" width="100%" height="308" frameborder="0" webkitAllowFullScreen="webkitAllowFullScreen" mozallowfullscreen="mozallowfullscreen" allowFullScreen="allowFullScreen"></iframe>
   </div>
-</div>
 
-<div class="main-video">
-  <iframe src="http://player.vimeo.com/video/65076873" width="100%" height="308" frameborder="0" webkitAllowFullScreen="webkitAllowFullScreen" mozallowfullscreen="mozallowfullscreen" allowFullScreen="allowFullScreen"></iframe>
-</div>
-
-<div class="ultimas-iniciativas">
-  <h3>Últimas <span class="weak">iniciativas</span></h3>
-</div>
-
-<div id="map_browser" class="ultimas-iniciativas-mapa">
-  <ul class="clearfix ultimas-iniciativas-filtro">
-    <li id="browser_all" data-icon="" class="selected">Ver todas</li>
-    <li id="browser_me" data-icon="">Medio ambiente</li>
-    <li id="browser_ac" data-icon="">Arte y cultura</li>
-    <li id="browser_ed" data-icon="">Educación</li>
-    <li id="browser_ds" data-icon="">Desarrollo social</li>
-  </ul>
-  <div class="ultimas-iniciativas-mapa-wrapper">
-    <div id="map_canvas" style="width:100%; height:100%"></div>
+  <div class="ultimas-iniciativas">
+    <h4>Últimas <span class="weak">iniciativas</span></h4>
   </div>
-  <script>
-    $(function(){
-      map_browser = new iniciativa.MapBrowser();
-      {{#geo}}
-        map_browser.reset({
-          user_location: {
-            latitud: {{geo.latitud}},
-            longitud: {{geo.longitud}}
-          }
-        });
-      {{/geo}}
-      map_browser.traer_iniciativas()
-    });
-  </script>
-</div>
-<div style="clear:both"></div>
-<div id="lastInitiatives">
-  <ul class="list">
-      <li data-category="environment" class="initiative">
-        <div data-label="Medio ambiente" class="pic">
-          <a href="/iniciativa" rel="address:/iniciativa">
-            <img src="/static/img/iniciativas/initiativepic-1-mq.jpg" />
-          </a>
-        </div>
-        <div class="wrapper">
-          <a href="/iniciativa" rel="address:/iniciativa">
-            <h4>Sembrando sonrisas en Boedo</h4>
-          </a>
-          <div class="place" data-icon="">Palermo, Buenos Aires</div>
-          <div class="schedule" data-icon="">Martes 28/06/13 16:40hs</div>
-        </div>
-        <div class="bottom">
-          <div class="wrapper">
-            <ul class="status">
-              <li class="actual">Convocatoria<div class="icon"></div></li>
-              <li>Activando<div class="icon"></div></li>
-              <li>Finalizada<div class="icon"></div></li>
-            </ul>
-          </div>
-          <div class="actions wrapper">
-            <a href="/iniciativa" rel="address:/iniciativa" class="button green">Participá</a>
-            <div class="text">28 participando</div>
-          </div>
-        </div>
-      </li>
-      <!---->
-      <li data-category="social" class="initiative">
-        <div data-label="Desarrollo social" class="pic">
-          <a href="/iniciativa" rel="address:/iniciativa">
-            <img src="/static/img/iniciativas/initiativepic-2-mq.jpg" />
-          </a>
-        </div>
-        <div class="wrapper">
-          <a href="/iniciativa" rel="address:/iniciativa">
-            <h4>Marcha de Concientización: Basta de Inseguridad</h4>
-          </a>
-          <div class="place" data-icon="">Palermo, Buenos Aires</div>
-          <div class="schedule started" data-icon="">Empezó hace 15 minutos</div>
-        </div>
-        <div class="bottom">
-          <div class="wrapper">
-            <ul class="status">
-              <li>Convocatoria<div class="icon"></div></li>
-              <li class="actual">Activando<div class="icon"></div></li>
-              <li>Finalizada<div class="icon"></div></li>
-            </ul>
-          </div>
-          <div class="actions wrapper">
-            <a href="/iniciativa" rel="address:/iniciativa" class="button red">Participá</a>
-            <div class="text">28 participando</div>
-          </div>
-        </div>
-      </li>
-      <!---->
-      <li data-category="environment" class="initiative">
-        <div data-label="Medio ambiente" class="pic">
-          <a href="/iniciativa" rel="address:/iniciativa">
-            <img src="/static/img/iniciativas/initiativepic-3-mq.jpg" />
-          </a>
-        </div>
-        <div class="wrapper">
-          <a href="/iniciativa" rel="address:/iniciativa">
-            <h4>Enseñando a comunicar con nuestras manos</h4>
-          </a>
-          <div class="place" data-icon="">Palermo, Buenos Aires</div>
-          <div class="schedule" data-icon="">Martes 28/06/13 16:40hs</div>
-        </div>
-        <div class="bottom">
-          <div class="wrapper">
-            <ul class="status">
-              <li class="actual">Convocatoria<div class="icon"></div></li>
-              <li>Activando<div class="icon"></div></li>
-              <li>Finalizada<div class="icon"></div></li>
-            </ul>
-          </div>
-          <div class="actions wrapper">
-            <a href="/iniciativa" rel="address:/iniciativa" class="button green">Participá</a>
-            <div class="text">28 participando</div>
-          </div>
-        </div>
-      </li>
-      <!---->
-      <li data-category="education" class="initiative">
-        <div data-label="Educación" class="pic">
-          <a href="/iniciativa" rel="address:/iniciativa">
-            <img src="/static/img/iniciativas/initiativepic-4-mq.jpg" />
-          </a>
-        </div>
-        <div class="wrapper">
-          <a href="/iniciativa" rel="address:/iniciativa">
-            <h4>Juguemos y aprendamos a conocer a nuestros vecinos</h4>
-          </a>
-          <div class="place" data-icon="">Palermo, Buenos Aires</div>
-          <div class="schedule" data-icon="">Martes 28/06/13 16:40hs</div>
-        </div>
-        <div class="bottom">
-          <div class="wrapper">
-            <ul class="status">
-              <li class="actual">Convocatoria<div class="icon"></div></li>
-              <li>Activando<div class="icon"></div></li>
-              <li>Finalizada<div class="icon"></div></li>
-            </ul>
-          </div>
-          <div class="actions wrapper">
-            <a href="/iniciativa" rel="address:/iniciativa" class="button green">Participá</a>
-            <div class="text">28 participando</div>
-          </div>
-        </div>
-      </li>
-      <!---->
-      <li data-category="education" class="initiative">
-        <div data-label="Educación" class="pic">
-          <a href="/iniciativa" rel="address:/iniciativa">
-            <img src="/static/img/iniciativas/initiativepic-5-mq.jpg" />
-          </a>
-        </div>
-        <div class="wrapper">
-          <a href="/iniciativa" rel="address:/iniciativa">
-            <h4>Curso de gastronomía como medio de inclusión social</h4>
-          </a>
-          <div class="place" data-icon="">Palermo, Buenos Aires</div>
-          <div class="schedule" data-icon="">Martes 28/06/13 16:40hs</div>
-        </div>
-        <div class="bottom">
-          <div class="wrapper">
-            <ul class="status">
-              <li class="actual">Convocatoria<div class="icon"></div></li>
-              <li>Activando<div class="icon"></div></li>
-              <li>Finalizada<div class="icon"></div></li>
-            </ul>
-          </div>
-          <div class="actions wrapper">
-            <a href="/iniciativa" rel="address:/iniciativa" class="button green">Participá</a>
-            <div class="text">28 participando</div>
-          </div>
-        </div>
-      </li>
-      <!---->
-      <li data-category="social" class="initiative">
-        <div data-label="Desarrollo social" class="pic">
-          <a href="/iniciativa" rel="address:/iniciativa">
-            <img src="/static/img/iniciativas/initiativepic-6-mq.jpg" />
-          </a>
-        </div>
-        <div class="wrapper">
-          <a href="/iniciativa" rel="address:/iniciativa">
-            <h4>Debatiendo sobre el futuro de nuestro alimento</h4>
-          </a>
-          <div class="place" data-icon="">Palermo, Buenos Aires</div>
-          <div class="schedule started" data-icon="">Empezó hace 15 minutos</div>
-        </div>
-        <div class="bottom">
-          <div class="wrapper">
-            <ul class="status">
-              <li>Convocatoria<div class="icon"></div></li>
-              <li class="actual">Activando<div class="icon"></div></li>
-              <li>Finalizada<div class="icon"></div></li>
-            </ul>
-          </div>
-          <div class="actions wrapper">
-            <a href="/iniciativa" rel="address:/iniciativa" class="button red">Participá</a>
-            <div class="text">28 participando</div>
-          </div>
-        </div>
-      </li>
+
+  <div id="map_browser" class="ultimas-iniciativas-mapa">
+    <ul class="clearfix ultimas-iniciativas-filtro">
+      <li id="browser_all" data-icon="" class="selected">Ver todas</li>
+      <li id="browser_me" data-icon="">Medio ambiente</li>
+      <li id="browser_ac" data-icon="">Arte y cultura</li>
+      <li id="browser_ed" data-icon="">Educación</li>
+      <li id="browser_ds" data-icon="">Desarrollo social</li>
     </ul>
-<div style="clear:both"></div>
+    <div class="ultimas-iniciativas-mapa-wrapper">
+      <div id="map_canvas" style="width:100%; height:100%"></div>
+    </div>
+    <script>
+      /*
+      $(function(){
+        map_browser = new iniciativa.MapBrowser();
+        {{#geo}}
+          map_browser.reset({
+            user_location: {
+              latitud: {{geo.latitud}},
+              longitud: {{geo.longitud}}
+            }
+          });
+        {{/geo}}
+        map_browser.traer_iniciativas()
+      });
+      */
+    </script>
+  </div>
 </div>

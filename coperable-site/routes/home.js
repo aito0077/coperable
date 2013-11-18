@@ -25,8 +25,8 @@ exports.index = function(req, res) {
     }
   });
   */
-  var geo = (req.session ? req.session.geo : false) ||
-            (req.cookies ? req.cookies.geo : undefined)
+  var geo = req.session ? req.session.geo :
+            req.cookies ? req.cookies.geo : undefined
 
   return res.render('home/index.html', {
     layoutTitle: 'Home',

@@ -1,19 +1,14 @@
-// Libs
-@import '/static/lib/lesshat.less';
-@import 'bootstrap.less';
-@import 'flat-ui.less';
+.ellipsis {
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-// Globals
-@import 'globals.less';
-
-// Layout
-@import 'colors.less';
-@import 'fonts.less';
+@import '/static/lib/lesshat/lesshat.less';
 @import 'layout.less';
 
-// Partials
 @import 'iniciativa/_list.less';
 
-// Pages
 @import 'home/index.less';
 @import 'user/login.less';

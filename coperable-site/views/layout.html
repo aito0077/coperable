@@ -2,57 +2,53 @@
 <html lang='es'>
 <head>
   <title>{{layoutTitle}} | Coperable</title>
-  <!--
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/base-min.css">
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/forms-min.css">
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/grids-min.css">
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/buttons-min.css">
+  <link rel='stylesheet' href='http://yui.yahooapis.com/pure/0.3.0/base-min.css'>
+  <link rel='stylesheet' href='http://yui.yahooapis.com/pure/0.3.0/grids-min.css'>
+  <link rel='stylesheet' href='http://yui.yahooapis.com/pure/0.3.0/buttons-min.css'>
+  <link rel='stylesheet' href='http://yui.yahooapis.com/pure/0.3.0/forms-min.css'>
+  <link rel='stylesheet/less' href='/static/css/styles.less'>
 
-  <link rel="stylesheet/less" href="/static/stylesheets-old/styles.less">
-  -->
+  <link rel='stylesheet/less' href='/static/stylesheets/styles.less'>
 
-  <link rel="stylesheet/less" href="/static/css/styles.less">
+  <script src='//cdn.jsdelivr.net/less/1.4.2/less.min.js'></script>
 
-  <script src="//cdn.jsdelivr.net/less/1.4.2/less.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
+  <script src='//cdn.jsdelivr.net/lodash/2.1.0/lodash.underscore.min.js'></script>
+  <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.3.1/moment-with-langs.min.js'></script>
+  <script src='//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js'></script>
+  <script src='//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'></script>
+  <script src="/static/lib/jquery.gomap-1.3.2.js"></script>
+  <script src="/static/js/iniciativa.js"></script>
+  <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
 
   {{{ yield-head }}}
 </head>
 <body id='{{layoutId}}'>
   <header>
-    <div class="container">
-      <div class="logo"><a href="/"><img src="/static/img/logo-1.png"/></a></div>
-      <nav>
-        <ul>
-          <li><a href="/iniciativas">Iniciativas</a></li>
-          <li><a href="/iniciativas/create">Organizá</a></li>
-          {{#user}}
-            <li><a href="/user/{{user.id}}">{{user.username}}</a></li>
-            <li><a href="/user/logout">Salir</a></li>
-          {{/user}}
-          {{^user}}
-            <li><a href="/user/login">Ingres&aacute;</a></li>
-          {{/user}}
-        </ul>
-      </nav>
+    <div class="pure-g content-wrapper">
+      <div class="pure-u-1-2">
+        <div class="logo"><a href="/"><img src="/static/img/logo-1.png"/></a></div>
+      </div>
+      <div class="pure-u-1-2">
+        <nav>
+          <ul>
+            <li><a href="/iniciativas">Iniciativas</a></li>
+            <li><a href="/iniciativas/create">Organizá</a></li>
+            {{#user}}
+              <li><a href="/user/{{user.id}}">{{user.username}}</a></li>
+              <li><a href="/user/logout">Salir</a></li>
+            {{/user}}
+            {{^user}}
+              <li><a href="/user/login">Ingres&aacute;</a></li>
+            {{/user}}
+          </ul>
+        </nav>
+      </div>
     </div>
   </header>
 
-  <div class="container">
+  <div class="content-wrapper">
     {{{ yield }}}
   </div>
-
-  <script src="//cdn.jsdelivr.net/lodash/2.3.0/lodash.underscore.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.3.1/moment-with-langs.min.js"></script>
-  <script src="//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-  <script src="/static/lib/jquery.gomap-1.3.2.js"></script>
-
-  <script src="/static/js/models/iniciativa.js"></script>
-  <script src="/static/js/collections/iniciativas.js"></script>
-
-  <div id="fb-root"></div>
-  <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
 </body>
 </html>

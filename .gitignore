@@ -1,8 +1,10 @@
+*.swp
+*.leo
+.nvmrc
+.DS_Store
+node_modules
+
 /coperable-engine/data
 /coperable-engine/target
 /coperable-site/config.js
 /coperable-api/config.js
-node_modules
-.nvmrc
-*.swp
-*.leo

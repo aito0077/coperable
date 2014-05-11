@@ -10,6 +10,70 @@ $(function(){
     idAttribute: "_id"
   });
 
+/*
+    name:  String,
+    slug:  String,
+    code:  String,
+    goal:  String,
+    duration:  String,
+    description:   String,
+    address:   String,
+    profile_picture:   String,
+    pariticipants_amount:   String,
+    phone:   String,
+    email:   String,
+    categories: {
+        medio_ambiente: {type: Boolean, default: false},
+        educacion: {type: Boolean, default: false},
+        desarrollo: {type: Boolean, default: false},
+        arte_cultura: {type: Boolean, default: false},
+    },
+    owner: {
+        user: String,
+        name: String
+    },
+    members: [{
+        user: String,
+        role: String,
+        since_date: { type: Date, default: Date.now }
+    }],
+    tasks: [{
+        tag: String,
+        description: String
+    }],
+    public: { type: Boolean, default: false},
+    stages: [{
+        stage: String,
+        description: String,
+        start_date: { type: Date, default: Date.now },
+        finish_date: { type: Date, default: Date.now }
+    }],
+    current_stage: String,
+    version: Number,
+    location: {
+        latitude: {type: Number, default: 0},
+        longitude: {type: Number, default: 0}
+    },
+    networks: {
+        facebook: {
+            text: String
+        },
+        twitter: {
+            text: String
+        },
+        vimeo: {
+            text: String
+        },
+        youtube: {
+            text: String
+        },
+        flickr: {
+            text: String
+        }
+    },
+*/
+ 
+
   iniciativa.Collection = Backbone.Collection.extend({
     model: iniciativa.Model,
     url: '/api/iniciativas',
@@ -83,6 +147,13 @@ $(function(){
 
       $('.ini_category').button();
       $('#button_gmap').button();
+
+        $('#datetimepicker_from').datetimepicker({
+            language: 'es-AR'
+        });
+        $('#datetimepicker_to').datetimepicker({
+            language: 'es-AR'
+        });
      
       $("#slider").slider({
         min: 1,
@@ -115,7 +186,7 @@ $(function(){
       });
 
 
-      $('#iniciativa_wizard a:first').tab('show');
+      $('#iniciativa_wizard').tab('show');
 
 
       $('[name="address"]').on('change', function(){
@@ -450,6 +521,36 @@ $(function(){
           '</div>',
         '</div>'].join(''));
 
+      this.itemTemplate = _.template([
+      '<li data-category="<%= main_category %>" class="initiative">',
+        '<div data-label="<%= main_category %>" class="pic">',
+          '<a href="/iniciativas/<%= _id %>" rel="address:/iniciativa">',
+            '<img src="/static/img/iniciativas/initiativepic-5-mq.jpg" />',
+          '</a>',
+        '</div>',
+        '<div class="wrapper">',
+          '<a href="/iniciativas/<%= _id %>" rel="address:/iniciativa">',
+            '<h4><%= name %></h4>',
+          '</a>',
+          '<div class="place" data-icon=""><%= address %></div>',
+          '<div class="schedule" data-icon=""></div>',
+        '</div>',
+        '<div class="bottom">',
+          '<div class="wrapper">',
+            '<ul class="status">',
+              '<li class="actual"><%= stages[0].stage %> <div class="icon"></div></li>',
+              '<li>Activando<div class="icon"></div></li>',
+              '<li>Finalizada<div class="icon"></div></li>',
+            '</ul>',
+          '</div>',
+          '<div class="actions wrapper">',
+            '<a href="/iniciativas/<%= _id %>" rel="address:/iniciativa" class="button green">Participá</a>',
+            '<div class="text"><%= members.lenght %></div>',
+          '</div>',
+        '</div>',
+      '</li>'
+        ].join(''));
+
 
 
       var myOptions = {
@@ -478,6 +579,7 @@ $(function(){
         marker.setMap(null);
       });
       this.markers = new Array();
+      $('#iniciativas_list').html('');
     },
 
     marcar_iniciativas: function() {
@@ -501,6 +603,8 @@ $(function(){
           marker.info.open(self.map, marker);
         });
         self.markers.push(marker);
+
+        $('#iniciativas_list').append(self.itemTemplate(model.toJSON()));
       });
     },
 
@@ -560,6 +664,10 @@ $(function(){
     }
   });
 
+
+
 });
+
+
 
 

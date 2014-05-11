@@ -16,6 +16,7 @@ var IniciativaSchema = new Schema({
     pariticipants_amount:   String,
     phone:   String,
     email:   String,
+    main_category: String,
     categories: {
         medio_ambiente: {type: Boolean, default: false},
         educacion: {type: Boolean, default: false},
@@ -102,6 +103,11 @@ exports.insert = function(iniciativa, success, error) {
     },
     persist = {};
     us.extend(persist, default_values, iniciativa);
+    console.dir(persist);
+    persist.main_category = us.first(us.filter(us.keys(persist.categories), function(categ) {
+        console.dir(categ);
+        return persist.categories[categ];
+    }));
     console.dir(persist);
     var iniciativa_model = new Iniciativa(persist);
     iniciativa_model.save(function(err, data) {

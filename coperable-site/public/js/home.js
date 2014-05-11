@@ -66,44 +66,5 @@ $(function(){
 
 });
 
-script type="text/javascript">
-            var initialLocation;
-            var buenos_aires = new google.maps.LatLng(-34.615692,-58.432846);
-            var browserSupportFlag =  new Boolean();
-            var user_default;
-            {{#geo}}
-            user_default = new google.maps.LatLng({{geo.latitud}},{{geo.longitud}});
-            {{/geo}}
 
-            var user_geo = typeof(user_default) != 'undefined';
 
-            function initialize() {
-
-                console.log(user_geo);
-                if(!user_geo) {
-                    if(navigator.geolocation) {
-                        browserSupportFlag = true;
-                        try {
-                            navigator.geolocation.getCurrentPosition(function(position) {
-                                initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-                                console.log('Latitud: '+initialLocation.lat()+' - Longitud: '+initialLocation.lng());
-                                map.setCenter(initialLocation);
-
-                                $.get(  
-                                    '/user/geolocalization/'+initialLocation.lat()+'/'+initialLocation.lng(),
-                                    {},  
-                                    function(responseText) {  
-                                        console.log(responseText);  
-                                    });  
-                            }, function() {
-                                handleNoGeolocation(browserSupportFlag);
-                            });
-                        } catch(positionError) {
-                            console.dir(positionError);
-                        }
-                    }
-                }
-
-            }
-
-        </

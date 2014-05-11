@@ -9,7 +9,7 @@ if( process.env.VCAP_SERVICES ){
     var mongo = env['mongodb-1.8'][0]['credentials'];
 } else {
     var mongo = {
-        "hostname":"localhost",
+        "hostname":"127.0.0.1",
         "port":27017,
         "username":"",
         "password":"",
@@ -19,7 +19,7 @@ if( process.env.VCAP_SERVICES ){
 }
 
 var generate_mongo_url = function(obj) {
-    obj.hostname = (obj.hostname || 'localhost');
+    obj.hostname = (obj.hostname || '127.0.0.1');
     obj.port = (obj.port || 27017);
     obj.db = (obj.db || 'test');
 

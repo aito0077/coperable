@@ -34,7 +34,9 @@ $(function(){
       'click .ini_category': 'set_category',
       'click #submit_iniciativa': 'create_iniciativa',
       'click #submit_iniciativa_tasks': 'add_iniciativa_tasks',
-      'shown #tareas_tab': 'set_current_tab'
+      'shown #tareas_tab': 'set_current_tab',
+      'click #checkbox_participantes': 'set_participantes_ilimitados',
+      'click #button_gmap': 'show_gmap'
     },
 
     initialize: function() {
@@ -71,12 +73,17 @@ $(function(){
         $('#longitude').val(model.get('longitud'));
       });
     },
+     
+    show_gmap: function(){
+      $('#modalGMap').modal('show');
+    },
 
     setup_components: function() {
       var self = this;
 
       $('.ini_category').button();
-
+      $('#button_gmap').button();
+     
       $("#slider").slider({
         min: 1,
         max: 50,
@@ -85,6 +92,8 @@ $(function(){
         orientation: "horizontal",
         range: "min"
       });
+
+      
 
       $("#activities").tagsInput({
          //autocomplete_url: url_to_autocomplete_api,
@@ -144,6 +153,14 @@ $(function(){
       //   });
       // });
 
+    },
+  
+    set_participantes_ilimitados: function(){
+	var checkeado = $('#checkbox_participantes').is(':checked');
+	
+	$('#slider').css('display',(checkeado?'none':'inline'));
+	$('#show_amount').css('display',(checkeado?'none':'inline'));
+	
     },
 
     create_iniciativa: function(e) {

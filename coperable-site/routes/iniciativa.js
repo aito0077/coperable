@@ -47,6 +47,7 @@ exports.edit = function(req, res) {
 exports.view = function(req, res) {
   console.log('route view')
   var iniciativa_id = req.params['id'];
+  console.log('Jose debug: iniciativa_id: ' + iniciativa_id);
   iniciativas.findById(iniciativa_id, function(err, iniciativa) {
     console.dir(iniciativa);
     try {

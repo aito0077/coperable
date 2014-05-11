@@ -4,6 +4,9 @@
 <link rel="stylesheet" type="text/css" media="screen" href="/static/bootstrap/css/bootstrap.min.css"></link>
 <link rel="stylesheet" type="text/css" media="screen" href="/static/flat/css/flat-ui.css"></link>
 
+<script src="/static/flat/js/jquery-ui.js"></script>
+<script src="/static/flat/js/jquery-ui-1.10.0.custom.min.js"></script>
+<script type="text/javascript" src="/static/bootstrap/js/bootstrap.js"></script>
 <script type='text/javascript' src='/static/bootstrap/js/bootstrap-tab.js'></script>
 <script type='text/javascript' src='/static/bootstrap/js/bootstrap-button.js'></script>
 
@@ -18,9 +21,12 @@
 <script src="/static/javascripts/underscore-min.js"></script>
 <script src="/static/javascripts/backbone-min.js"></script>
 
-<script src="/static/flat/js/jquery-ui-1.10.0.custom.min.js"></script>
 <script src="/static/flat/js/jquery.tagsinput.js"></script>
+<script src="/static/flat/js/custom_checkbox_and_radio.js"></script>
 
+
+<script type="text/javascript" src="/static/javascripts/nogray_js/1.1.4/ng_all.js"></script>
+<script type="text/javascript" src="/static/javascripts/nogray_js/1.1.4/components/calendar.js"></script>
 
 <script src="/static/js/iniciativa.js"></script>
 
@@ -42,13 +48,13 @@
           <div class="control-group">
             <label class="control-label" for="name">Nombre Iniciativa</label>
             <div class="controls">
-              <input type="text" name="name" id="name" value="" name class="span3" required autocomplete="off"/>
+              <input name="name" id="name" value="" name class="span6" required autocomplete="off"/>
             </div>
           </div>
           <div class="control-group">
             <label class="control-label" for="goal">Objetivo</label>
             <div class="controls">
-              <input type="textarea" name="goal" id="goal" value="" name class="span3" required autocomplete="off" rows="4" cols="50"/>
+              <input type="textarea" name="goal" id="goal" value="" name class="span6" required autocomplete="off" rows="4" cols="50"/>
             </div>
           </div>
           <div class="control-group">
@@ -75,57 +81,85 @@
           <div class="control-group">
             <label class="control-label" for="description">Descripci&oacute;n</label>
             <div class="controls">
-            <div class="controls">
+            <div>
               <textarea id="description_red" class="input-xxlarge" autocomplete="off"></textarea autocomplete="off">
             </div>
           </div>
           <div class="control-group">
             <label class="control-label" for="date">Fecha</label>
             <div class="controls">
-              <input type="date" id="date" class="input-small span2 datepicker" autocomplete="off" required autocomplete="off"/>
+		<input  style="width:120px" id="date_iniciativa"/>              
+		<!--input type="date" id="date" class="input-small span2 datepicker" autocomplete="off" required autocomplete="off"/-->
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="duration">Duraci&oacute;n</label>
+            <label class="control-label" for="duration">Inicio</label>
             <div class="controls">
-              <input type="text" name="duration" id="duration" value="" name class="span3" required autocomplete="off"/>
-            </div>
-          </div>
+              	<input  style="width:120px" id="date_duracion_from"/> 
+		<!--input  name="duration" id="duration" value="" name class="span5" required autocomplete="off"/-->
+		<select style="height:25px; width: 60px; position: relative; top:-7px; " id="duracion_desde_hora"><option value="00">00</option><option value="01">01</option><option value="02">02</option><option value="03">00</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option></select>:<select style="height:25px; width: 60px; position: relative; top:-7px; " id="duracion_desde_minutos"><option value="00">00</option><option value="01">01</option><option value="02">02</option><option value="03">00</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option><option value="51">51</option><option value="52">52</option><option value="53">53</option><option value="54">54</option><option value="55">55</option><option value="56">56</option><option value="57">57</option><option value="58">58</option><option value="59">59</option></select> 
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label" for="date_duracion_to">Fin</label>
+            <div class="controls">
+              	<input  style="width:120px" id="date_duracion_to"/> 
+		<!--input  name="duration" id="duration" value="" name class="span5" required autocomplete="off"/-->
+<select style="height:25px; width: 60px; position: relative; top:-7px; " id="duracion_hasta_hora"><option value="00">00</option><option value="01">01</option><option value="02">02</option><option value="03">00</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option></select>:<select style="height:25px; width: 60px; position: relative; top:-7px; " id="duracion_hasta_minutos"><option value="00">00</option><option value="01">01</option><option value="02">02</option><option value="03">00</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option><option value="51">51</option><option value="52">52</option><option value="53">53</option><option value="54">54</option><option value="55">55</option><option value="56">56</option><option value="57">57</option><option value="58">58</option><option value="59">59</option></select> 
+	    </div>            	
+	  </div>
 
 
           <!--{{> widget_address}}-->
           <div class="control-group">
             <label class="control-label" for="address">Direcci&oacute;n</label>
             <div class="controls">
-              <input type="text" name="address" class="span5" required/>
-              <div style="width:300px;height:300px;margin-top:20px" id="address_map"></div>
-            </div>
+             <div class="row">
+		<div class="span6"><input required="" class="span6" name="address"></div><div style="align:left" class="span2">
+		<button id="button_gmap"  class="span1 btn btn-block btn-lg btn-primary" >Google Map</button></div>
+		</div>
+	    <!--div id="div_gmap" style="display:none">
+              <div style="width:300px;height:300px;margin-top:20px; display:none" id="address_map"></div>
+            </div-->
+	    </div>
           </div>
 
           <div class="control-group">
             <label class="control-label" for="picture">Foto Portada</label>
             <div class="controls">
-              <input type="text" name="profile_picture" id="profile_picture" value="" name class="span3" required autocomplete="off"/>
+              <input  class="span5" type="file" name="profile_picture" id="profile_picture" value="" required autocomplete="off"/>
             </div>
           </div>
-          <div class="control-group">
-            <label class="control-label" for="participants_amount">Cantidad Participantes <span id="show_amount" class="strong"></span></label>
-            <div id="slider" class="ui-slider span5">
-              <div class="ui-slider-segment"></div>
-              <div class="ui-slider-segment"></div>
-              <div class="ui-slider-segment"></div>
-            </div>
+          <div class="row control-group">
+		<div class="span">
+			    <label class="control-label" for="participants_amount">Cantidad Participantes <span id="show_amount" class="strong">(16)</span></label>
+			    <div aria-disabled="false" id="slider" class="ui-slider span5 ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+			      <div class="ui-slider-segment"></div>
+			      <div class="ui-slider-segment"></div>
+			      <div class="ui-slider-segment"></div>
+			    <div style="width: 30.6122%;" id="slider_range" class="ui-slider-range ui-widget-header ui-slider-range-min"></div><a style="left: 30.6122%;" id="slider-handle" class="ui-slider-handle ui-state-default ui-corner-all" href="#"></a></div>
+		</div>
+		<div class="span1">
+		<label class="checkbox checked" for="checkbox_participantes"><span class="icon"></span><span class="icon-to-fade"></span>
+		<span class="icons">
+		<span class="first-icon fui-checkbox-unchecked"></span>
+		<span class="second-icon fui-checkbox-checked"></span>
+		</span>
+		<input type="checkbox" id="checkbox_participantes" data-toggle="checkbox" value="">
+		Ilimitados
+		</label>
+	</div>
           </div>
           <div class="control-group">
             <label class="control-label" for="phone">Tel&eacute;fono</label>
             <div class="controls">
-              <input type="text" name="phone" id="phone" value="" name class="span3" required autocomplete="off"/>
+              <input  name="phone" id="phone" value="" name class="span5" required autocomplete="off"/>
             </div>
           </div>
           <div class="control-group">
             <label class="control-label" for="email">Email</label>
             <div class="controls">
-              <input type="email" name="email" id="email" value="" name class="span3" required autocomplete="off"/>
+              <input name="email" id="email" value="" name class="span5" required autocomplete="off"/>
             </div>
           </div>
           <div class="form-actions">
@@ -135,10 +169,18 @@
       </div>
       <div class="tab-pane" id="tareas">
          <div class="offset1 content">
-          <h3 class="demo-panel-title">Actividades</h3>
+	  <div class="row">
+          <div class="demo-tooltips">
+		<h3 class="demo-panel-title">Actividades</h3>
+		<p align="center" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Actividades"></p>
+		<div class="tooltip fade bottom in" style="top: 3px; left: 0px; display: block;">
+		<div class="tooltip-arrow" style="position:absolute; left:40px;"></div>
+		<div class="tooltip-inner" style="position:absolute; left:10px; max-width:550px; width: 550px">Agregá las diferentes atividades y tareas que realizarán quienes asistan a la iniciativa.</div>
+		</div>
+	  </div>		
           <div class="row">
-            <input type="text" placeholder="tarea" value="" autocomplete="off" class="tarea"/>
-            <input type="text" placeholder="descripcion" value="" autocomplete="off" class="descripcion_tarea input-xxlarge"/>
+            <input  placeholder="tarea" value="" autocomplete="off" class="tarea"/>
+            <input  placeholder="descripcion" value="" autocomplete="off" class="descripcion_tarea input-xxlarge"/>
             <a class="btn btn-primary add_activity"><i class="fui-plus-16"></i></a>
           </div>
           <br />
@@ -257,9 +299,18 @@
 </div>
 
 
+ <div id="modalGMap" class="modal hide fade" style="width: 650px; height: 500px;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                </div>
+                <div class="modal-body">
+			<div style="width:550px;height:380px;" id="address_map"></div>
+                </div>
+ </div>
+
 <script type="text/template" id="item-template">
   <div class="span12 tareas_input">
-    <input type="text" placeholder="tarea" value="" autocomplete="off" class="tarea"/>
+    <input  placeholder="tarea" value="" autocomplete="off" class="tarea"/>
     <input type="textarea" placeholder="descripcion" value="" name class="descripcion_tarea span3"  rows="4" cols="50"/>
     <a class="add"></a>
   </div>
@@ -289,4 +340,32 @@ $(function(){
  $(".todo li").click(function() {
    $(this).toggleClass("todo-done");
  });
+
+ng.ready( function() {
+      var my_cal = new ng.Calendar({
+      input: 'date_iniciativa', // the input field id
+      start_date: 'last year', // the start date (default is today)
+      end_date: 'year + 5', // the end date (related to start_date, 4 years from today)
+      display_date: new Date() // the display date (default is start_date)
+      });
+});
+
+ng.ready( function() {
+      var my_cal = new ng.Calendar({
+      input: 'date_duracion_from', // the input field id
+      start_date: 'last year', // the start date (default is today)
+      end_date: 'year + 5', // the end date (related to start_date, 4 years from today)
+      display_date: new Date() // the display date (default is start_date)
+      });
+});
+
+ng.ready( function() {
+      var my_cal = new ng.Calendar({
+      input: 'date_duracion_to', // the input field id
+      start_date: 'last year', // the start date (default is today)
+      end_date: 'year + 5', // the end date (related to start_date, 4 years from today)
+      display_date: new Date() // the display date (default is start_date)
+      });
+});
+
 </script>

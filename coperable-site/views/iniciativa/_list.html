@@ -3,13 +3,17 @@
     <div class="iniciativas-list-item-wrapper pure-u-1-3">
       <div class="iniciativas-list-item category-environment stage-{{current_stage}}" id="iniciativas-list-item-{{_id}}">
         <div class="thumb">
-          <div class="label">Medio Ambiente</div>
+	  <div class="label" id="div_categoria"></div>
           <div class="iniciativas-list-item-map" style="width: 100%;height: 130px;"></div>
         </div>
         <div class="wrapper">
           <h4 class="title">
             <a href="/iniciativas/{{_id}}">{{name}}</a>
           </h4>
+	 
+	 <p class="address ellipsis" data-icon="">Organizador: {{owner.name}}</p>
+          <div class="start-date ellipsis" data-icon="">Creado: {{creation_date}}
+          </div>
           <p class="address ellipsis" data-icon="">{{address}}</p>
           <div class="start-date ellipsis" data-icon="">
             {{creation_date}}
@@ -40,7 +44,10 @@
             maptype: 'ROADMAP'
           });
           var $date = $item.find('.start-date')
-          $date.html(moment($date.html()).lang('es').fromNow())
+          $date.html(moment($date.html()).lang('es').fromNow());
+	
+	  var categoria=({{categories.arte_cultura}}?'Arte y cultura':({{categories.desarrollo}}?'Desarrollo':		({{categories.educacion}}?'Educacion':({{categories.medio_ambiente}}?'Medio ambiente':'Otra categoría'))));
+	  $("#div_categoria").html(categoria);
         })
       </script>
     </div>

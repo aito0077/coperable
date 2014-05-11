@@ -7,7 +7,8 @@
           <div class="iniciativas-list-item-map" style="width: 100%;height: 130px;"></div>
         </div>
         <div class="wrapper">
-          <h4 class="title">
+          
+	  <h4 class="title">
             <a href="/iniciativas/{{_id}}">{{name}}</a>
           </h4>
 	 
@@ -15,9 +16,6 @@
           <div class="start-date ellipsis" data-icon="">Creado: {{creation_date}}
           </div>
           <p class="address ellipsis" data-icon="">{{address}}</p>
-          <div class="start-date ellipsis" data-icon="">
-            {{creation_date}}
-          </div>
         </div>
         <ul class="stages wrapper">
           <li class="convocatoria actual">Convocatoria<div class="icon"></div></li>
@@ -28,6 +26,9 @@
           <a href="/iniciativas/{{_id}}" rel="/iniciativas/{{_id}}" class="pure-button boton-participar">Participá</a>
           <div class="text">{{pariticipants_amount}} participando</div>
         </div>
+	<div class="row">
+		<div style="position:absolute; left:65%" id="div_social_network"></div>
+	</div>
       </div>
       <script type="text/javascript">
         $(function(){
@@ -48,7 +49,32 @@
 	
 	  var categoria=({{categories.arte_cultura}}?'Arte y cultura':({{categories.desarrollo}}?'Desarrollo':		({{categories.educacion}}?'Educacion':({{categories.medio_ambiente}}?'Medio ambiente':'Otra categoría'))));
 	  $("#div_categoria").html(categoria);
-        })
+
+	  
+	  
+	  var links_redes_sociales='<table><tr>';
+	  
+	  {{#network.facebook.text}} 
+	   links_redes_sociales+='<td><a href="'+{{network.facebook.text}}+'"><img src="/static/img/facebook.png" class="image_network"/></a></td>'; 
+	  {{/network.facebook.text}}
+	  
+	  {{#network.twitter.text}} 
+	   links_redes_sociales+='<td><a href="'+{{network.twitter.text}}+'"><img src="/static/img/twitter.png" class="image_network"/></a></td>'; 
+	  {{/network.twitter.text}}
+
+	  {{#network.youtube.text}} 
+	   links_redes_sociales+='<td><a href="'+{{network.youtube.text}}+'"><img src="/static/img/youtube.png" class="image_network"/></a></td>'; 
+	  {{/network.youtube.text}}
+
+	  if(links_redes_sociales=='<table><tr>'){
+	  	links_redes_sociales+='<td><img src="/static/img/facebook.png" class="image_network" title="Sin cuenta de Facebook vinculada"/><img src="/static/img/twitter.png" class="image_network" title="Sin cuenta de Twitter vinculada"/><img src="/static/img/youtube.png" class="image_network" title="Sin cuenta de Youtube vinculada"/></td>';
+	  } 
+	  
+	  links_redes_sociales+='</tr></table>';
+ 
+	  $("#div_social_network").html(links_redes_sociales);
+
+	})
       </script>
     </div>
   {{/iniciativas}}

@@ -64,7 +64,12 @@ app.configure(function(){
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.cookieParser());
-  app.use(express.bodyParser());
+/*
+  app.use(express.bodyParser({
+        uploadDir: './public/uploads',
+        keepExtensions: true
+    }));
+*/
   app.use(express.urlencoded());
   app.use(express.multipart());
   app.use(express.session({
@@ -117,6 +122,7 @@ app.all( '*', function( req, res, next ) {
   next();
 });
 
+
 app.get('/iniciativas', iniciativa.list);
 app.get('/iniciativas/create', iniciativa.create);
 app.post('/iniciativas', iniciativas.create);
@@ -127,6 +133,7 @@ app.get('/iniciativas/:id', iniciativa.view);
  app.get('/api/iniciativas/view/:id', iniciativa.view);
  app.get('/api/iniciativas/edit', iniciativa.edit);
  app.get('/api/iniciativas/:id', iniciativas.get);
+ app.post('/api/iniciativas/:id/:userId', iniciativas.participate);
  app.post('/api/iniciativas', iniciativas.create);
 
  app.get('/api/iniciativas', function(req, res, next) {
@@ -196,6 +203,7 @@ app.get('/users', users.list);
 app.get('/user/:id', user.profile);
 
 
+app.post('/uploads', external_files.upload);
 app.post('/gets3credentials', external_files.createS3Policy);
 app.get('/uploadsuccess', function(req, resp) {
   console.dir(req);

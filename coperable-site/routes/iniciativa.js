@@ -19,7 +19,7 @@ exports.create = function(req, res) {
     layoutTitle: 'Empezar Iniciativa',
     layoutId: 'iniciativa-create',
     partials: {
-      widget_address: 'widgets/address'
+        widget_address: 'widgets/address'
     }
   })
 };

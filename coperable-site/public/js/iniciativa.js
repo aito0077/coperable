@@ -10,69 +10,7 @@ $(function(){
     idAttribute: "_id"
   });
 
-/*
-    name:  String,
-    slug:  String,
-    code:  String,
-    goal:  String,
-    duration:  String,
-    description:   String,
-    address:   String,
-    profile_picture:   String,
-    pariticipants_amount:   String,
-    phone:   String,
-    email:   String,
-    categories: {
-        medio_ambiente: {type: Boolean, default: false},
-        educacion: {type: Boolean, default: false},
-        desarrollo: {type: Boolean, default: false},
-        arte_cultura: {type: Boolean, default: false},
-    },
-    owner: {
-        user: String,
-        name: String
-    },
-    members: [{
-        user: String,
-        role: String,
-        since_date: { type: Date, default: Date.now }
-    }],
-    tasks: [{
-        tag: String,
-        description: String
-    }],
-    public: { type: Boolean, default: false},
-    stages: [{
-        stage: String,
-        description: String,
-        start_date: { type: Date, default: Date.now },
-        finish_date: { type: Date, default: Date.now }
-    }],
-    current_stage: String,
-    version: Number,
-    location: {
-        latitude: {type: Number, default: 0},
-        longitude: {type: Number, default: 0}
-    },
-    networks: {
-        facebook: {
-            text: String
-        },
-        twitter: {
-            text: String
-        },
-        vimeo: {
-            text: String
-        },
-        youtube: {
-            text: String
-        },
-        flickr: {
-            text: String
-        }
-    },
-*/
- 
+    moment.lang('es');
 
   iniciativa.Collection = Backbone.Collection.extend({
     model: iniciativa.Model,
@@ -120,10 +58,10 @@ $(function(){
       console.dir(options);
       this.user_default = new google.maps.LatLng(options.latitud, options.longitud);
 
-      // this.address.reset({
-      //   map_canvas: '#map_canvas',
-      //   user_position: this.user_default
-      // });
+       this.address.reset({
+         map_canvas: '#map_canvas',
+         user_position: this.user_default
+       });
 
     },
 
@@ -145,15 +83,32 @@ $(function(){
     setup_components: function() {
       var self = this;
 
-      $('.ini_category').button();
-      $('#button_gmap').button();
+    $('#profile_picture').fileupload({
+        dataType: 'json',
+        url: '/uploads',
+        done: function (e, data) {
+            console.log('Done!');
+            console.dir(e);
+            console.dir(data);
+            $.each(data.result.files, function (index, file) {
+                self.model.set({'profile_picture': file.name});
+                console.dir(file.name);
+                $('<p/>').text(file.name).appendTo(document.body);
+            });
+        }
+    });
 
+
+      $('.ini_category').button();
+
+        /*
         $('#datetimepicker_from').datetimepicker({
             language: 'es-AR'
         });
         $('#datetimepicker_to').datetimepicker({
             language: 'es-AR'
         });
+        */
      
       $("#slider").slider({
         min: 1,
@@ -174,12 +129,46 @@ $(function(){
          removeWithBackspace: true,
          minChars: 3
       });
-      // $('.datepicker').datepicker();
-      // $('#description_red').redactor({
-      //   lang: 'es',
-      //   plugins: ['fullscreen', 'clips'],
-      //   imageUpload: '/resources/upload_image/'
-      // });
+      $('#date_duracion_from').daterangepicker({
+            format: 'DD/MM/YYYY HH:mm',
+            timePickerIncrement: 30,
+            timePicker12Hour: false,
+            timePicker: true,
+            locale: {
+                applyLabel: 'Aplicar',
+                cancelLabel: 'Cancelar',
+                fromLabel: 'Desde',
+                toLabel: 'Hasta',
+                weekLabel: 'S',
+                customRangeLabel: 'Rango',
+                daysOfWeek: moment()._lang._weekdaysMin.slice(),
+                monthNames: moment()._lang._monthsShort.slice(),
+                firstDay: 0
+            }
+
+        });
+
+       $('.datepicker').daterangepicker({
+            format: 'DD/MM/YYYY',
+            singleDatePicker: true,
+            locale: {
+                applyLabel: 'Aplicar',
+                cancelLabel: 'Cancelar',
+                fromLabel: 'Desde',
+                toLabel: 'Hasta',
+                weekLabel: 'S',
+                customRangeLabel: 'Rango',
+                daysOfWeek: moment()._lang._weekdaysMin.slice(),
+                monthNames: moment()._lang._monthsShort.slice(),
+                firstDay: 0
+            }
+
+        });
+       $('#description_red').redactor({
+         lang: 'es',
+         plugins: ['fullscreen', 'clips'],
+         imageUpload: '/resources/upload_image/'
+       });
       $(".btn-group a").click(function() {
         $(this).siblings().removeClass("active");
         $(this).addClass("active");
@@ -206,23 +195,24 @@ $(function(){
         zoom: 13,
         disableDoubleClickZoom: true
       });
-      // this.address = new AddressPicker();
 
-      // this.address.on('direccion_change', function(direccion) {
-      //   self.model.set({
-      //     address: direccion
-      //   });
-      // });
-      // this.address.on('location_change', function(location) {
-      //   self.model.set({
-      //     latitud: location.latitud,
-      //     longitud: location.longitud,
-      //     location: {
-      //       latitude: location.latitud,
-      //       longitude: location.longitud
-      //     }
-      //   });
-      // });
+       this.address = new AddressPicker();
+
+       this.address.on('direccion_change', function(direccion) {
+         self.model.set({
+           address: direccion
+         });
+       });
+       this.address.on('location_change', function(location) {
+         self.model.set({
+           latitud: location.latitud,
+           longitud: location.longitud,
+           location: {
+             latitude: location.latitud,
+             longitude: location.longitud
+           }
+         });
+       });
 
     },
   
@@ -259,7 +249,7 @@ $(function(){
           success: function() {
             self.after_save();
             console.log('Exito en crear iniciativa');
-            window.location = '/iniciativas'
+            //window.location = '/iniciativas'
           },
           error: function() {
             console.log('Error en crear iniciativa');
@@ -545,7 +535,7 @@ $(function(){
           '</div>',
           '<div class="actions wrapper">',
             '<a href="/iniciativas/<%= _id %>" rel="address:/iniciativa" class="button green">Participá</a>',
-            '<div class="text"><%= members.lenght %></div>',
+            '<div class="text"><%= members.length %></div>',
           '</div>',
         '</div>',
       '</li>'

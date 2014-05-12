@@ -7,11 +7,32 @@
           <div class="iniciativas-list-item-map" style="width: 100%;height: 130px;"></div>
         </div>
         <div class="wrapper">
-          
-	  <h4 class="title">
-            <a href="/iniciativas/{{_id}}">{{name}}</a>
-          </h4>
-	 
+          <table>
+		<tr>
+			<td>
+			  <h4 class="title">
+			    <a href="/iniciativas/{{_id}}">{{name}}</a>
+			  </h4>
+		 	</td>
+		</tr>
+		<tr>
+			<td>
+			<button class="pure-button boton-participar" id="button_compartir" onclick="javascript:try_compartir(true,'iniciativas-list-item-{{_id}}')">Compartir</button>
+			<div style="width: 250px; height: 50px; display:none" id="modalCompartir" >
+				<fieldset><legend>Compartir</legend>
+				<table width="100%">
+					<tbody>
+					    <tr><td><a href="http://www.facebook.com"><img width="30px" height="30px" src="/static/img/facebook.png"></a></td>
+					    <td><a href="http://www.twitter.com"><img width="30px" height="30px" src="/static/img/twitter.png"></a></td>
+					    <td><a href="http://www.youtube.com"><img width="30px" height="30px" src="/static/img/youtube.png"></a></td>
+					    <td align="right"><a class="pure-button boton-participar" href="javascript:try_compartir(false, 'iniciativas-list-item-{{_id}}')">X</a></td></tr>
+				</tbody></table>		
+			 	</fieldset>
+			</div>
+			<br/>
+			</td>
+		</tr>
+	</table>
 	 <p class="address ellipsis" data-icon="">Organizador: {{owner.name}}</p>
           <div class="start-date ellipsis" data-icon="">Creado: {{creation_date}}
           </div>
@@ -79,3 +100,4 @@
     </div>
   {{/iniciativas}}
 </div>
+<script type='text/javascript' src='/static/js/_list.js'></script>

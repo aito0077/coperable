@@ -68,13 +68,15 @@ exports.upload= function(req, res, callback ) {
             var thumbPath = __dirname + "/../public/uploads/thumbs/" + imageName;
 
             fs.writeFile(newPath, data, function (err) {
-                im.resize({
+                im.crop({
                     srcPath: newPath,
                     dstPath: thumbPath,
-                    width:   200
+                    width:   280,
+                    height:   120,
+                    gravity: 'North'
                 }, function(err, stdout, stderr){
                     if (err) throw err;
-                    console.log('resized image to fit within 200x200px');
+                    console.log('resized image to fit within 280x120px');
                 });
 
                 var result = {

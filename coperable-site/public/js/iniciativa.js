@@ -1,5 +1,6 @@
 $(function(){
   var self = this;
+     Backbone.emulateJSON = true; 
 
   if (typeof iniciativa == 'undefined') {
     window.iniciativa = self.iniciativa = {};
@@ -506,7 +507,6 @@ $(function(){
           '<div class="media-body">',
             '<h3><a class="iniciativa" data-id="<%= _id %>" href="/iniciativas/<%= _id %>"><%= name %></a></h3>',
             '<div class="media">',
-              '<p class="descSmall"><%= goal %></p>',
             '</div>',
           '</div>',
         '</div>'].join(''));
@@ -515,7 +515,7 @@ $(function(){
       '<li data-category="<%= main_category %>" class="initiative">',
         '<div data-label="<%= main_category %>" class="pic">',
           '<a href="/iniciativas/<%= _id %>" rel="address:/iniciativa">',
-            '<img src="/static/img/iniciativas/initiativepic-5-mq.jpg" />',
+            '<img src="/static/uploads/thumbs/<%= profile_picture %>" />',
           '</a>',
         '</div>',
         '<div class="wrapper">',
@@ -587,14 +587,20 @@ $(function(){
 
         console.log(self.markerTemplate(model.toJSON()));
         marker.info = new google.maps.InfoWindow({
-          content:self.markerTemplate(model.toJSON())
-        })
+          content:self.markerTemplate(_.extend({
+            profile_picture: '',
+            goal: ''
+        }, model.toJSON()))
+        });
         google.maps.event.addListener(marker, 'click', function(){
           marker.info.open(self.map, marker);
         });
         self.markers.push(marker);
 
-        $('#iniciativas_list').append(self.itemTemplate(model.toJSON()));
+        $('#iniciativas_list').append(self.itemTemplate(_.extend({
+            profile_picture: '',
+            goal: ''
+        }, model.toJSON())));
       });
     },
 

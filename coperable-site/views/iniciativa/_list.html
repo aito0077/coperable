@@ -22,9 +22,10 @@
 				<fieldset><legend>Compartir</legend>
 				<table width="100%">
 					<tbody>
-					    <tr><td><a href="http://www.facebook.com"><img width="30px" height="30px" src="/static/img/facebook.png"></a></td>
-					    <td><a href="http://www.twitter.com"><img width="30px" height="30px" src="/static/img/twitter.png"></a></td>
-					    <td><a href="http://www.youtube.com"><img width="30px" height="30px" src="/static/img/youtube.png"></a></td>
+					    <tr><td><a href="http://www.facebook.com" target="_blank"><img width="30px" height="30px" src="/static/img/facebook.png"></a></td>
+					    <td><a href="http://www.twitter.com" target="_blank"><img width="30px" height="30px" src="/static/img/twitter.png"></a></td>
+					    <td><a href="http://plus.google.com" target="_blank"><img width="30px" height="30px" src="/static/img/google_plus.png"></a></td>
+					     <td><a href="http://www.flickr.com" target="_blank"><img width="30px" height="30px" src="/static/img/flickr.png"></a></td>
 					    <td align="right"><a class="pure-button boton-participar" href="javascript:try_compartir(false, 'iniciativas-list-item-{{_id}}')">X</a></td></tr>
 				</tbody></table>		
 			 	</fieldset>
@@ -48,7 +49,7 @@
           <div class="text">{{pariticipants_amount}} participando</div>
         </div>
 	<div class="row">
-		<div style="position:absolute; left:65%" id="div_social_network"></div>
+		<div style="position:absolute; left:40%" id="div_social_network"></div>
 	</div>
       </div>
       <script type="text/javascript">
@@ -87,8 +88,17 @@
 	   links_redes_sociales+='<td><a href="'+{{network.youtube.text}}+'"><img src="/static/img/youtube.png" class="image_network"/></a></td>'; 
 	  {{/network.youtube.text}}
 
+	  {{#network.vimeo.text}} 
+	   links_redes_sociales+='<td><a href="'+{{network.vimeo.text}}+'"><img src="/static/img/vimeo.png" class="image_network"/></a></td>'; 
+	  {{/network.vimeo.text}}
+ 
+          {{#network.flickr.text}} 
+	   links_redes_sociales+='<td><a href="'+{{network.flickr.text}}+'"><img src="/static/img/flickr.png" class="image_network"/></a></td>'; 
+	  {{/network.flickr.text}}
+
+	  
 	  if(links_redes_sociales=='<table><tr>'){
-	  	links_redes_sociales+='<td><img src="/static/img/facebook.png" class="image_network" title="Sin cuenta de Facebook vinculada"/><img src="/static/img/twitter.png" class="image_network" title="Sin cuenta de Twitter vinculada"/><img src="/static/img/youtube.png" class="image_network" title="Sin cuenta de Youtube vinculada"/></td>';
+	  	links_redes_sociales+='<td><img src="/static/img/facebook.png" class="image_network" title="Sin cuenta de Facebook vinculada"/><img src="/static/img/twitter.png" class="image_network" title="Sin cuenta de Twitter vinculada"/><img src="/static/img/youtube.png" class="image_network" title="Sin cuenta de Youtube vinculada"/><img src="/static/img/vimeo.png" class="image_network" title="Sin cuenta de Vimeo vinculada"/><img src="/static/img/flickr.png" class="image_network" title="Sin cuenta de Flickr vinculada"/></td>';
 	  } 
 	  
 	  links_redes_sociales+='</tr></table>';

@@ -1,5 +1,6 @@
 var iniciativas = require('../logic/iniciativas'),
-  us = require('underscore');
+    users = require('../logic/users'),
+    us = require('underscore');
 
 exports.create = function(req, res) {
   /*
@@ -17,9 +18,10 @@ exports.create = function(req, res) {
   */
   return res.render('iniciativa/create.html', {
     layoutTitle: 'Empezar Iniciativa',
-    layoutId: 'iniciativa-create',
     partials: {
-        widget_address: 'widgets/address'
+        widget_address: 'widgets/address',
+        head_resources: 'iniciativa/iniciativa_script_resources',
+        bottom_resources: 'iniciativa/iniciativa_css_resources'
     }
   })
 };
@@ -54,15 +56,19 @@ exports.view = function(req, res) {
       iniciativa.description = JSON.parse(iniciativa.description);
     }catch(e) {console.log(e);}
 
-    res.locals = us.extend(res.locals, {
-      iniciativa: iniciativa,
-      layoutTitle: iniciativa.name,
-      layoutId: 'iniciativas-view',
-    });
-    return res.render('iniciativa/view.html',{
-      partials: {
-        map: 'widgets/map',
-      }
+    users.profile(iniciativa.owner.user, function(err, user) {
+
+        res.locals = us.extend(res.locals, {
+          user: user,
+          iniciativa: iniciativa,
+          layoutTitle: iniciativa.name,
+          layoutId: 'iniciativas-view',
+        });
+        return res.render('iniciativa/view.html',{
+          partials: {
+            map: 'widgets/map',
+          }
+        });
     });
   });
 

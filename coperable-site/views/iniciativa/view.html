@@ -196,11 +196,11 @@
           <div class="title">Sobre el organizador</div>
             <div class="info">
                 <img src="/static/img/users/user-12-mq.jpg" />
-                <a href="#" class="name">Matías Cheistwer</a>
-                <div class="place">Buenos Aires, Argentina</div>
+                <a href="/user/{{iniciativa.owner.user}}" class="name">{{user.first_name}}, {{user.last_name}}</a>
+                <div class="place">{{user.location}}</div>
             </div>
             <div class="description">
-              Mi nombre es Matías, trabajo en la zona de Colegiales desde hace casi un año promoviendo la separación de resiuduos y el reciclado.
+                {{user.about}}
             </div>
             <div class="other">
               <div class="title">Otras iniciativas de Matías</div>

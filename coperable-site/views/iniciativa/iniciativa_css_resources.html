@@ -1,0 +1,57 @@
+
+
+<div id="clipsmodal" style="display: none;">
+  <div id="redactor_modal_content">
+    <div class="redactor_modal_box">
+      <ul class="redactor_clips_box">
+        <li>
+          <a href="#" class="redactor_clip_link">Hola</a>
+          <div class="redactor_clip" style="display: none;">
+            <span font="">hola</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="redactor_modal_footer">
+    <a href="#" class="redactor_modal_btn redactor_btn_modal_close">Cerrar</a>
+  </div>
+</div>
+
+
+
+<script type="text/template" id="item-template">
+  <div class="span12 tareas_input">
+    <input  placeholder="tarea" value="" autocomplete="off" class="tarea"/>
+    <input type="textarea" placeholder="descripcion" value="" class="descripcion_tarea span3"  rows="4" cols="50"/>
+    <a class="add"></a>
+  </div>
+</script>
+
+
+<script>
+
+$(function(){
+  AppIniEdi = new iniciativa.Edit({
+    el: $('#inciativa_editor')
+  });
+  AppIniEdi.reset({
+    {{#geo}}
+      latitud: {{geo.latitud}},
+      longitud: {{geo.longitud}},
+      zoom_default: 14
+    {{/geo}}
+    {{^geo}}
+      zoom_default: 12,
+      latitud: -34.615692,
+      longitud: -58.432846
+    {{/geo}}
+  });
+ });
+
+ $(".todo li").click(function() {
+   $(this).toggleClass("todo-done");
+ });
+
+</script>
+

@@ -32,8 +32,8 @@ var sessionStore = new RedisStore({client:rClient});
 
 var app = express();
 
-app.set('layout', 'layout')
 app.engine('html', require('hogan-express'));
+app.set('layout', 'layout.html')
 //app.engine('jade', require('jade').__express);
 //app.enable('view cache');
 

@@ -56,7 +56,6 @@ $(function(){
 
     reset: function(options) {
       this.model.set(options);
-      console.dir(options);
       this.user_default = new google.maps.LatLng(options.latitud, options.longitud);
 
        this.address.reset({
@@ -89,11 +88,8 @@ $(function(){
         url: '/uploads',
         done: function (e, data) {
             console.log('Done!');
-            console.dir(e);
-            console.dir(data);
             $.each(data.result.files, function (index, file) {
                 self.model.set({'profile_picture': file.name});
-                console.dir(file.name);
                 $('<p/>').text(file.name).appendTo(document.body);
             });
         }
@@ -185,7 +181,8 @@ $(function(){
         });
       })
 
-      this.$map = $("#address_map")
+      this.$map = $("#address_map");
+        console.dir(this.$map);
       this.$map.goMap({
         markers: [{
           latitude: -34.615853,
@@ -205,6 +202,7 @@ $(function(){
          });
        });
        this.address.on('location_change', function(location) {
+        console.dir(location);
          self.model.set({
            latitud: location.latitud,
            longitud: location.longitud,
@@ -231,10 +229,11 @@ $(function(){
 
     save_iniciativa: function() {
       var self = this;
-      //$('#description').val(JSON.stringify($('#description_red').getCode()));
-      $('#description').val(JSON.stringify($('#description_red').val()));
+      $('#description').val(JSON.stringify($('#description_red').getCode()));
+      //$('#description').val(JSON.stringify($('#description_red').val()));
 
-      var location = this.$map.data()['addressMarker'].position
+        /*
+      var location = this.$map.data()['addressMarker'].position;
       self.model.set({
         latitud: location.lat(),
         longitud: location.lng(),
@@ -243,6 +242,7 @@ $(function(){
           longitude: location.lng()
         }
       });
+    */
 
       if(this.validate()) {
         console.log('Es un modelo nuevo? '+this.model.isNew());
@@ -367,10 +367,19 @@ $(function(){
     set_category: function(e) {
       var value_map = this.model.get('categories') || {};
       value_map[e.target.id] = value_map[e.target.id] ? false : true;
-      console.dir(value_map);
+        
       this.model.set({
         categories: value_map
       });
+
+        _.each(_.keys(value_map), function(cat) {
+            if(value_map[cat]) {
+                $('#'+cat).addClass('active');
+            } else {
+                $('#'+cat).removeClass('active');
+            }
+        });
+      
     },
 
     set_activities: function(e) {
@@ -422,7 +431,6 @@ $(function(){
       });
       this.addresspickerMap.on("positionChanged", function(evt, markerPosition) {
         console.log('Position Changed');
-        console.dir(markerPosition);
         markerPosition.getAddress( function(address) {
           if (address) {
             $( "#addresspicker_map").val(address.formatted_address);
@@ -577,7 +585,6 @@ $(function(){
       this.clear_markers();
 
       _.each(this.iniciativas.models, function(model) {
-        console.dir(model.attributes);
         var location = model.get('location');
         var marker = new google.maps.Marker({
           title: model.get('name'),
@@ -634,6 +641,8 @@ $(function(){
     browse_iniciativas: function(e) {
       var category = null;
       console.log('Target id: '+e.target.id);
+      $('.category_tab').removeClass('selected');
+      $('#'+e.target.id).addClass('selected');
       switch(e.target.id) {
         case 'browser_all':
           category = null;

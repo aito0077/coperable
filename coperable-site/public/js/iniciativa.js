@@ -424,9 +424,10 @@ $(function(){
         } catch(e) {
           console.log(e);
         }
+        console.dir(address);
         self.trigger('location_change', {
-          latitud: address.geometry.location.jb,
-          longitud: address.geometry.location.kb
+          latitud: address.geometry.location.lat(),
+          longitud: address.geometry.location.lng()
         });
       });
       this.addresspickerMap.on("positionChanged", function(evt, markerPosition) {
@@ -508,7 +509,7 @@ $(function(){
     },
 
     setup_component: function() {
-      this.markerTemplate = _.template([
+      this.markerTemplate_old = _.template([
         '<div class="media">',
           '<a class="pull-left" href="#">',
           '</a>',
@@ -519,11 +520,44 @@ $(function(){
           '</div>',
         '</div>'].join(''));
 
+      this.markerTemplate = _.template([
+      '<div class="media" data-category="<%= main_category %>" class="initiative">',
+        '<div data-label="<%= main_category %>" class="pic">',
+          '<a href="/iniciativas/<%= _id %>" rel="address:/iniciativa">',
+            '<img src="/static/uploads/thumbs/<%= profile_picture %>" width="100%"/>',
+          '</a>',
+        '</div>',
+        '<div class="wrapper">',
+          '<a href="/iniciativas/<%= _id %>" rel="address:/iniciativa">',
+            '<h4><%= name %></h4>',
+          '</a>',
+          '<div class="place" data-icon=""><%= address %></div>',
+          '<div class="schedule" data-icon=""></div>',
+        '</div>',
+        '<div class="bottom">',
+          '<div class="wrapper">',
+            '<ul class="status">',
+              '<li class="actual"><%= stages[0].stage %> <div class="icon"></div></li>',
+              '<li>Activando<div class="icon"></div></li>',
+              '<li>Finalizada<div class="icon"></div></li>',
+            '</ul>',
+          '</div>',
+          '<div class="actions wrapper">',
+            '<a href="/iniciativas/<%= _id %>" rel="address:/iniciativa" class="button green">Participá</a>',
+            '<div class="text"><%= members.length %></div>',
+          '</div>',
+        '</div>',
+      '</div>'
+        ].join(''));
+
+
+
+
       this.itemTemplate = _.template([
       '<li data-category="<%= main_category %>" class="initiative">',
         '<div data-label="<%= main_category %>" class="pic">',
           '<a href="/iniciativas/<%= _id %>" rel="address:/iniciativa">',
-            '<img src="/static/uploads/thumbs/<%= profile_picture %>" />',
+            '<img src="/static/uploads/thumbs/<%= profile_picture %>" width="100%"/>',
           '</a>',
         '</div>',
         '<div class="wrapper">',

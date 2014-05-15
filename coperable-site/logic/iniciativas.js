@@ -5,7 +5,7 @@ var config = require('../config'),
 
 function prepare_to_persist(req, done) {
   console.dir(req.body);
-  var body = req.body,
+  var body = req.body.model ? JSON.parse(req.body.model) : req.body,
     activities = body.activities,
     task = new Array();
 
@@ -32,13 +32,23 @@ function prepare_to_persist(req, done) {
 };
 
 exports.create = function(req, res, done) {
+    console.log("Iniciativa create");
+    console.dir(req);
   prepare_to_persist(req, function(iniciativa_data) {
-    console.log(iniciativa_data);
+    console.dir(iniciativa_data);
     cop_api.client.post('/api/iniciativa', iniciativa_data, function(err, request, response, obj) {
       res.send(obj);
     });
   });
 };
+
+exports.participate = function(req, res, done) {
+    var id = req.params['id'],
+      userId = req.params['userId'];
+    cop_api.client.post('/api/iniciativa/:id/:userId', iniciativa_data, function(err, request, response, obj) {
+      res.send(obj);
+    });
+  }
 
 
 exports.save = function(req, res, done) {

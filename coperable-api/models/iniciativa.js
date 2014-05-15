@@ -82,6 +82,19 @@ exports.list = function(success) {
   });
 };
 
+exports.participate = function(id, success) {
+  Iniciativa.findOne({code: id}).exec(function(err, result) {
+        console.dir(result);
+        console.log(err);
+        if(result) {
+            res.send(result);
+        } else {
+            res.send(404, {});
+        }
+});
+}
+
+
 exports.get = function(id, success) {
   Iniciativa.findOne({code: id}).exec(success);
 };
@@ -102,6 +115,7 @@ exports.insert = function(iniciativa, success, error) {
         }]
     },
     persist = {};
+    console.dir(iniciativa);
     us.extend(persist, default_values, iniciativa);
     console.dir(persist);
     persist.main_category = us.first(us.filter(us.keys(persist.categories), function(categ) {

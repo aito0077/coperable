@@ -75,7 +75,7 @@ exports.save = function(req, res, next) {
 
 exports.participate = function(req, res, next) {
     var body = req.body;
-    Iniciativa.save(
+    Iniciativa.participate(
         body,
         function(data) {
             usuario.Model.findById(body.owner.user).exec(function (err, user) {
@@ -105,6 +105,7 @@ exports.participate = function(req, res, next) {
     );
 };
 
+/*
 exports.participate = function(req, res, next) {
     console.log('Guardando iniciativa');
     var iniciativa_id = req.params.id;
@@ -120,6 +121,7 @@ exports.participate = function(req, res, next) {
         });
     });
 }
+*/
 
 exports.findById = function(req, res, next) {
     var iniciativa_id = req.params.id;

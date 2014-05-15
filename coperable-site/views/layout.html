@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='es'>
 <head>
-  <title>{{layoutTitle}} | Coperable</title>
+  <title>{{layoutTitle}} | Coperable 2</title>
   <link rel='stylesheet' href='http://yui.yahooapis.com/pure/0.3.0/base-min.css'>
   <link rel='stylesheet' href='http://yui.yahooapis.com/pure/0.3.0/grids-min.css'>
   <link rel='stylesheet' href='http://yui.yahooapis.com/pure/0.3.0/buttons-min.css'>
@@ -21,7 +21,7 @@
   <script src="/static/js/iniciativa.js"></script>
   <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
 
-  {{{ yield-head }}}
+  {{>head_resources}}
 </head>
 <body id='{{layoutId}}'>
   <header>
@@ -50,5 +50,7 @@
   <div class="content-wrapper">
     {{{ yield }}}
   </div>
+
+  {{>bottom_resources}}
 </body>
 </html>

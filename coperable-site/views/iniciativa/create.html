@@ -1,35 +1,3 @@
-<link rel="stylesheet" type="text/css" href="/static/javascripts/redactor/redactor.css"></link>
-<link rel="stylesheet" type="text/css" media="screen" href="/static/javascripts/redactor/plugins/clips.css"></link>
-<link rel="stylesheet" type="text/css" media="screen" href="/static/stylesheets/datepicker.css"></link>
-<link rel="stylesheet" type="text/css" media="screen" href="/static/bootstrap/css/bootstrap.min.css"></link>
-<link rel="stylesheet" type="text/css" media="screen" href="/static/flat/css/flat-ui.css"></link>
-
-<script src="/static/lib/flat-ui/js/jquery-ui-1.10.3.custom.min.js"></script>
-
-
-<script type="text/javascript" src="/static/lib/flat-ui/js/bootstrap.min.js"></script>
-<script type='text/javascript' src='/static/bootstrap/js/bootstrap-tab.js'></script>
-<script type='text/javascript' src='/static/bootstrap/js/bootstrap-button.js'></script>
-
-
-<script src="/static/javascripts/bootstrap-typeahead.min.js"></script>
-<script src="/static/javascripts/bootstrap-datepicker.js"></script>
-<script src="/static/javascripts/jquery.addresspicker.min.js"></script>
-<script src="/static/javascripts/redactor/redactor.min.js"></script>
-<script src="/static/javascripts/redactor/plugins/fullscreen.js"></script>
-<script src="/static/javascripts/redactor/plugins/clips.js"></script>
-<script src="/static/javascripts/redactor/es.js"></script>
-<script src="/static/javascripts/underscore-min.js"></script>
-<script src="/static/javascripts/backbone-min.js"></script>
-
-<script src="/static/flat/js/jquery.tagsinput.js"></script>
-<script src="/static/flat/js/custom_checkbox_and_radio.js"></script>
-
-
-<link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap-datetimepicker.min.css"></link>
-<script type="text/javascript" src="/static/javascripts/bootstrap-datetimepicker.min.js"></script>
-
-<script src="/static/js/iniciativa.js"></script>
 
 <div id="inciativa_editor" class="container">
   <h3>Organiza</h3>
@@ -49,13 +17,13 @@
           <div class="control-group">
             <label class="control-label" for="name">Nombre Iniciativa</label>
             <div class="controls">
-              <input name="name" id="name" value="" name class="span6" required autocomplete="off"/>
+              <input name="name" id="name" value="" class="span6" required autocomplete="off"/>
             </div>
           </div>
           <div class="control-group">
             <label class="control-label" for="goal">Objetivo</label>
             <div class="controls">
-              <input type="textarea" name="goal" id="goal" value="" name class="span6" required autocomplete="off" rows="4" cols="50"/>
+              <input type="textarea" name="goal" id="goal" value="" class="span6" required autocomplete="off" rows="4" cols="50"/>
             </div>
           </div>
           <div class="control-group">
@@ -63,16 +31,16 @@
             <div class="controls" id="categoria">
               <div class="btn-toolbar">
                 <div class="btn-group" data-toggle="buttons-checkbox">
-                  <button id="medio_ambiente" class="ini_category btn btn-primary inline fui-time-16">
+                  <button id="medio_ambiente" class="category-environment ini_category btn btn-primary inline fui-time-16">
                     Medio Ambiente
                   </button>
-                  <button id="educacion" class="ini_category btn btn-primary inline fui-heart-16">
+                  <button id="educacion" class="category-education ini_category btn btn-primary inline fui-heart-16">
                     Educaci&oacute;n
                   </button>
-                  <button id="arte_cultura" class="ini_category btn btn-primary inline fui-eye-16">
+                  <button id="arte_cultura" class="category-art ini_category btn btn-primary inline fui-eye-16">
                     Arte y Cultura
                   </button>
-                  <button id="desarrollo" class="ini_category btn btn-primary inline fui-new-16">
+                  <button id="desarrollo" class="category-social ini_category btn btn-primary inline fui-new-16">
                     Desarrollo Social
                   </button>
                 </div>
@@ -82,57 +50,28 @@
           <div class="control-group">
             <label class="control-label" for="description">Descripci&oacute;n</label>
             <div class="controls">
-            <div>
               <textarea id="description_red" class="input-xxlarge" autocomplete="off"></textarea autocomplete="off">
             </div>
           </div>
           <div class="control-group">
             <label class="control-label" for="date">Fecha</label>
             <div class="controls">
-		<input  style="width:120px" id="date_iniciativa"/>              
-		<!--input type="date" id="date" class="input-small span2 datepicker" autocomplete="off" required autocomplete="off"/-->
+                <input type="date" id="date" class="span2 datepicker" required autocomplete="off"/>
             </div>
           </div>
           <div class="control-group">
-                <label class="control-label" for="date_duracion_from">Inicio</label>
-                <div id="datetimepicker_from" class="input-append date">
-                    <input data-format="dd/MM/yyyy hh:mm:ss" type="text" id="date_duracion_from"></input>
-                    <span class="add-on">
-                        <i data-time-icon="icon-time" data-date-icon="icon-calendar"> </i>
-                    </span>
-                </div>
-
-          </div>
-          <div class="control-group">
-                    <label class="control-label" for="date_duracion_to">Fin</label>
-                <div id="datetimepicker_to" class="input-append date">
-                    <input data-format="dd/MM/yyyy hh:mm:ss" type="text" id="date_duracion_to"></input>
-                    <span class="add-on">
-                        <i data-time-icon="icon-time" data-date-icon="icon-calendar"> </i>
-                    </span>
-                </div>
-
-          </div>
-
-
-          <!--{{> widget_address}}-->
-          <div class="control-group">
-            <label class="control-label" for="address">Direcci&oacute;n</label>
+            <label class="control-label" for="date_duracion_from">Duraci&oacute;n</label>
             <div class="controls">
-             <div class="row">
-		<div class="span6"><input required="" class="span6" name="address"></div><div style="align:left" class="span2">
-		<button id="button_gmap"  class="span1 btn btn-block btn-lg btn-primary" >Google Map</button></div>
-		</div>
-	    <!--div id="div_gmap" style="display:none">
-              <div style="width:300px;height:300px;margin-top:20px; display:none" id="address_map"></div>
-            </div-->
-	    </div>
+                <input id="date_duracion_from" class="span5"></input>
+            </div>
           </div>
+
+            {{> widget_address}}
 
           <div class="control-group">
             <label class="control-label" for="picture">Foto Portada</label>
             <div class="controls">
-              <input  class="span5" type="file" name="profile_picture" id="profile_picture" value="" required autocomplete="off"/>
+                <input id="profile_picture" type="file" name="files[]" multiple>
             </div>
           </div>
           <div class="row control-group">
@@ -158,17 +97,17 @@
           <div class="control-group">
             <label class="control-label" for="phone">Tel&eacute;fono</label>
             <div class="controls">
-              <input  name="phone" id="phone" value="" name class="span5" required autocomplete="off"/>
+              <input  name="phone" id="phone" value="" class="span5" required autocomplete="off"/>
             </div>
           </div>
           <div class="control-group">
             <label class="control-label" for="email">Email</label>
             <div class="controls">
-              <input name="email" id="email" value="" name class="span5" required autocomplete="off"/>
+              <input name="email" id="email" value="" class="span5" required autocomplete="off"/>
             </div>
           </div>
           <div class="form-actions">
-            <button type="button" id="submit_iniciativa" class="btn btn-primary">Aceptar</button>
+            <span id="submit_iniciativa" class="btn btn-primary">Aceptar</span>
           </div>
         </div>
       </div>
@@ -198,6 +137,7 @@
           </div>
         </div>
 
+        </div>
       </div>
       <div class="tab-pane" id="redes">
 
@@ -271,7 +211,6 @@
 
 
       </div>
-      </div>
 
 
 
@@ -284,66 +223,3 @@
 
 </div>
 
-<!-- Clips Modal HTML -->
-<div id="clipsmodal" style="display: none;">
-  <div id="redactor_modal_content">
-    <div class="redactor_modal_box">
-      <ul class="redactor_clips_box">
-        <li>
-          <a href="#" class="redactor_clip_link">Hola</a>
-          <div class="redactor_clip" style="display: none;">
-            <span font="">hola</span>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div id="redactor_modal_footer">
-    <a href="#" class="redactor_modal_btn redactor_btn_modal_close">Cerrar</a>
-  </div>
-</div>
-
-
- <div id="modalGMap" class="modal hide fade" style="width: 650px; height: 500px;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                </div>
-                <div class="modal-body">
-			<div style="width:550px;height:380px;" id="address_map"></div>
-                </div>
- </div>
-
-<script type="text/template" id="item-template">
-  <div class="span12 tareas_input">
-    <input  placeholder="tarea" value="" autocomplete="off" class="tarea"/>
-    <input type="textarea" placeholder="descripcion" value="" name class="descripcion_tarea span3"  rows="4" cols="50"/>
-    <a class="add"></a>
-  </div>
-</script>
-
-
-<script>
-
-$(function(){
-  AppIniEdi = new iniciativa.Edit({
-    el: $('#inciativa_editor')
-  });
-  AppIniEdi.reset({
-    {{#geo}}
-      latitud: {{geo.latitud}},
-      longitud: {{geo.longitud}},
-      zoom_default: 14
-    {{/geo}}
-    {{^geo}}
-      zoom_default: 12,
-      latitud: -34.615692,
-      longitud: -58.432846
-    {{/geo}}
-  });
- });
-
- $(".todo li").click(function() {
-   $(this).toggleClass("todo-done");
- });
-
-</script>

@@ -1,0 +1,349 @@
+<link rel="stylesheet" type="text/css" href="/static/javascripts/redactor/redactor.css"></link>
+<link rel="stylesheet" type="text/css" media="screen" href="/static/javascripts/redactor/plugins/clips.css"></link>
+<link rel="stylesheet" type="text/css" media="screen" href="/static/stylesheets/datepicker.css"></link>
+<link rel="stylesheet" type="text/css" media="screen" href="/static/bootstrap/css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css" media="screen" href="/static/flat/css/flat-ui.css"></link>
+
+<script src="/static/lib/flat-ui/js/jquery-ui-1.10.3.custom.min.js"></script>
+<!--script src="/static/flat/js/jquery-ui-1.10.0.custom.min.js"></script-->
+
+<script type="text/javascript" src="/static/lib/flat-ui/js/bootstrap.min.js"></script>
+<script type='text/javascript' src='/static/bootstrap/js/bootstrap-tab.js'></script>
+<script type='text/javascript' src='/static/bootstrap/js/bootstrap-button.js'></script>
+
+
+<script src="/static/javascripts/bootstrap-typeahead.min.js"></script>
+<script src="/static/javascripts/bootstrap-datepicker.js"></script>
+<script src="/static/javascripts/jquery.addresspicker.min.js"></script>
+<script src="/static/javascripts/redactor/redactor.min.js"></script>
+<script src="/static/javascripts/redactor/plugins/fullscreen.js"></script>
+<script src="/static/javascripts/redactor/plugins/clips.js"></script>
+<script src="/static/javascripts/redactor/es.js"></script>
+<script src="/static/javascripts/underscore-min.js"></script>
+<script src="/static/javascripts/backbone-min.js"></script>
+
+<script src="/static/flat/js/jquery.tagsinput.js"></script>
+<script src="/static/flat/js/custom_checkbox_and_radio.js"></script>
+
+
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap-datetimepicker.min.css"></link>
+<script type="text/javascript" src="/static/javascripts/bootstrap-datetimepicker.min.js"></script>
+
+<script src="/static/js/iniciativa.js"></script>
+
+<div id="inciativa_editor" class="container">
+  <h3>Organiza</h3>
+    <ul class="nav nav-tabs" id="iniciativa_wizard">
+      <li class="active"><a id="basicos_tab" href="#basico" data-toggle="tab">Datos B&aacute;sicos</a></li>
+      <li><a id="tareas_tab" href="#tareas" data-toggle="tab">Tareas</a></li>
+      <li><a id="redes_tab" href="#redes" data-toggle="tab">Redes</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="basico">
+        <div class="form-horizontal">
+          <input type="hidden" name="latitude" id="latitude"/>
+          <input type="hidden" name="longitude" id="longitude"/>
+          <input type="hidden" name="slug" id="slug"/>
+          <input type="hidden" name="description" id="description"/>
+          <div class="control-group">
+            <label class="control-label" for="name">Nombre Iniciativa</label>
+            <div class="controls">
+              <input name="name" id="name" value="" name class="span6" required autocomplete="off"/>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="goal">Objetivo</label>
+            <div class="controls">
+              <input type="textarea" name="goal" id="goal" value="" name class="span6" required autocomplete="off" rows="4" cols="50"/>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="categoria">Categor&iacute;a</label>
+            <div class="controls" id="categoria">
+              <div class="btn-toolbar">
+                <div class="btn-group" data-toggle="buttons-checkbox">
+                  <button id="medio_ambiente" class="ini_category btn btn-primary inline fui-time-16">
+                    Medio Ambiente
+                  </button>
+                  <button id="educacion" class="ini_category btn btn-primary inline fui-heart-16">
+                    Educaci&oacute;n
+                  </button>
+                  <button id="arte_cultura" class="ini_category btn btn-primary inline fui-eye-16">
+                    Arte y Cultura
+                  </button>
+                  <button id="desarrollo" class="ini_category btn btn-primary inline fui-new-16">
+                    Desarrollo Social
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="description">Descripci&oacute;n</label>
+            <div class="controls">
+            <div>
+              <textarea id="description_red" class="input-xxlarge" autocomplete="off"></textarea autocomplete="off">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="date">Fecha</label>
+            <div class="controls">
+		<input  style="width:120px" id="date_iniciativa"/>              
+		<!--input type="date" id="date" class="input-small span2 datepicker" autocomplete="off" required autocomplete="off"/-->
+            </div>
+          </div>
+          <div class="control-group">
+                <label class="control-label" for="date_duracion_from">Inicio</label>
+                <div id="datetimepicker_from" class="input-append date">
+                    <input data-format="dd/MM/yyyy hh:mm:ss" type="text" id="date_duracion_from"></input>
+                    <span class="add-on">
+                        <i data-time-icon="icon-time" data-date-icon="icon-calendar"> </i>
+                    </span>
+                </div>
+
+          </div>
+          <div class="control-group">
+                    <label class="control-label" for="date_duracion_to">Fin</label>
+                <div id="datetimepicker_to" class="input-append date">
+                    <input data-format="dd/MM/yyyy hh:mm:ss" type="text" id="date_duracion_to"></input>
+                    <span class="add-on">
+                        <i data-time-icon="icon-time" data-date-icon="icon-calendar"> </i>
+                    </span>
+                </div>
+
+          </div>
+
+
+          <!--{{> widget_address}}-->
+          <div class="control-group">
+            <label class="control-label" for="address">Direcci&oacute;n</label>
+            <div class="controls">
+             <div class="row">
+		<div class="span6"><input required="" class="span6" name="address"></div><div style="align:left" class="span2">
+		<button id="button_gmap"  class="span1 btn btn-block btn-lg btn-primary" >Google Map</button></div>
+		</div>
+	    <!--div id="div_gmap" style="display:none">
+              <div style="width:300px;height:300px;margin-top:20px; display:none" id="address_map"></div>
+            </div-->
+	    </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="picture">Foto Portada</label>
+            <div class="controls">
+              <input  class="span5" type="file" name="profile_picture" id="profile_picture" value="" required autocomplete="off"/>
+            </div>
+          </div>
+          <div class="row control-group">
+		<div class="span">
+			    <label class="control-label" for="participants_amount">Cantidad Participantes <span id="show_amount" class="strong">(16)</span></label>
+			    <div aria-disabled="false" id="slider" class="ui-slider span5 ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+			      <div class="ui-slider-segment"></div>
+			      <div class="ui-slider-segment"></div>
+			      <div class="ui-slider-segment"></div>
+			    <div style="width: 30.6122%;" id="slider_range" class="ui-slider-range ui-widget-header ui-slider-range-min"></div><a style="left: 30.6122%;" id="slider-handle" class="ui-slider-handle ui-state-default ui-corner-all" href="#"></a></div>
+		</div>
+		<div class="span1">
+		<label class="checkbox checked" for="checkbox_participantes"><span class="icon"></span><span class="icon-to-fade"></span>
+		<span class="icons">
+		<span class="first-icon fui-checkbox-unchecked"></span>
+		<span class="second-icon fui-checkbox-checked"></span>
+		</span>
+		<input type="checkbox" id="checkbox_participantes" data-toggle="checkbox" value="">
+		Ilimitados
+		</label>
+	</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="phone">Tel&eacute;fono</label>
+            <div class="controls">
+              <input  name="phone" id="phone" value="" name class="span5" required autocomplete="off"/>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="email">Email</label>
+            <div class="controls">
+              <input name="email" id="email" value="" name class="span5" required autocomplete="off"/>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" id="submit_iniciativa" class="btn btn-primary">Aceptar</button>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="tareas">
+         <div class="offset1 content">
+	  <div class="row">
+          <div class="demo-tooltips">
+		<h3 class="demo-panel-title">Actividades</h3>
+		<p align="center" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Actividades"></p>
+		<div class="tooltip fade bottom in" style="top: 3px; left: 0px; display: block;">
+		<div class="tooltip-arrow" style="position:absolute; left:40px;"></div>
+		<div class="tooltip-inner" style="position:absolute; left:10px; max-width:550px; width: 550px">Agregá las diferentes atividades y tareas que realizarán quienes asistan a la iniciativa.</div>
+		</div>
+	  </div>		
+          <div class="row">
+            <input  placeholder="tarea" value="" autocomplete="off" class="tarea"/>
+            <input  placeholder="descripcion" value="" autocomplete="off" class="descripcion_tarea input-xxlarge"/>
+            <a class="btn btn-primary add_activity"><i class="fui-plus-16"></i></a>
+          </div>
+          <br />
+          <div class="row">
+            <input name="activities" id="activities" class="tagsinput input-xxlarge" value=""  autocomplete="off"/>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" id="submit_iniciativa_tasks" class="btn btn-primary">Aceptar</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="tab-pane" id="redes">
+
+      <div class="row demo-samples">
+        <div class="span4">
+          <div class="todo mrm tabbable tabs-left">
+            <ul>
+              <li class="todo-done">
+                <div class="todo-icon fui-mail-24"></div>
+                <div class="todo-content">
+                  <h4 class="todo-name">
+                    <strong>Mail</strong>
+                  </h4>
+                </div>
+              </li>
+              <li class="todo-done">
+                <div class="todo-icon fui-man-24"></div>
+                <div class="todo-content">
+                  <h4 class="todo-name">
+                    <strong>Facebook</strong>
+                  </h4>
+                </div>
+              </li>
+              <li class="todo-done">
+                <div class="todo-icon fui-man-24"></div>
+                <div class="todo-content">
+                  <h4 class="todo-name">
+                    <strong>Twitter</strong>
+                  </h4>
+                </div>
+              </li>
+              <li class="todo-done">
+                <div class="todo-icon fui-man-24"></div>
+                <div class="todo-content">
+                  <h4 class="todo-name">
+                    <strong>Google+</strong>
+                  </h4>
+                </div>
+              </li>
+              <li class="todo-done">
+                <div class="todo-icon fui-video-24"></div>
+                <div class="todo-content">
+                  <h4 class="todo-name">
+                    <strong>Youtube</strong>
+                  </h4>
+                </div>
+              </li>
+              <li class="todo-done">
+                <div class="todo-icon fui-video-24"></div>
+                <div class="todo-content">
+                  <h4 class="todo-name">
+                    <strong>Vimeo</strong>
+                  </h4>
+                </div>
+              </li>
+              <li class="todo-done">
+                <div class="todo-icon fui-camera-24"></div>
+                <div class="todo-content">
+                  <h4 class="todo-name">
+                    <strong>Flickr</strong>
+                  </h4>
+                </div>
+              </li>
+
+
+            </ul>
+           </div>
+        </div>
+      </div>
+      <div class="span8">
+
+
+      </div>
+      </div>
+
+
+
+
+
+
+
+      </div>
+    </div>
+
+</div>
+
+<!-- Clips Modal HTML -->
+<div id="clipsmodal" style="display: none;">
+  <div id="redactor_modal_content">
+    <div class="redactor_modal_box">
+      <ul class="redactor_clips_box">
+        <li>
+          <a href="#" class="redactor_clip_link">Hola</a>
+          <div class="redactor_clip" style="display: none;">
+            <span font="">hola</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="redactor_modal_footer">
+    <a href="#" class="redactor_modal_btn redactor_btn_modal_close">Cerrar</a>
+  </div>
+</div>
+
+
+ <div id="modalGMap" class="modal hide fade" style="width: 650px; height: 500px;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                </div>
+                <div class="modal-body">
+			<div style="width:550px;height:380px;" id="address_map"></div>
+                </div>
+ </div>
+
+<script type="text/template" id="item-template">
+  <div class="span12 tareas_input">
+    <input  placeholder="tarea" value="" autocomplete="off" class="tarea"/>
+    <input type="textarea" placeholder="descripcion" value="" name class="descripcion_tarea span3"  rows="4" cols="50"/>
+    <a class="add"></a>
+  </div>
+</script>
+
+
+<script>
+
+$(function(){
+  AppIniEdi = new iniciativa.Edit({
+    el: $('#inciativa_editor')
+  });
+  AppIniEdi.reset({
+    {{#geo}}
+      latitud: {{geo.latitud}},
+      longitud: {{geo.longitud}},
+      zoom_default: 14
+    {{/geo}}
+    {{^geo}}
+      zoom_default: 12,
+      latitud: -34.615692,
+      longitud: -58.432846
+    {{/geo}}
+  });
+ });
+
+ $(".todo li").click(function() {
+   $(this).toggleClass("todo-done");
+ });
+
+</script>

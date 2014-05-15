@@ -1,0 +1,43 @@
+/*
+ * NoGray JavaScript Library
+ *
+ * Copyright (c), All right reserved
+ * Gazing Design - http://www.NoGray.com
+ * http://www.nogray.com/license.php
+ */
+ 
+.ng_autocomplete_list_div {padding:3px 5px;
+	cursor:pointer;} 
+
+.ng_autocomplete_list_focus {background:#935d00;
+	color:#ffffff;}
+	
+.ng_autocomplete_group_div {padding:3px 5px;
+	font-style:italic;
+	font-weight:bold;}
+	
+.ng_autocomplete_multi_list {vertical-align:top;}
+	
+.ng_autocomplete_multi_list_option {display:inline-block;
+	color:#ffffff;
+	background:#22232d;
+	border:solid #303237 1px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	margin-right:3px;}
+	
+.rtl.ng_autocomplete_multi_list_option {margin-left:3px;
+	margin-right:auto;}
+	
+.ng_autocomplete_multi_list_text {padding:0px 3px;}
+	
+.ng_autocomplete_multi_list_remove {background:url(../images/remove_icon.gif) no-repeat center center;
+	cursor:pointer;
+	border-left:solid #303237 1px;
+	width:15px;}
+	
+.rtl .ng_autocomplete_multi_list_remove {
+	border-left:auto;
+	border-right:solid #303237 1px;
+}

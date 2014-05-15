@@ -1,0 +1,68 @@
+/*
+ * NoGray JavaScript Library
+ *
+ * Copyright (c), All right reserved
+ * Gazing Design - http://www.NoGray.com
+ * http://www.nogray.com/license.php
+ */
+ 
+.ng_timepicker_holder {padding:10px;}
+
+.ng_timepicker_faceplate {background:#1d2037;
+	border:solid #3b3f5e 2px;
+	padding:5px;
+	position:absolute;
+	color:#8e9cc0;
+	text-align:center;
+	font-weight:bold;}
+	
+.rtl .ng_timepicker_faceplate {direction:ltr;}
+
+.ng_timepicker_holder, .ng_timepicker_holder * {font-size:11px;
+	font-family:Arial, Helvetica, sans-serif;}
+	
+.ng_timepicker_number {position:absolute;}
+
+.ng_timepicker_hour, .ng_timepicker_minute {cursor:pointer;
+	padding:4px;
+	position:relative;}
+
+.ng_timepicker_hour:hover, .ng_timepicker_minute:hover {border:dotted #545454 1px;
+	background:#3c301a;
+	padding:3px;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;}
+	
+.ng_timepicker_off, .ng_timepicker_off:hover {border:none;
+	color:#545454;
+	padding:4px;
+	background:none;
+	cursor:auto;}
+	
+.ng_timepicker_selected, .ng_timepicker_selected:hover {background:#935d00;
+	border:solid #935d00 1px;
+	padding:3px;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;}
+	
+.ng_timepicker_simple_table {border-collapse:separate;
+	border:solid #3b3f5e 2px;
+	background:#1d2037;
+	text-align:center;}
+	
+.ng_timepicker_simple_table td {min-width:15px;}
+
+.ng_timepicker_simple_display {color:#3b3f5e;
+	font-weight:bold;}
+	
+.rtl .ng_timepicker_simple_display {direction:ltr;}
+
+/*1.1.2*/
+.ng-comp-disabled .ng_timepicker_hour:hover, .ng-comp-disabled  .ng_timepicker_minute:hover {border:none;
+	background:none;}
+	
+.ng-comp-disabled .ng_timepicker_simple_table, .ng-comp-disabled .ng_timepicker_faceplate {border-color:#606060;
+	background:#343434;}
+/*1.1.2*/

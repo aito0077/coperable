@@ -1,0 +1,28 @@
+/*
+ * NoGray JavaScript Library
+ *
+ * Copyright (c), All right reserved
+ * Gazing Design - http://www.NoGray.com
+ * http://www.nogray.com/license.php
+ */
+
+.ng-button {border:solid 1px !important;
+	background-image:none !important;}
+
+.ng-button-gloss {background-image:none !important;}
+.ng-button-down {background-image:none !important;}
+		
+.ng-button-holder {border:none !important;
+	margin:0px !important;
+	background-image:none !important;}
+	
+.ng-button-holder-down {background-image:none !important;}
+.ng-button-holder-gloss-down {background-image:none !important;}
+
+.ng-button-bevel {border:none !important;
+	padding:1px 4px 3px 4px !important;}
+
+/* componenet style */
+.ng-comp-right-shadow, .ng-comp-left-shadow, .ng-comp-left-shadow, .ng-comp-bottom-shadow,
+.ng-comp-bottom-right-shadow, .ng-comp-bottom-left-shadow {display:none !important;
+	background-image:none !important;}

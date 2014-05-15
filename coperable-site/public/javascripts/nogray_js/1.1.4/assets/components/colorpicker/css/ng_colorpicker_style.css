@@ -1,0 +1,68 @@
+/*
+ * NoGray JavaScript Library
+ *
+ * Copyright (c), All right reserved
+ * Gazing Design - http://www.NoGray.com
+ * http://www.nogray.com/license.php
+ */
+ 
+.ng_colorpicker_swatch_table {border-collapse:separate;
+	border-spacing:4px;}
+	
+.ng_colorpicker_swatch_td{
+	border:solid #000000 1px;
+	padding:0px;
+	border-radius:2px;
+}
+
+.ng_colorpicker_swatch {border:solid #ffffff 1px;
+	font-size:1px;
+	overflow:hidden;
+	width:20px;
+	height:20px;
+	cursor:pointer;
+	padding:0px !important;
+	margin:0px !important;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius:2px;
+	cursor:pointer;}
+	
+.ng_colorpicker_swatch:hover {border-style:dotted;}
+
+.ng-comp-disabled .ng_colorpicker_swatch:hover {border-style:solid;}
+	
+.ng_colorpicker_selected {border:solid #ffffff 1px;}
+.ng_colorpicker_selected .ng_colorpicker_swatch {border:solid #000000 1px;}
+
+.ng_colorpicker_more_colors_div {}
+
+	
+.ng_colorpicker_hue_slider .ng_slider_inner {background:url(../images/hue_slider_bg.jpg);}
+
+.ng_colorpicker_current_swatch, .ng_colorpicker_previous_swatch {border:solid #000000 1px;
+	height:25px;
+	padding:0px !important;
+	margin:0px !important;
+	cursor:pointer;}
+	
+.ng_colorpicker_input_fields_td {text-align:center;
+	font-size:small;}
+	
+.ng_colorpicker_input_fields_td table {border-collapse:collapse;}
+
+.ng_colorpicker_input_fields_td table input {width:30px;}
+
+.ng_colorpicker_input_fields_td td {padding:0px 3px 1px 3px;}
+	
+.ng_colorpicker_current_swatch {border-bottom:none;}
+.ng_colorpicker_previous_swatch {border-top:none;}
+
+/* 1.1.4 */
+.ng_colorpicker_opacity_div {padding:5px;}
+
+.ng_colorpicker_opacity_td {text-align:right;}
+.rtl .ng_colorpicker_opacity_td {text-align:left;}
+
+.ng_colorpicker_checkered_bg {background-image: url(../images/checkered_bg.gif);}
+/* 1.1.4 */

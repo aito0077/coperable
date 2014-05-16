@@ -211,8 +211,9 @@ $(function(){
         });
        $('#description_red').redactor({
          lang: 'es',
-         plugins: ['fullscreen', 'clips'],
-         imageUpload: '/resources/upload_image/'
+         plugins: ['fullscreen'],
+         minHeight: 200, 
+         imageUpload: '/uploads/'
        });
       $(".btn-group a").click(function() {
         $(this).siblings().removeClass("active");
@@ -307,8 +308,6 @@ $(function(){
     save_iniciativa: function() {
       var self = this;
       $('#description').val(JSON.stringify($('#description_red').getCode()));
-      //$('#description').val(JSON.stringify($('#description_red').val()));
-
         /*
       var location = this.$map.data()['addressMarker'].position;
       self.model.set({

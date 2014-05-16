@@ -169,7 +169,7 @@ $(function(){
       $("#activities").tagsInput({
          //autocomplete_url: url_to_autocomplete_api,
          interactive:true,
-         width: '200px',
+         width: '600px',
          onChange : this.set_activities,
          removeWithBackspace: true,
          minChars: 3

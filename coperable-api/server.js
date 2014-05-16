@@ -34,26 +34,6 @@ var mongourl = generate_mongo_url(mongo);
 
 mongoose.connect(mongourl);
 
-function list(req, res, next) {
-      res.send('list' + req.params.entity);
-}
-
-function fetch(req, res, next) {
-      res.send('fetch: ' + req.params.entity +' - id: '+req.params.id);
-}
-
-function update(req, res, next) {
-      res.send('update: ' + req.params.entity +' - id: '+req.params.id);
-}
-
-function remove(req, res, next) {
-      res.send('remove: ' + req.params.entity +' - id: '+req.params.id);
-}
-
-function respond(req, res, next) {
-      res.send('hello ' + req.params.entity);
-}
-
 var server = restify.createServer({
     name: 'Coperable API'
 });
@@ -69,7 +49,6 @@ server.get('/api/iniciativa/s_name/:name', iniciativas.findByName);
 server.get('/api/iniciativa/:id', iniciativas.findById);
 server.post('/api/iniciativa', iniciativas.create);
 server.put('/api/iniciativa/:id', iniciativas.save);
-server.del('/api/iniciativa/:id', remove);
 server.post('/api/iniciativa/:id/:userId', iniciativas.participate);
 
 server.get('/api/organizadores', usuarios.listOwners);

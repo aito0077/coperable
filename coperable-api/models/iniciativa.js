@@ -66,6 +66,9 @@ var IniciativaSchema = new Schema({
             text: String
         }
     },
+    date: { type: Date, default: Date.now },
+    start_date: { type: Date, default: Date.now },
+    end_date: { type: Date, default: Date.now },
     creation_date: { type: Date, default: Date.now },
     modification_date: { type: Date, default: Date.now }
 });
@@ -77,7 +80,7 @@ exports.Model = Iniciativa;
 var limit = 20;
 
 exports.list = function(success) {
-  Iniciativa.find().limit(limit).execFind(function (arr,data) {
+  Iniciativa.find().limit(limit).execFind(function (err, data) {
     success(data);
   });
 };

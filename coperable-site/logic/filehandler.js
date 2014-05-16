@@ -84,8 +84,8 @@ exports.upload= function(req, res, callback ) {
                         "name": imageName,
                         "size": fileUploaded.size,
                         "url": "/static/uploaded/fullsize/"+imageName,
-                        "thumbnailUrl": "/static/uploaded/thumbs/"+imageName,
-                        "deleteUrl": "/static/uploaded/fullsize/"+imageName,
+                        "thumbnailUrl": "/static/uploads/thumbs/"+imageName,
+                        "deleteUrl": "/static/uploads/fullsize/"+imageName,
                         "deleteType": "DELETE"
                     }]};
 

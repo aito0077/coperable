@@ -8,7 +8,54 @@ $(function(){
 
   iniciativa.Model = Backbone.Model.extend({
     urlRoot : '/api/iniciativas',
-    idAttribute: "_id"
+    idAttribute: "_id",
+
+    initialize: function () {
+        this.validators = {};
+
+        this.validators.name = function (value) {
+            return value && value.length > 0 ? {isValid: true} : {isValid: false, message: "Tenes que ingresar nombre"};
+        };
+
+        this.validators.goal = function (value) {
+            return value && value.length > 0 ? {isValid: true} : {isValid: false, message: "Tenes que ingresar objetivo "};
+        };
+
+        this.validators.description = function (value) {
+            return value && value.length > 0 ? {isValid: true} : {isValid: false, message: "Tenes que ingresar descripcion"};
+        };
+
+        this.validators.date = function (value) {
+            return value && value.length > 0 ? {isValid: true} : {isValid: false, message: "Tenes que ingresar fecha"};
+        };
+
+        this.validators.profile_picture = function (value) {
+            return value && value.length > 0 ? {isValid: true} : {isValid: false, message: "Tenes que ingresar imagen"};
+        };
+
+        this.validators.address = function (value) {
+            return value && value.length > 0 ? {isValid: true} : {isValid: false, message: "Tenes que ingresar direccion"};
+        };
+    },
+
+    validateAll: function () {
+
+        var messages = {};
+
+        for (var key in this.validators) {
+            if(this.validators.hasOwnProperty(key)) {
+                var check = this.validators[key](this.get(key));
+                if (check.isValid === false) {
+                    messages[key] = check.message;
+                }
+            }
+        }
+
+        return _.size(messages) > 0 ? {isValid: false, messages: messages} : {isValid: true};
+    },
+
+
+
   });
 
     moment.lang('es');
@@ -84,13 +131,14 @@ $(function(){
       var self = this;
 
     $('#profile_picture').fileupload({
+        dropZone: $('#dropzone'),
         dataType: 'json',
         url: '/uploads',
         done: function (e, data) {
             console.log('Done!');
             $.each(data.result.files, function (index, file) {
                 self.model.set({'profile_picture': file.name});
-                $('<p/>').text(file.name).appendTo(document.body);
+                $('#dropzone').css('background', "url('"+file.thumbnailUrl+"')");
             });
         }
     });
@@ -213,6 +261,35 @@ $(function(){
          });
        });
 
+
+        $(document).bind('dragover', function (e) {
+            var dropZone = $('#dropzone'),
+                timeout = window.dropZoneTimeout;
+            if (!timeout) {
+                dropZone.addClass('in');
+            } else {
+                clearTimeout(timeout);
+            }
+            var found = false,
+                node = e.target;
+            do {
+                if (node === dropZone[0]) {
+                    found = true;
+                    break;
+                }
+                node = node.parentNode;
+            } while (node != null);
+            if (found) {
+                dropZone.addClass('hover');
+            } else {
+                dropZone.removeClass('hover');
+            }
+            window.dropZoneTimeout = setTimeout(function () {
+                window.dropZoneTimeout = null;
+                dropZone.removeClass('in hover');
+            }, 100);
+        });
+
     },
   
     set_participantes_ilimitados: function(){
@@ -281,7 +358,17 @@ $(function(){
     },
 
     validate: function() {
-      return true;
+        var check = this.model.validateAll();
+
+        console.dir(check);
+        if (check.isValid === false) {
+            //utils.addValidationError(target.id, check.message);
+            alert(_.first(_.values(check.messages)));
+            return false;
+        } else {
+            return true;
+        }
+
     },
 
     add_iniciativa_tasks: function(e) {

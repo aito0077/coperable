@@ -8,3 +8,4 @@ node_modules
 /coperable-engine/target
 /coperable-site/config.js
 /coperable-api/config.js
+/coperable-api/data

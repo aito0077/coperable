@@ -1,2 +1,2 @@
 #!/bin/sh
-sudo mongod -v --dbpath=$PWD/data
+sudo mongod --dbpath=$PWD/coperable-api/data

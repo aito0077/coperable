@@ -1,21 +1,28 @@
-<div class="container pure-g-r">
-  <h1 class="pure-u-1">Ingresá</h1>
-  <div class="module pure-u-2-5 centered">
-    <p>Podes usar tus redes sociales para hacer login</p>
-    <a href="/auth/facebook">
-      <img src="/static/img/social-btn-facebook.png"/>
-    </a>
-    <a href="/auth/twitter" class="btn btn-large btn-block">
-      <img src="/static/img/social-btn-twitter.png"/>
-    </a>
-    <p>o tu cuenta coperable</p>
-    <form method="post" action="/user/login" class="pure-form">
-      <fieldset class="pure-group">
-        <input type="text" name="username" placeholder="Usuario" class="pure-input-1" required>
-        <input type="password" name="password" placeholder="Contraseña" class="pure-input-1" required>
-      </fieldset>
-      <button type="submit" class="pure-button pure-input-1 pure-button-primary">Aceptar</button>
-    </form>
-    <p>Si no tienes cuenta te puedes registrar <strong><a href="/user/signup">acá</a></strong></p>
-  </div>
+<div class="container">
+  <h1>Ingresá</h1>
+  <p>Podes usar tus redes sociales para hacer login</p>
+  <a href="/auth/facebook">
+    <img src="/static/img/social-btn-facebook.png"/>
+  </a>
+  <a href="/auth/twitter">
+    <img src="/static/img/social-btn-twitter.png"/>
+  </a>
+  <br>
+  <br>
+  <p>o tu cuenta coperable</p>
+
+  <form method="post" action="/user/login" class="form-horizontal">
+    <label for="username">Usuario</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password">Contraseña</label>
+    <input type="password" id="password" name="password" required>
+
+    <br>
+    <br>
+    <div>
+      <button type="submit" class="btn">Sign in</button>
+    </div>
+  </form>
+  <p>Si no tienes cuenta te puedes registrar <strong><a href="/user/signup">acá</a></strong></p>
 </div>

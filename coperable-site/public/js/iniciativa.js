@@ -196,6 +196,7 @@ Backbone.emulateHTTP = true;
 
         });
 
+        /*
        $('.datepicker').daterangepicker({
             format: 'DD/MM/YYYY',
             singleDatePicker: true,
@@ -212,6 +213,7 @@ Backbone.emulateHTTP = true;
             }
 
         });
+    */
        $('#description_red').redactor({
          lang: 'es',
          plugins: ['fullscreen'],

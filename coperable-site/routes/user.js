@@ -75,8 +75,8 @@ exports.signup = function(req, res) {
   */
 
   return res.render('user/signup.html', {
-    layoutTitle: 'Login',
-    layoutId: 'user-login'
+    layoutTitle: 'Registrate',
+    layoutId: 'user-signup'
   })
 };
 

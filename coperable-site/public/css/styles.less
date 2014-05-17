@@ -1,15 +1,14 @@
-.ellipsis {
-  white-space: nowrap;
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
+// Libs
 @import '/static/lib/lesshat/lesshat.less';
+
+// Global Files
+@import 'globals.less';
 @import 'layout.less';
 
+// Partials
 @import 'iniciativa/_list.less';
 
+// View Specific
 @import 'home/index.less';
 @import 'user/login.less';
 
@@ -17,7 +16,7 @@
         color: #388D47 !important;
         border-color: #388D47 !important;
         background: #FFF !important;
-        &.active{ 
+        &.active{
             color: #FFF !important;
             background: #388D47 !important ;
         }
@@ -27,7 +26,7 @@
     color: #EB3130 !important;
     border-color: #EB3130 !important;
     background: #FFF !important;
-    &.active{ 
+    &.active{
         color: #FFF !important;
         background: #EB3130 !important ;
     }
@@ -36,7 +35,7 @@
     color: #37A2df !important;
     border-color: #37A2df !important;
     background: #FFF !important;
-    &.active{ 
+    &.active{
         color: #FFF !important;
         background: #37A2df !important ;
     }
@@ -45,7 +44,7 @@
     color: #E17a36 !important;
     border-color: #E17a36 !important;
     background: #FFF !important;
-    &.active{ 
+    &.active{
         color: #FFF !important;
         background: #E17a36 !important ;
     }

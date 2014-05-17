@@ -58,6 +58,7 @@ exports.view = function(req, res) {
 
     console.dir(iniciativa.owner);
     if(iniciativa.owner) {
+        iniciativa.creation_date = iniciativa.creation_date ? new Date(iniciativa.creation_date).toDateString() : '';
     users.profile(iniciativa.owner.user, function(err, user) {
 
         res.locals = us.extend(res.locals, {

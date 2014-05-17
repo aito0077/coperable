@@ -73,7 +73,7 @@ $(function(){
     events: {
       'change #name': 'set_name',
       'change #goal': 'set_goal',
-      'change #description_red': 'set_description',
+      //'change #description_red': 'set_description',
       'change #date': 'set_date',
       'change #duration': 'set_duration',
       'change #profile_picture': 'set_profile_picture',
@@ -307,7 +307,10 @@ $(function(){
 
     save_iniciativa: function() {
       var self = this;
-      $('#description').val(JSON.stringify($('#description_red').getCode()));
+      this.model.set({
+        description: $('#description_red').redactor('get')
+    });
+        console.log(this.model.get('description'));
         /*
       var location = this.$map.data()['addressMarker'].position;
       self.model.set({

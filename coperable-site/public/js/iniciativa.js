@@ -301,7 +301,7 @@ Backbone.emulateHTTP = true;
     set_participantes_ilimitados: function(){
 	var checkeado = $('#checkbox_participantes').is(':checked');
 	
-	$('#slider').css('display',(checkeado?'none':'inline'));
+	//$('#slider').css('display',(checkeado?'none':'inline'));
 	$('#show_amount').css('display',(checkeado?'none':'inline'));
 	
     },

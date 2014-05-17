@@ -1,4 +1,5 @@
 $(function(){
+Backbone.emulateHTTP = true;
   var self = this;
      Backbone.emulateJSON = true; 
 

@@ -88,8 +88,9 @@ app.all( '*', function( req, res, next ) {
 
 app.get('/iniciativas', iniciativa.list);
 app.get('/iniciativas/create', iniciativa.create);
+app.post('/iniciativas/:id', iniciativas.save);
 app.post('/iniciativas', iniciativas.create);
-app.put('/iniciativas/:id', iniciativas.save);
+//app.put('/iniciativas/:id', iniciativas.save);
 app.get('/iniciativas/name/:slug', iniciativa.view_slug);
 app.get('/iniciativas/:id', iniciativa.view);
 

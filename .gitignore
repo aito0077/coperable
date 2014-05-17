@@ -3,6 +3,7 @@
 .nvmrc
 .DS_Store
 node_modules
+npm-debug.log
 
 /coperable-engine/data
 /coperable-engine/target

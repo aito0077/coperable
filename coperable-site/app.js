@@ -102,7 +102,6 @@ function loadUserInformation(req, res, next) {
     geo: geo
   };
 
-  console.dir(res.locals);
   next('route');
 }
 
@@ -130,24 +129,24 @@ app.put('/iniciativas/:id', iniciativas.save);
 app.get('/iniciativas/name/:slug', iniciativa.view_slug);
 app.get('/iniciativas/:id', iniciativa.view);
 
- app.get('/api/iniciativas/view/:id', iniciativa.view);
- app.get('/api/iniciativas/edit', iniciativa.edit);
- app.get('/api/iniciativas/:id', iniciativas.get);
- app.post('/api/iniciativas/:id/:userId', iniciativas.participate);
- app.post('/api/iniciativas', iniciativas.create);
+app.get('/api/iniciativas/view/:id', iniciativa.view);
+app.get('/api/iniciativas/edit', iniciativa.edit);
+app.get('/api/iniciativas/:id', iniciativas.get);
+app.post('/api/iniciativas/:id/:userId', iniciativas.participate);
+app.post('/api/iniciativas', iniciativas.create);
 
- app.get('/api/iniciativas', function(req, res, next) {
-   console.dir(req.query);
-   if(req.query.category) {
-     iniciativas.browseByCategory(req, res, function(err, iniciativas) {
-       res.send(iniciativas);
-     });
-   } else {
-     iniciativas.list(req, res, function(err, iniciativas) {
-       res.send(iniciativas);
-     });
-   }
- });
+app.get('/api/iniciativas', function(req, res, next) {
+  console.dir(req.query);
+  if(req.query.category) {
+    iniciativas.browseByCategory(req, res, function(err, iniciativas) {
+      res.send(iniciativas);
+    });
+  } else {
+    iniciativas.list(req, res, function(err, iniciativas) {
+      res.send(iniciativas);
+    });
+  }
+});
 
 
 

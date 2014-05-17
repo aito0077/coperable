@@ -1,6 +1,5 @@
 <link rel="stylesheet" type="text/css" href="/static/javascripts/redactor/redactor.css"></link>
 <link rel="stylesheet" type="text/css" media="screen" href="/static/javascripts/redactor/plugins/clips.css"></link>
-<link rel="stylesheet" type="text/css" media="screen" href="/static/stylesheets/datepicker.css"></link>
 <link rel="stylesheet" type="text/css" media="screen" href="/static/bootstrap/css/bootstrap.min.css"></link>
 <link rel="stylesheet" type="text/css" media="screen" href="/static/flat/css/flat-ui.css"></link>
 
@@ -89,7 +88,7 @@
           <div class="control-group">
             <label class="control-label" for="date">Fecha</label>
             <div class="controls">
-		<input  style="width:120px" id="date_iniciativa"/>              
+		<input  style="width:120px" id="date_iniciativa"/>
 		<!--input type="date" id="date" class="input-small span2 datepicker" autocomplete="off" required autocomplete="off"/-->
             </div>
           </div>
@@ -182,7 +181,7 @@
 		<div class="tooltip-arrow" style="position:absolute; left:40px;"></div>
 		<div class="tooltip-inner" style="position:absolute; left:10px; max-width:550px; width: 550px">Agregá las diferentes atividades y tareas que realizarán quienes asistan a la iniciativa.</div>
 		</div>
-	  </div>		
+	  </div>
           <div class="row">
             <input  placeholder="tarea" value="" autocomplete="off" class="tarea"/>
             <input  placeholder="descripcion" value="" autocomplete="off" class="descripcion_tarea input-xxlarge"/>

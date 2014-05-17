@@ -7,15 +7,10 @@
           <div class="iniciativas-list-item-map" style="width: 100%;height: 130px;"></div>
         </div>
         <div class="wrapper">
-          <table>
-		<tr>
-			<td>
 			  <h4 class="title">
 			    <a href="/iniciativas/{{_id}}">{{name}}</a>
 			  </h4>
-		 	</td>
-		</tr>
-		<tr>
+		<!--tr>
 			<td>
 			<button class="btn btn-success boton-participar" id="button-{{_id}}" onclick="javascript:try_compartir(true,'iniciativas-list-item-{{_id}}', 'button-{{_id}}', 'modal-{{_id}}')">Compartir</button>
 			<div style="width: 250px; height: 50px; display:none" id="modal-{{_id}}" >
@@ -32,8 +27,7 @@
 			</div>
 			<br/>
 			</td>
-		</tr>
-	</table>
+		</tr-->
 	 <p class="address ellipsis" data-icon="">Organizador: {{owner.name}}</p>
           <div class="start-date ellipsis" data-icon="">Creado: {{creation_date}}
           </div>
@@ -77,7 +71,8 @@
 	  $("#div_categoria").html(categoria);
 
 
-	//REDES SOCIALES
+	/*REDES SOCIALES
+
 	  var links_redes_sociales='<table><tr>';
 
 	  {{#network.facebook.text}}
@@ -106,6 +101,7 @@
 	  }
 
 	  links_redes_sociales+='</tr></table>';
+        */
 
 	  $("#div_social_network-{{_id}}").html(links_redes_sociales);
 

@@ -56,10 +56,12 @@ exports.view = function(req, res) {
       iniciativa.description = JSON.parse(iniciativa.description);
     }catch(e) {console.log(e);}
 
+    console.dir(iniciativa.owner);
+    if(iniciativa.owner) {
     users.profile(iniciativa.owner.user, function(err, user) {
 
         res.locals = us.extend(res.locals, {
-          user: user,
+          profile: user,
           iniciativa: iniciativa,
           layoutTitle: iniciativa.name,
           layoutId: 'iniciativas-view',
@@ -70,6 +72,9 @@ exports.view = function(req, res) {
           }
         });
     });
+    } else {
+        res.send("");
+    }
   });
 
 };

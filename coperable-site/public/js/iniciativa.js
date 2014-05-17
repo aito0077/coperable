@@ -25,9 +25,11 @@ $(function(){
             return value && value.length > 0 ? {isValid: true} : {isValid: false, message: "Tenes que ingresar descripcion"};
         };
 
+        /*
         this.validators.date = function (value) {
             return value && value.length > 0 ? {isValid: true} : {isValid: false, message: "Tenes que ingresar fecha"};
         };
+        */
 
         this.validators.profile_picture = function (value) {
             return value && value.length > 0 ? {isValid: true} : {isValid: false, message: "Tenes que ingresar imagen"};
@@ -308,28 +310,15 @@ $(function(){
     save_iniciativa: function() {
       var self = this;
       this.model.set({
-        description: $('#description_red').redactor('get')
+        description: JSON.stringify($('#description_red').getCode())
     });
         console.log(this.model.get('description'));
-        /*
-      var location = this.$map.data()['addressMarker'].position;
-      self.model.set({
-        latitud: location.lat(),
-        longitud: location.lng(),
-        location: {
-          latitude: location.lat(),
-          longitude: location.lng()
-        }
-      });
-    */
 
       if(this.validate()) {
-        console.log('Es un modelo nuevo? '+this.model.isNew());
         this.model.save(null, {
           success: function() {
             self.after_save();
             console.log('Exito en crear iniciativa');
-            //window.location = '/iniciativas'
           },
           error: function() {
             console.log('Error en crear iniciativa');

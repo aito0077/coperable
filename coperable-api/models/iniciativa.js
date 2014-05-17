@@ -13,7 +13,7 @@ var IniciativaSchema = new Schema({
     description:   String,
     address:   String,
     profile_picture:   String,
-    pariticipants_amount:   String,
+    participants_amount:   String,
     phone:   String,
     email:   String,
     main_category: String,

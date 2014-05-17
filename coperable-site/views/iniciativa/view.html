@@ -1,98 +1,4 @@
-<!--
-<style>
-  #wrapper { position: relative; }
-  #over_map { position: relative; top: -30px; left: 10px; z-index: 99; }
-  .dropSheet {
 
-    opacity: 0.5;
-    filter: alpha(opacity=50);
-    /* IE10 Consumer Preview */
-    background-image: -ms-linear-gradient(top, #FFFFFF 0%, #000000 100%);
-    /* Mozilla Firefox */
-    background-image: -moz-linear-gradient(top, #FFFFFF 0%, #000000 100%);
-    /* Opera */
-    background-image: -o-linear-gradient(top, #FFFFFF 0%, #000000 100%);
-    /* Webkit (Safari/Chrome 10) */
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #000000));
-    /* Webkit (Chrome 11+) */
-    background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #000000 100%);
-    /* W3C Markup, IE10 Release Preview */
-    background-image: linear-gradient(to bottom, #FFFFFF 0%, #000000 100%);
-  }
-</style>
-<h3>{{iniciativa.name}}</h3>
-<h4>{{iniciativa.goal}}</h4>
-
-
-<div id="tareas">
-  {{#iniciativa.tasks}}
-  <ul>
-    <li>
-      {{description}}
-    </li>
-  </ul>
-  {{/iniciativa.tasks}}
-</div>
-
-<div id="description"> </div>
-
-<div id="wrapper" class="offset1 span10" style="height:400px">
-  <div id="map_canvas" style="width:100%; height:100%"></div>
-
-  <div id="over_map" class="dropSheet" >
-    <h3><span style="font-color: #FFFFFF"> {{iniciativa.start_date}}</span></h3><br />
-    <h4><span style="font-color: #FFFFFF"> {{iniciativa.address}}<span></h4>
-  </div>
-</div>
-
-</div>
-
-<script>
-
-  function initialize() {
-
-  var descripcion = $('<div />').html('{{iniciativa.description}}').text();
-     $('#description').html(descripcion);
-    var location = new google.maps.LatLng({{iniciativa.location.latitude}},{{iniciativa.location.longitude}});
-    var myOptions = {
-      zoom: 14,
-      center:  location,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-
-    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-
-    var markerTemplate = _.template([
-      '<div class="media">',
-        '<a class="pull-left" href="#">',
-        '</a>',
-        '<div class="media-body">',
-          '<h3><a class="iniciativa" data-id="{{iniciativa._id}}" href="#">{{iniciativa.name}}</a></h3>',
-          '<div class="media">',
-            '<p class="descSmall">'+descripcion+'</p>',
-          '</div>',
-        '</div>',
-      '</div>'].join(''));
-
-      console.log(markerTemplate);
-
-      var marker = new google.maps.Marker({
-        title: '{{iniciativa.name}}',
-        position: location,
-        map: map
-      });
-      marker.info = new google.maps.InfoWindow({
-        content:markerTemplate('{{iniciativa.description}}')
-      })
-      google.maps.event.addListener(marker, 'click', function(){
-        marker.info.open(map, marker);
-      });
-
-   };
-   initialize();
-</script>
--->
 <div id="initiativePage">
   <div id="initiativeContent">
         <h1 class="title">{{iniciativa.name}}</h1>
@@ -110,10 +16,13 @@
             <div class="cell tags-wrapper">
               <h3>Tareas</h3>
                 <ul class="orange tags">
-                  <li>Separación de residuos</li>
-                  <li>Coordinación</li>
+                {{#iniciativa.tasks}}
+                  <li>{{tag}}</li>
+                {{/iniciativa.tasks}}
+                
                 </ul>
             </div>
+            <!--  
             <div class="cell tags-wrapper">
               <h3>Etiquetas</h3>
                 <ul class="tags">
@@ -123,19 +32,20 @@
                   <li>Reciclaje</li>
                 </ul>
             </div>
+            -->
 
             <div class="cell description">
               <h3>Descripción</h3>
-                <p>
+                
                   {{iniciativa.description}}
-                </p>
+                
             </div>
 
-            <div class="cell comments">
+            <!-- div class="cell comments">
               <h3>Comentarios</h3>
         <div class="fb-comments" data-href="http://example.com" data-width="630" data-num-posts="8"></div>
-            </div>
-
+            </div -->
+            
         </section>
     </div>
     <div id="initiativeSidebar">
@@ -147,8 +57,8 @@
             </ul>
             <div class="participants">
               <div class="info">
-                  <span class="num">25</span> Participantes<br />
-                    <b>de <span class="total">120</span></b>
+                  <span class="num">{{iniciativa.members.length}}</span> Participantes<br />
+                    <b>de <span class="total">{{iniciativa.participants_amount}}</span></b>
                 </div>
                 <ul class="users-list-sq">
                   <li><img src="/static/img/users/user-1-sq.jpg" /></li>
@@ -196,18 +106,22 @@
           <div class="title">Sobre el organizador</div>
             <div class="info">
                 <img src="/static/img/users/user-12-mq.jpg" />
-                <a href="/user/{{iniciativa.owner.user}}" class="name">{{user.first_name}}, {{user.last_name}}</a>
+                <a href="/user/{{iniciativa.owner.user}}" class="name">{{iniciativa.owner.name}}</a>
                 <div class="place">{{user.location}}</div>
             </div>
             <div class="description">
-                {{user.about}}
+                {{profile.about}}
             </div>
             <div class="other">
-              <div class="title">Otras iniciativas de Matías</div>
+              <div class="title">Otras iniciativas de {{iniciativa.owner.name}}</div>
+                {{#profile.iniciativas}}
+                
                 <div class="pic">
-                <div class="name">Reforcemos techos de Buenos Aires</div>
-                  <img src="/static/img/iniciativas/initiativepic-7-mq.jpg" />
+                	<div class="name">{{description}}</div>
+                  	<img src="{{profile_picture}}" />
                 </div>
+                {{/profile.iniciativas}}
+
             </div>
         </div>
     </div>

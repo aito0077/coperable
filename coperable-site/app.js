@@ -15,15 +15,6 @@ var config = require('./config'),
   external_files = require('./logic/filehandler'),
   RedisStore = require('connect-redis')(express);
 
-/*
-function _cb() {
-  console.log(arguments)
-}
-var repl = require("repl");
-var context = repl.start("$ ").context;
-context.cb = _cb;
-*/
-
 var stylus = require('stylus')
 var nib = require('nib')
 
@@ -34,42 +25,15 @@ var app = express();
 
 app.engine('html', require('hogan-express'));
 app.set('layout', 'layout.html')
-//app.engine('jade', require('jade').__express);
-//app.enable('view cache');
-
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('view options', { layout: false });
-  app.set('view engine', 'jade');
+    //  app.set('view engine', 'jade');
   app.set('views', __dirname + '/views');
-  //app.set('view engine', 'html');
-
-  // function compile(str, path) {
-  //   return stylus(str)
-  //     .set('filename', path)
-  //     .set('compress', false)
-  //     .set('warn', true)
-  //     .use(nib())
-  //     .import('nib');
-  // }
-
-  // app.use(stylus.middleware({
-  //   debug: true,
-  //   src: __dirname + '/assets/css',
-  //   dest: __dirname + '/public/css/',
-  //   compile: compile
-  // }));
-
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.cookieParser());
-/*
-  app.use(express.bodyParser({
-        uploadDir: './public/uploads',
-        keepExtensions: true
-    }));
-*/
   app.use(express.urlencoded());
   app.use(express.multipart());
   app.use(express.session({

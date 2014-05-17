@@ -20,6 +20,7 @@ var UsuarioSchema = new Schema({
     iniciativas:    [{
         title: String,
         description: String,
+        profile_picture: String,
         owner: { type: Boolean, default: false}
     }],
     cantidad_actividades:  {type: Number, default: 0},

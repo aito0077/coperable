@@ -1,0 +1,10 @@
+// Don't commit this file to your public repos
+exports.system = {
+    FACEBOOK_APP_ID: 'fake',
+    FACEBOOK_APP_SECRET: 'fake',
+    TWITTER_CONSUMER_KEY: 'fake',
+    TWITTER_CONSUMER_SECRET: 'fake',
+    AMAZON: 'fakeID',
+    API_URL: process.env.API_URL || 'http://127.0.0.1:3001',
+    DOMAIN_BASE: process.env.DOMAIN_BASE || 'http://coperable.dev'
+}

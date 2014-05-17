@@ -17,7 +17,7 @@ exports.browseByCategory = function(req, res, next) {
     var category = req.params.category; 
 
     console.log('Buscando por categoria: '+category);
-    Iniciativa.Model.find().where('categories.'+category).equals(true).exec(
+    Iniciativa.Model.find().where('categories.'+category).where('profile_picture').exists(true).equals(true).exec(
         function (err, iniciativas) {
             if (err) return handleError(err);
             res.send(iniciativas);

@@ -80,7 +80,7 @@ exports.Model = Iniciativa;
 var limit = 20;
 
 exports.list = function(success) {
-  Iniciativa.find().limit(limit).execFind(function (err, data) {
+  Iniciativa.find().where('profile_picture').exists(true).limit(limit).execFind(function (err, data) {
     success(data);
   });
 };

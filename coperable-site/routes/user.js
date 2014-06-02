@@ -16,13 +16,20 @@ exports.profile = function(req, res) {
       title: 'Perfil'
     };
     */
-    return res.render('user/profile.html',{
-      partials: {
-        header: 'wrapper/header',
-        menu_site: 'wrapper/menu_site',
-        footer: 'wrapper/footer'
-      }
-    });
+    if(req.user){ 
+	    return res.render('user/profile.html',{
+	      partials: {
+		header: 'wrapper/header',
+		menu_site: 'wrapper/menu_site',
+		footer: 'wrapper/footer'
+	      }
+	    });
+    } else{
+	    return res.render('user/login_fail.html',{
+		layoutTitle: 'Login',
+		layoutId: 'user-login'
+	});
+    }
   });
 
 };

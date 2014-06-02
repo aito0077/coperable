@@ -1,28 +1,62 @@
 <div class="container">
-  <h1>Ingresá</h1>
-  <p>Podes usar tus redes sociales para hacer login</p>
-  <a href="/auth/facebook">
-    <img src="/static/img/social-btn-facebook.png"/>
-  </a>
-  <a href="/auth/twitter">
-    <img src="/static/img/social-btn-twitter.png"/>
-  </a>
-  <br>
-  <br>
-  <p>o tu cuenta coperable</p>
-
-  <form method="post" action="/user/login" class="form-horizontal">
-    <label for="username">Usuario</label>
-    <input type="text" id="username" name="username" required>
-
-    <label for="password">Contraseña</label>
-    <input type="password" id="password" name="password" required>
-
-    <br>
-    <br>
-    <div>
-      <button type="submit" class="btn">Sign in</button>
-    </div>
-  </form>
-  <p>Si no tienes cuenta te puedes registrar <strong><a href="/user/signup">acá</a></strong></p>
+<span class="row">
+	<span class="span12"> 
+ 		<h1>Para poder proseguir, debes loguearte</h1>
+	</span>
+</span>
+<br/><br/>
+<span>
+	    <span class="span6 login-redes">
+		<fieldset><legend>a traves de tus redes sociales</legend>	
+			<span class="row">
+			    <span class="span5">
+						  <a href="/auth/facebook">
+						    <img src="/static/img/social-btn-facebook.png">
+						  </a>
+			    </span>
+			</span>
+			<span class="row">
+			    <span class="span5">
+						  <a href="/auth/twitter">
+						    <img src="/static/img/social-btn-twitter.png">
+						  </a>
+			    </span>
+			</span>
+			<br/><br/><br/><br/>
+			</span>
+		</fieldset>	 	
+	   </span>
+   	   <span class="span6 login-coperable">	
+		<fieldset><legend>con tu cuenta <img src="/static/img/logo-1.png" width="100px"></legend>	
+			<form class="form-horizontal" action="/user/login" method="post">
+			    <span class="row">
+				<span class="span2">
+			    		<label for="username">Usuario</label>
+				</span>
+				<span class="span2">
+					<input type="text" required="" name="username" id="username">
+				</span>
+			    </span>
+			    <span class="row">
+				<span class="span2">
+					<label for="password">Contraseña</label>
+			   	</span>
+				<span class="span2">
+			    		 <input type="password" required="" name="password" id="password">
+				</span>
+			    </span>
+			    <span class="row">
+				<span class="span6">
+			    	  <button class="btn" type="submit">Confirmar</button>
+				</span>
+			    </span>
+			    <span class="row">
+				<span class="span6">	
+		 			<p>Si no tienes cuenta te puedes registrar <strong><a href="/user/signup">acá</a></strong></p>
+				</span>
+		  	    </span>    
+		      </form>
+	      </fieldset> 
+	</span>
+</span>
 </div>

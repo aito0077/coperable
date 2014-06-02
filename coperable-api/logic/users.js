@@ -60,6 +60,7 @@ exports.authenticate = function(req, res, next) {
         if(user) {
             user.comparePassword(login_data.password, function(err, isMatch) {
                 if (err) { 
+		    console.log('error de password');
                     throw err;
                 }
                 res.send(isMatch ? user : {});
@@ -79,7 +80,7 @@ exports.findById = function(req, res, next) {
         if(user) {
             res.send(user);
         } else {
-            res.send(404, {});
+            res.send(404, 'usuario_password_erroneo');
         }
     });
 };

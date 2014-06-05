@@ -51,7 +51,7 @@ exports.authenticate = function(req, res, next) {
         password: body.password,
         username: body.username
     };
-    console.dir(login_data);
+    //console.dir(login_data);
     usuario.findOne({ username: login_data.username}, function(err, user) {
         if (err) {
             console.log('Error: '+err);
@@ -90,7 +90,7 @@ exports.findByProvider = function(req, res, next) {
         user_id = req.params.id,
         user_filter = {};
     user_filter[provider+'_id'] = user_id;
-    console.dir(user_filter);
+    //console.dir(user_filter);
     usuario.Model.findOne(user_filter,  '-password').exec(function (err, user) {
         console.dir(user);
         if(user) {

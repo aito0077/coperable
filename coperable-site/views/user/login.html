@@ -27,7 +27,15 @@
 		</fieldset>	 	
 	   </span>
    	   <span class="span6 login-coperable">	
-		<fieldset><legend>con tu cuenta <img src="/static/img/logo-1.png" width="100px"></legend>	
+		<fieldset><legend>con tu cuenta <img src="/static/img/logo-1.png" width="100px"></legend>
+			{{#user}}			
+			//			
+			{{/user}}
+			{{^user}}
+			<label style="color:#FFFFFF ; background-color:#c0392b; width:94%">
+				Datos de logueo erróneos. Vuelva a intentarlo.
+			</label>		
+			{{/user}}				
 			<form class="form-horizontal" action="/user/login" method="post">
 			    <span class="row">
 				<span class="span2">

@@ -9,49 +9,16 @@ exports.profile = function(req, res) {
       profile: user,
       title: 'Perfil'
     });
-    /*
-    res.locals = {
-      user: req.user,
-      profile: user,
-      title: 'Perfil'
-    };
-    */
-    if(req.user){ 
-	    return res.render('user/profile.html',{
-	      partials: {
-		header: 'wrapper/header',
-		menu_site: 'wrapper/menu_site',
-		footer: 'wrapper/footer'
-	      }
-	    });
-    } else{
-	    return res.render('user/login_fail.html',{
+    return res.render('user/login_fail.html',{
 		layoutTitle: 'Login',
 		layoutId: 'user-login'
 	});
-    }
+
   });
 
 };
 
 exports.login = function(req, res) {
-
-  /*
-  res.locals = us.extend(res.locals, {
-    title: 'Login'
-  });
-  res.locals = {
-    user: req.user,
-    title: 'Login'
-  };
-  return res.render('user/login',{
-    partials: {
-      header: 'wrapper/header',
-      menu_site: 'wrapper/menu_site',
-      footer: 'wrapper/footer'
-    }
-  });
-  */
   return res.render('user/login.html', {
     layoutTitle: 'Login',
     layoutId: 'user-login'
@@ -60,27 +27,6 @@ exports.login = function(req, res) {
 
 exports.signup = function(req, res) {
   var s3Credentials = {};
-  /*
-  res.locals = {
-    user: req.user,
-    title: 'Registrate',
-  };
-  */
-
-  /*
-  res.locals = us.extend(res.locals, {
-    title: 'Registrate'
-  });
-  return res.render('user/edit_profile',{
-    partials: {
-      header: 'wrapper/header',
-      menu_site: 'wrapper/menu_site',
-      footer: 'wrapper/footer',
-      widget_address: 'widgets/address'
-    }
-  });
-  */
-
   return res.render('user/signup.html', {
     layoutTitle: 'Registrate',
     layoutId: 'user-signup'

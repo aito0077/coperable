@@ -120,7 +120,7 @@ app.get('/user/success_login', function(req, res, next) {
 });
 
 app.get('/user/failure_login', function(req, res, next) {
-  res.redirect('/user/user_no_found');
+  res.redirect('/user/login');
   //res.send(403, 'El usuario no se encuentra.');
 });
 

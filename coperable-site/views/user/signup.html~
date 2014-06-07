@@ -1,0 +1,70 @@
+<div class="container">
+  <h1>Registrate</h1>
+  <form method="POST" action="/user/signup" class="pure-form pure-form-aligned">
+    <input type="hidden" name="latitude" id="latitude"/>
+    <input type="hidden" name="longitude" id="longitude"/>
+    <span class="row">
+	<span class="span3">
+    		<label for="username">Usuario</label>
+	</span>    
+	<span class="span3">
+		<input class="input-large" id="username" name="username" type="text" placeholder="Usuario" required>
+	</span>
+	<span class="span3">
+    		<label for="password">Contraseña</label>
+	</span>
+	<span class="span3">    
+		<input class="input-large" id="password" name="password" type="password" placeholder="Contraseña" required>
+	</span>
+    </span>
+    <span class="row">
+	<span class="span3">
+		<label for="confirm-password">Confirmar Contraseña</label>
+	</span>    	
+	<span class="span3">
+		<input class="input-large" id="confirm-password" type="password" placeholder="Confirmar Contraseña" required>
+	</span>
+	<span class="span3">
+		<label for="email">Email</label>
+	</span>
+	<span class="span3">
+		<input class="input-large" id="email" name="email" type="email" placeholder="Email" required>
+	</span>
+    </span>
+    <span class="row">
+	<span class="span3">
+		<label for="first_name">Nombre</label>
+	</span>
+	<span class="span3">
+		<input class="input-large" id="first_name" name="first_name" type="text" placeholder="Nombre" required>
+	</span>
+	<span class="span3">
+		<label for="last_name">Apellido</label>
+	</span>
+	<span class="span3">
+		<input class="input-large" id="last_name" name="last_name" type="text" placeholder="Apellido" required>
+	</span>
+    </span>
+    <span class="row">
+	<span class="span3">
+		<label for="address">Dirección</label>
+	</span>
+	<span class="span9">
+		<input class="input-large" id="address" name="address" type="text" style="width:100%" placeholder="Dirección">
+	</span>
+    </span>
+    <span class="row">	
+	<span class="span3">
+		<label for="about">Sobre mí</label>
+	</span>
+	<span class="span9">
+		<textarea id="about" name="about" placeholder="Sobre mí" style="width:100%"></textarea>
+	</span>
+    </span>
+ <span class="row">
+	<span class="span12">
+ 	 <button type="submit" class="btn">Registrarme</button>
+	</span>
+ </span> 
+ </form>
+</div>

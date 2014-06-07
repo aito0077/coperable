@@ -1,0 +1,12 @@
+.first_field {
+    background-color: #FFFFFF;
+    border-radius: 6px 6px 6px 6px;
+    line-height: 18px;
+    padding: 4px;
+    color:#FFFFFF;
+}
+
+.icon_social_net{
+    width:23px; 
+    height:23px;
+}

@@ -1,0 +1,27 @@
+#user-login {
+  .container {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.login-coperable {
+    background-color: #2980b9;
+    border-radius: 6px 6px 6px 6px;
+    line-height: 18px;
+    padding: 4px;
+    text-align: center;
+    color:#FFFFFF;	
+    height:60%;
+}
+
+.login-redes {
+    background-color: #ecf0f1;
+    border-radius: 6px 6px 6px 6px;
+    line-height: 18px;
+    padding: 4px;
+    text-align: center;
+    color:#FFFFFF;	
+    height:60%;
+}

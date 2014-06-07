@@ -1,0 +1,23 @@
+
+	<div class="first_field" style="position:relative; width:100%; top:10px; float:left; width:100%; height:143px;">	
+		<div style="position:absolute; width:25%">
+		    <img src="/static/img/users/user-12-mq.jpg" style="width:55%; height:130px;" 
+			class="img-rounded img-responsive"/>
+		</div>
+		<div style="position:relative; left:15%">
+       	    		{{#profile}}
+				<h3>{{profile.username}}</h3>
+		            	<h5>{{profile.about}}</h5>
+		            	{{#profile.networks.facebook.has}}
+					<img class="img-rounded img-responsive" src="/static/img/facebook.png">
+				{{/profile.networks.facebook.has}}
+				{{#profile.networks.twitter.has}}
+					<img class="img-rounded img-responsive" src="/static/img/twitter.png">
+				{{/profile.networks.twitter.has}}
+				{{#profile.networks.googleplus.has}}
+					<img class="img-rounded img-responsive" src="/static/img/google_plus.png">
+				{{/profile.networks.googleplus.has}}
+			{{/profile}}
+                </div>
+	</div>
+

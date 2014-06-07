@@ -8,8 +8,7 @@
        	    		{{#profile}}
 				<h3>{{profile.username}}</h3>
 		            	<h5>{{profile.about}}</h5>
-		            	<p></p>
-		  		{{#profile.networks.facebook.has}}
+		            	{{#profile.networks.facebook.has}}
 					<img class="img-rounded img-responsive" src="/static/img/facebook.png">
 				{{/profile.networks.facebook.has}}
 				{{#profile.networks.twitter.has}}

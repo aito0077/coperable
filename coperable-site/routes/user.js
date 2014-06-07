@@ -9,8 +9,8 @@ exports.profile = function(req, res) {
       profile: user,
       title: 'Perfil'
     });
-    return res.render('user/login_fail.html',{
-		layoutTitle: 'Login',
+    return res.render('user/profile.html',{
+		layoutTitle: 'Perfil',
 		layoutId: 'user-login'
 	});
 

@@ -8,7 +8,7 @@
        	    		{{#profile}}
 				<h3>{{profile.username}}</h3>
 		            	<h5>{{profile.about}}</h5>
-		            	{{#profile.networks.facebook.has}}
+				{{#profile.networks.facebook.has}}
 					<img class="img-rounded img-responsive" src="/static/img/facebook.png">
 				{{/profile.networks.facebook.has}}
 				{{#profile.networks.twitter.has}}
@@ -17,7 +17,16 @@
 				{{#profile.networks.googleplus.has}}
 					<img class="img-rounded img-responsive" src="/static/img/google_plus.png">
 				{{/profile.networks.googleplus.has}}
+			<script>
+			    $(function(){
+			      iniciativas_owner = new iniciativa.OwnerBrowser();
+			      iniciativas_owner.traer_iniciativas('{{profile._id}}');
+			    });
+			</script>
 			{{/profile}}
                 </div>
 	</div>
+	<br/>
 
+	<div id="div_iniciativas_owner" class="iniciativas-list" style="position:relative; top:15px;"></div>	
+<script type='text/javascript' src='/static/js/_list.js'></script-->

@@ -50,6 +50,12 @@ exports.participate = function(req, res, done) {
     });
   }
 
+exports.findByOwner = function(req, res, done) {
+    var id = req.params['userId'];
+    cop_api.client.get('/api/iniciativa/user/'+id, function(err, request, response, obj) {
+      res.send(obj);
+    });
+  }
 
 exports.save = function(req, res, done) {
   console.log('Guardando iniciativa');
@@ -63,9 +69,12 @@ exports.save = function(req, res, done) {
 };
 
 
-exports.get = function(req, res) {
+exports.get = function(req, res, done) {
   var id = req.params['id'];
-  cop_api.client.get('/api/iniciativa/'+id, function(err, req, res, iniciativa) {
+  console.log('id:' + id);
+  cop_api.client.get('/api/iniciativa/'+id, function(err, req, res, iniciativa) { 
+    console.log('INICIATIVA - debug: ');
+    console.dir(iniciativa);
     res.send(iniciativa);
   });
 };

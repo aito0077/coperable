@@ -29,4 +29,4 @@
 	<br/>
 
 	<div id="div_iniciativas_owner" class="iniciativas-list" style="position:relative; top:15px;"></div>	
-
+<script type='text/javascript' src='/static/js/_list.js'></script-->

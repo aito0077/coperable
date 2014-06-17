@@ -94,7 +94,7 @@ app.post('/iniciativas', iniciativas.create);
 app.get('/iniciativas/name/:slug', iniciativa.view_slug);
 app.get('/iniciativas/:id', iniciativa.view);
 
-app.get('/api/iniciativas/user/:userId', iniciativas.findByOwner);
+app.get('/api/iniciativas/user/:userId', iniciativa.findByOwner);
 app.get('/api/iniciativas/view/:id', iniciativa.view);
 app.get('/api/iniciativas/edit', iniciativa.edit);
 app.get('/api/iniciativas/:id', iniciativas.get);

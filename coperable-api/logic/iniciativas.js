@@ -13,6 +13,19 @@ exports.list = function(req, res, next) {
     );
 };
 
+exports.browseByUser = function(req, res, next) {
+    var user_id = req.params.user_id; 
+
+    console.log('Buscando por usuario: '+user_id);
+    Iniciativa.Model.find('{owner.user:user_id}').exec(
+        function (err, iniciativas) {
+            if (err) return handleError(err);
+            res.send(iniciativas);
+        }
+    );
+
+};
+
 exports.browseByCategory = function(req, res, next) {
     var category = req.params.category; 
 

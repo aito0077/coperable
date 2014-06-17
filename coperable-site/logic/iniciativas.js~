@@ -52,7 +52,7 @@ exports.participate = function(req, res, done) {
 
 exports.findByOwner = function(req, res, done) {
     var id = req.params['userId'];
-    cop_api.client.get('/api/iniciativa/user/'+id, function(err, request, response, obj) {
+    cop_api.client.get('/api/iniciativa/user/'+id, iniciativa_data, function(err, request, response, obj) {
       res.send(obj);
     });
   }

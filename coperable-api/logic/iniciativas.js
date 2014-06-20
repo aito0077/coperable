@@ -175,8 +175,8 @@ exports.findLast = function(req, res, next) {
         console.log('lat: '+lat);
         console.log('long: '+lng);
 
-    Iniciativa.Model.find({ end_date: { $lt: new Date()}, coords: { $near : [lng, lat], $maxDistance : 500/111.2}}).limit(1).sort('-start_date').exec(function(err, result) {
-        console.dir(err);
+    Iniciativa.Model.find({ end_date: { $gt: new Date()}, coords: { $near : [lng, lat], $maxDistance : 500/111.2}}).where('profile_picture').exists(true).sort('-start_date').exec(function(err, result) {
+        console.dir(result);
         if(result) {
             res.send(result);
         } else {

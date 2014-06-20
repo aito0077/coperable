@@ -45,24 +45,26 @@ exports.create = function(req, res, next) {
         body,
         function(data) {
             usuario.Model.findById(body.owner.user).exec(function (err, user) {
-                user.update({ 
-                        $inc: {
-                            'cantidad_iniciativas':1
+                if(user) {
+                    user.update({ 
+                            $inc: {
+                                'cantidad_iniciativas':1
+                            },
+                            $push: {
+                                'iniciativas': {
+                                    id: data._id,
+                                    title: body.title,
+                                    description: body.description,
+                                    picture: body.profile_picture,
+                                    owner: true
+                                }
+                            }   
                         },
-                        $push: {
-                            'iniciativas': {
-                                id: data._id,
-                                title: body.title,
-                                description: body.description,
-                                picture: body.profile_picture,
-                                owner: true
-                            }
-                        }   
-                    },
-                    function() {
-                        res.send(data);
-                    } 
-                );
+                        function() {
+                            res.send(data);
+                        } 
+                    );
+                }
             });
 
         },

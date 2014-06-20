@@ -45,6 +45,7 @@ server.use(restify.fullResponse());
 
 server.get('/api/iniciativa', iniciativas.list);
 server.get('/api/iniciativa/user/:user_id', iniciativas.browseByUser);
+server.get('/api/iniciativa/last/:lat/:lng', iniciativas.findLast);
 server.get('/api/iniciativa/category/:category', iniciativas.browseByCategory);
 server.get('/api/iniciativa/s_name/:name', iniciativas.findByName);
 server.get('/api/iniciativa/:id', iniciativas.findById);

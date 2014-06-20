@@ -168,3 +168,20 @@ exports.findByName = function(req, res, next) {
     });
 };
 
+
+exports.findLast = function(req, res, next) {
+    console.dir(req.params);
+    var lat = req.params.lat,
+        lng = req.params.lng;
+        console.log('lat: '+lat);
+        console.log('long: '+lng);
+
+    Iniciativa.Model.find({ end_date: { $lt: new Date()}, coords: { $near : [lng, lat], $maxDistance : 500/111.2}}).limit(1).sort('-start_date').exec(function(err, result) {
+        console.dir(err);
+        if(result) {
+            res.send(result);
+        } else {
+            res.send(404, {});
+        }
+    });
+};

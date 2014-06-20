@@ -49,6 +49,7 @@ var IniciativaSchema = new Schema({
         latitude: {type: Number, default: 0},
         longitude: {type: Number, default: 0}
     },
+    coords: [Number, Number],
     networks: {
         facebook: {
             text: String
@@ -107,6 +108,7 @@ exports.insert = function(iniciativa, success, error) {
         creation_date: new Date(),
         modification_date: new Date(),
         current_stage: 'PREPARACION',
+        coords: [iniciativa.longitude, iniciativa.latitude],
         location: {
             latitude: iniciativa.latitude,
             longitude: iniciativa.longitude

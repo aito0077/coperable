@@ -107,12 +107,12 @@ exports.insert = function(iniciativa, success, error) {
     var default_values = {
         creation_date: new Date(),
         modification_date: new Date(),
-        current_stage: 'PREPARACION',
         coords: [iniciativa.longitude, iniciativa.latitude],
         location: {
             latitude: iniciativa.latitude,
             longitude: iniciativa.longitude
         },
+        current_stage: 'PREPARACION',
         stages: [{
             stage: 'PREPARACION',
             description: 'PREPARACION',

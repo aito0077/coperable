@@ -172,10 +172,9 @@ exports.findLast = function(req, res, next) {
     console.dir(req.params);
     var lat = req.params.lat,
         lng = req.params.lng;
-        console.log('lat: '+lat);
-        console.log('long: '+lng);
 
-    Iniciativa.Model.find({ end_date: { $gt: new Date()}, coords: { $near : [lng, lat], $maxDistance : 500/111.2}}).where('profile_picture').exists(true).sort('-start_date').exec(function(err, result) {
+    //Iniciativa.Model.find({ end_date: { $gt: new Date()}, coords: { $near : [lng, lat], $maxDistance : 500/111.2}}).where('profile_picture').exists(true).sort('-start_date').exec(function(err, result) {
+    Iniciativa.Model.find({end_date: { $gt: new Date()}, coords: { $near : [lng, lat], $maxDistance : 500/111.2}}).where('profile_picture').exists(true).sort('-start_date').exec(function(err, result) {
         console.dir(result);
         if(result) {
             res.send(result);

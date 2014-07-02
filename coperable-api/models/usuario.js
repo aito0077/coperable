@@ -15,6 +15,8 @@ var UsuarioSchema = new Schema({
     twitter_id:   String,
     authenticate_with: String,
     birthdate: Date,
+    picture: String,
+    picture_thumb: String,
     about: String,
     cantidad_iniciativas:  {type: Number, default: 0},
     iniciativas:    [{

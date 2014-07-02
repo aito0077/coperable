@@ -172,10 +172,13 @@ exports.findByName = function(req, res, next) {
 exports.findLast = function(req, res, next) {
     console.dir(req.params);
     var lat = req.params.lat,
-        lng = req.params.lng;
+        lng = req.params.lng,
+	toFind = new Date();
 
-    //Iniciativa.Model.find({ end_date: { $gt: new Date()}, coords: { $near : [lng, lat], $maxDistance : 500/111.2}}).where('profile_picture').exists(true).sort('-start_date').exec(function(err, result) {
-    Iniciativa.Model.find({end_date: { $gt: new Date()}, coords: { $near : [lng, lat], $maxDistance : 500/111.2}}).where('profile_picture').exists(true).sort('-start_date').exec(function(err, result) {
+    //Iniciativa.Model.find({end_date: { $gte: new Date()}, coords: { $near : [lng, lat], $maxDistance : 500/111.2}}).where('profile_picture').exists(true).sort('-start_date').exec(function(err, result) {
+    //Iniciativa.Model.find({end_date: { $gte: new Date()}).where('profile_picture').exists(true).sort('-start_date').exec(function(err, result) {
+    Iniciativa.Model.find({end_date: { $gt: new Date().setDate(toFind.getDate() - 1)}, coords: { $near : [lng, lat], $maxDistance : 500/111.2}}).where('profile_picture').exists(true).sort('-start_date').exec(function(err, result) {
+    //Iniciativa.Model.find({ coords: { $near : [lng, lat], $maxDistance : 500/111.2}}).where('profile_picture').exists(true).sort('-start_date').exec(function(err, result) {
         console.dir(result);
         if(result) {
             res.send(result);

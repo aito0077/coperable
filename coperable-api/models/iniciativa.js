@@ -107,7 +107,7 @@ exports.insert = function(iniciativa, success, error) {
     var default_values = {
         creation_date: new Date(),
         modification_date: new Date(),
-        coords: [iniciativa.longitude, iniciativa.latitude],
+        coords: [iniciativa.longitude || 0, iniciativa.latitude || 0],
         location: {
             latitude: iniciativa.latitude,
             longitude: iniciativa.longitude
@@ -120,19 +120,22 @@ exports.insert = function(iniciativa, success, error) {
         }]
     },
     persist = {};
-    console.dir(iniciativa);
-    us.extend(persist, default_values, iniciativa);
-    console.dir(persist);
+    us.extend(persist, default_values, iniciativa, {coords: [iniciativa.longitude || 0, iniciativa.latitude || 0]});
     persist.main_category = us.first(us.filter(us.keys(persist.categories), function(categ) {
-        console.dir(categ);
         return persist.categories[categ];
     }));
     console.dir(persist);
+    coords = [];
+    coords[0] = iniciativa.longitude || 0;
+    coords[1] = iniciativa.latitude || 0;
+    persist.coords = coords;
     var iniciativa_model = new Iniciativa(persist);
     iniciativa_model.save(function(err, data) {
         if(err) {
+            console.log(err);
             error(err);
         } else {
+            console.log('exito en crear iniciativa: '+data._id);
             success(data);
         }
     });

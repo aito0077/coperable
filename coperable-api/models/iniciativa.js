@@ -162,3 +162,18 @@ exports.remove = function(id, success, error) {
     });
 };
 
+exports.update_status = function(success, error) {
+        var today = new Date().setHours(0);
+            tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+
+
+      Iniciativa.find({end_date: { $gt: today}, end_date: { $lt: tomorrow}, current_stage: 'PREPARACION'}).execFind(function (err, data) {
+            console.dir(data);
+        });
+
+        Iniciativa.update({end_date: { $gt: today}, end_date: { $lt: tomorrow}, current_stage: 'PREPARACION'}, {$set: {current_stage: 'ACTIVO'}}, {multi:true}, success);
+        Iniciativa.update({end_date: { $lt: tomorrow}}, {$set: {current_stage: 'FINALIZADO'}}, {multi:true}, success);
+};
+
+
+

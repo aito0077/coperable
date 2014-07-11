@@ -173,7 +173,6 @@ exports.findLast = function(req, res, next) {
     var lat = req.params.lat,
         lng = req.params.lng;
 
-    //Iniciativa.Model.find({ end_date: { $gt: new Date()}, coords: { $near : [lng, lat], $maxDistance : 500/111.2}}).where('profile_picture').exists(true).sort('-start_date').exec(function(err, result) {
     Iniciativa.Model.find({end_date: { $gt: new Date()}, coords: { $near : [lng, lat], $maxDistance : 500/111.2}}).where('profile_picture').exists(true).sort('-start_date').exec(function(err, result) {
         console.dir(result);
         if(result) {
@@ -182,4 +181,10 @@ exports.findLast = function(req, res, next) {
             res.send(404, {});
         }
     });
+};
+
+
+exports.update_status = function(success) {
+    Iniciativa.update_status(success);
+
 };

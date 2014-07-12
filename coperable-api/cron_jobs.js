@@ -36,4 +36,5 @@ mongoose.connect(mongourl);
 iniciativas.update_status(function(success, error) {
     console.log(error);
     console.log("FINALIZADO");
+    process.exit(code=0);
 });

@@ -188,6 +188,7 @@ exports.findLast = function(req, res, next) {
 
 
 exports.update_status = function(success) {
-    Iniciativa.update_status(success);
-
+    Iniciativa.update_status(function(s) {
+        success();
+    });
 };

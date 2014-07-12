@@ -1,6 +1,7 @@
 var mongoose = require('mongoose/'),
     util = require('util'),
     us = require('underscore'),
+    async = require("async"),
     Schema = mongoose.Schema;
 
 
@@ -163,16 +164,29 @@ exports.remove = function(id, success, error) {
 };
 
 exports.update_status = function(success, error) {
-        var today = new Date().setHours(0);
-            tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+    var today = new Date().setHours(0);
+        tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
 
+    Iniciativa.find({end_date: { $gt: today}, end_date: { $lt: tomorrow}, current_stage: 'PREPARACION'}).execFind(function (err, data) {
+        console.dir(data);
+    });
+    async.parallel({
+        to_active: function(sub_callback) {
+            console.log('to_Active');
+            Iniciativa.update({end_date: { $gt: today}, end_date: { $lt: tomorrow}, current_stage: 'PREPARACION'}, {$set: {current_stage: 'ACTIVO'}}, {multi:true}, sub_callback);
+        },
+        to_finish: function(sub_callback) {
+            console.log('to_finish');
+            Iniciativa.update({end_date: { $lt: tomorrow}}, {$set: {current_stage: 'FINALIZADO'}}, {multi:true}, sub_callback);
+        }},
+        function(err, results) {
+            console.log('end');
+            success();
+        }
 
-      Iniciativa.find({end_date: { $gt: today}, end_date: { $lt: tomorrow}, current_stage: 'PREPARACION'}).execFind(function (err, data) {
-            console.dir(data);
-        });
+    );
+	
 
-        Iniciativa.update({end_date: { $gt: today}, end_date: { $lt: tomorrow}, current_stage: 'PREPARACION'}, {$set: {current_stage: 'ACTIVO'}}, {multi:true}, success);
-        Iniciativa.update({end_date: { $lt: tomorrow}}, {$set: {current_stage: 'FINALIZADO'}}, {multi:true}, success);
 };
 
 

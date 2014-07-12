@@ -11,6 +11,7 @@
     "underscore": "1.4.4",
     "mongoose": "*",
     "bcrypt": "0.7.5",
+    "async": "*",
     "validator": "1.1.1"
   }
 }

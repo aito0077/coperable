@@ -75,6 +75,18 @@ var IniciativaSchema = new Schema({
     modification_date: { type: Date, default: Date.now }
 });
 
+IniciativaSchema.virtual('convocatoria').get(function () {
+  return this.current_stage == 'PREPARACION';
+});
+
+IniciativaSchema.virtual('activando').get(function () {
+  return this.current_stage == 'ACTIVO';
+});
+
+IniciativaSchema.virtual('finalizada').get(function () {
+  return this.current_stage == 'FINALIZADO';
+});
+
 var Iniciativa = mongoose.model('Iniciativa', IniciativaSchema);
 
 exports.Model = Iniciativa;
@@ -89,7 +101,6 @@ exports.list = function(success) {
 
 exports.participate = function(id, success) {
   Iniciativa.findOne({code: id}).exec(function(err, result) {
-        console.dir(result);
         console.log(err);
         if(result) {
             res.send(result);
@@ -108,10 +119,10 @@ exports.insert = function(iniciativa, success, error) {
     var default_values = {
         creation_date: new Date(),
         modification_date: new Date(),
-        coords: [iniciativa.longitude || 0, iniciativa.latitude || 0],
+        coords: [iniciativa.location.longitude || 0, iniciativa.location.latitude || 0],
         location: {
-            latitude: iniciativa.latitude,
-            longitude: iniciativa.longitude
+            latitude: iniciativa.location.latitude,
+            longitude: iniciativa.location.longitude
         },
         current_stage: 'PREPARACION',
         stages: [{
@@ -121,14 +132,13 @@ exports.insert = function(iniciativa, success, error) {
         }]
     },
     persist = {};
-    us.extend(persist, default_values, iniciativa, {coords: [iniciativa.longitude || 0, iniciativa.latitude || 0]});
+    us.extend(persist, default_values, iniciativa, {coords: [default_values.location.longitude || 0, default_values.location.latitude || 0]});
     persist.main_category = us.first(us.filter(us.keys(persist.categories), function(categ) {
         return persist.categories[categ];
     }));
-    console.dir(persist);
     coords = [];
-    coords[0] = iniciativa.longitude || 0;
-    coords[1] = iniciativa.latitude || 0;
+    coords[0] = default_values.location.longitude || 0;
+    coords[1] = default_values.location.latitude || 0;
     persist.coords = coords;
     var iniciativa_model = new Iniciativa(persist);
     iniciativa_model.save(function(err, data) {

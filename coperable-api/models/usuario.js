@@ -116,7 +116,6 @@ exports.get = function(id, success) {
 
 exports.alreadyExists = function(id, success, wrong) {
   Usuario.find({username: id}).limit(limit).execFind(function (arr,data) {
-    console.dir(data);
     if(typeof data[0] !== 'undefined') {
         console.log('Username already exists');
         wrong({error: 'username_already_exists'});
@@ -135,8 +134,10 @@ exports.insert = function(usuario, success, error) {
     var usuario_model = new Usuario(usuario);
     usuario_model.save(function(err, data) {
         if(err) {
+            console.log(err);
             error(err);
         } else {
+            console.log('usuario creado');
             success(data);
         }
     });
